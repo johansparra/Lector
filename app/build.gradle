@@ -1,0 +1,67 @@
+apply plugin: 'com.android.application'
+
+android {
+    signingConfigs {
+        config {
+            keyAlias 'parra'
+            keyPassword 'j0h4ns92ap'
+            storeFile file('C:/Users/defaultuser0/parra.keystore.jks')
+            storePassword 'j0h4ns92ap'
+        }
+
+    }
+    compileSdkVersion 26
+    defaultConfig {
+        applicationId "com.ing_sebasparra.lector"
+        minSdkVersion 23
+        targetSdkVersion 23
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.config
+        }
+        debug {
+            signingConfig signingConfigs.config
+            minifyEnabled false
+        }
+    }
+    productFlavors {
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    //FACEBOOK
+  /*  compile 'com.facebook.android:facebook-android-sdk:4.0.0'*/
+    implementation 'com.facebook.android:facebook-android-sdk:4.31.0'
+    implementation 'com.google.firebase:firebase-core:12.0.0'
+    implementation 'com.google.firebase:firebase-auth:12.0.0'
+    //POR CORREO FIREBASE
+    implementation 'com.google.android.gms:play-services-auth:12.0.0'
+    implementation 'com.google.firebase:firebase-messaging:12.0.0'
+    //TEMAS Y DRAWER
+    implementation 'com.android.support:support-compat:26.1.0'
+    implementation 'com.android.support:cardview-v7:26.1.0'
+    implementation 'com.android.support:support-v4:26.1.0'
+    //noinspection GradleCompatible
+    implementation 'com.android.support:design:26.1.0'
+    //imagen
+    // HASTA ACA
+    // LOGIN
+    implementation 'com.android.support.constraint:constraint-layout:1.0.2'
+    implementation 'com.android.volley:volley:1.0.0'
+    /*  implementation 'com.android.support:appcompat-v7:24.2.0'*/
+    implementation 'com.android.support:design:26.1.0'
+    //GPS
+    implementation 'com.google.android.gms:play-services-maps:12.0.0'
+
+}
+apply plugin: 'com.google.gms.google-services'

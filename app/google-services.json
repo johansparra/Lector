@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "874614264917",
+    "firebase_url": "https://pasaje-rfid.firebaseio.com",
+    "project_id": "pasaje-rfid",
+    "storage_bucket": "pasaje-rfid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:874614264917:android:1291f5fe9d11ac04",
+        "android_client_info": {
+          "package_name": "com.ing_sebasparra.lector"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "874614264917-8d9ki2sj1sg488hfp3ttcs40a6e2cunp.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ing_sebasparra.lector",
+            "certificate_hash": "907010e8efd9f0c94ca9471dc22903721a849be0"
+          }
+        },
+        {
+          "client_id": "874614264917-ptlkmg6mdog6kvcrrva84pu02kel7d6p.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDEVAlPnrPb00kTS7FByViyw62g_Af0aJA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "874614264917-ptlkmg6mdog6kvcrrva84pu02kel7d6p.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

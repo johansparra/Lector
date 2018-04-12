@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:checked="true"
+            android:id="@+id/item_navigation_drawer_inicio"
+            android:icon="@drawable/ic_home"
+            android:title="@string/inicio" />
+        <item
+            android:id="@+id/item_navigation_drawer_perfil"
+            android:icon="@drawable/ic_login"
+            android:title="@string/perfil" />
+        <item
+            android:id="@+id/item_navigation_drawer_gps"
+            android:icon="@drawable/ic_action_content_send"
+            android:title="@string/gps" />
+        <item
+            android:id="@+id/item_navigation_drawer_nfc"
+            android:icon="@drawable/ic_nfc"
+            android:title="@string/nfc" />
+    </group>
+
+    <item android:title="@string/ajustes">
+        <menu>
+            <item
+                android:id="@+id/item_navigation_drawer_configuracion"
+                android:icon="@drawable/ic_action_action_settings"
+                android:title="@string/configuracion_1" />
+            <item
+                android:id="@+id/item_navigation_drawer_maps"
+                android:icon="@drawable/ic_map1"
+                android:title="@string/googlemaps" />
+        </menu>
+    </item>
+
+</menu>
