@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
     // VARIABLES DEL XML
     private Button siguiente1,siguiente2;
 
+    //comprobando control de versiones
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
