@@ -33,6 +33,7 @@ public class Config {
     /// cargarlos otros datos id nombre nivel matricula
     public static final String NOMBRET2_SHARED_PREF = "name";
     public static final String IDT2_SHARED_PREF = "nivel";
-
-
+    // prueba
+    public static final String IDT2_SHARED_PREF1 = "no se";
 }
+//otra prueba
