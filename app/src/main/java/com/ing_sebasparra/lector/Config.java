@@ -19,10 +19,10 @@ public class Config {
     // Esto sería usado para almacenar el correo electrónico del usuario registrado en el momento
     static final String EMAIL_SHARED_PREF = "email";
 
+
     // Usaremos esto para almacenar el booleano en preferencia compartida
     // para rastrear que el usuario ha iniciado sesión o no
     static final String LOGGEDIN_SHARED_PREF = "loggedin";
-
     /// guardar los otros datos id nombre nivel matricula
     static final String NOMBRE_SHARED_PREF = "name";
     static final String NIVEL_SHARED_PREF = "nivel";
@@ -37,3 +37,4 @@ public class Config {
     public static final String IDT2_SHARED_PREF1 = "no se";
 }
 //otra prueba
+bueno
