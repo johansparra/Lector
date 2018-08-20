@@ -37,4 +37,4 @@ public class Config {
     public static final String IDT2_SHARED_PREF1 = "no se";
 }
 //otra prueba
-bueno
+//bueno
