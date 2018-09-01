@@ -57,6 +57,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     GoogleMapOptions options = new GoogleMapOptions();
     private Button otro, btnMap, btnSatellite, btnHybrid, otro2, btncalle;
 
+
     // para marker boton
     static final CameraPosition CASA = CameraPosition.builder()
             .target(new LatLng(4.329052, -74.3634342))
@@ -85,7 +86,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         theme();
         setContentView(R.layout.activity_maps);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //Siguiente del tema bar---
@@ -93,14 +94,14 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         themeChanged();
         // hasta aca va el tema
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        drawerLayout = findViewById(R.id.navigation_drawer_layout);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         }
         setupNavigationDrawerContent(navigationView);
         //MAPS
-        otro2 = (Button) findViewById(R.id.btnotro2);
+        otro2 = findViewById(R.id.btnotro2);
         otro2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -108,7 +109,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     flyTo(CASA);
             }
         });
-        otro = (Button) findViewById(R.id.btnotro);
+        otro = findViewById(R.id.btnotro);
         otro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -116,7 +117,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     flyTo(SEATTLE);
             }
         });
-        btnMap = (Button) findViewById(R.id.btnMap);
+        btnMap = findViewById(R.id.btnMap);
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,7 +127,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         });
 
 
-        btnSatellite = (Button) findViewById(R.id.btnSatellite);
+        btnSatellite = findViewById(R.id.btnSatellite);
         btnSatellite.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -135,7 +136,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        btnHybrid = (Button) findViewById(R.id.btnHybrid);
+        btnHybrid = findViewById(R.id.btnHybrid);
         btnHybrid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -144,7 +145,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
             }
         });
 
-        btncalle = (Button) findViewById(R.id.btncalle);
+        btncalle = findViewById(R.id.btncalle);
         btncalle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -301,8 +302,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
     public void toolbarStatusBar() {
-        statusBar = (FrameLayout) findViewById(R.id.statusBar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        statusBar = findViewById(R.id.statusBar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Titulo que se visualiza en en action bar
         getSupportActionBar().setTitle("Google Maps");
@@ -385,7 +386,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.msg_limpiar,
                 (ViewGroup) findViewById(R.id.lytLayout));
-        TextView txtMsg = (TextView) layout.findViewById(R.id.txtMensaje);
+        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
         txtMsg.setText("Memoria Limpiada");
         toast3.setDuration(Toast.LENGTH_SHORT);
         toast3.setView(layout);
