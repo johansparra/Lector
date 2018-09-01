@@ -19,7 +19,6 @@
     <uses-permission android:name="com.google.android.providers.gsf.permission.READ_GSERVICES" />
     <!-- NFC -->
     <uses-permission android:name="android.permission.NFC" />
-
     <uses-feature
         android:name="android.hardware.nfc"
         android:required="true" />
@@ -35,7 +34,7 @@
     <uses-permission android:name="android.permission.READ_CONTACTS" />
 
     <application
-        android:name=".LectorAPP"
+
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -43,15 +42,6 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!-- FACEBOOK -->
-        <meta-data
-            android:name="com.facebook.sdk.ApplicationId"
-            android:value="@string/facebook_app_id" />
-
-        <activity
-            android:name="com.facebook.FacebookActivity"
-            android:configChanges="keyboard|keyboardHidden|screenLayout|screenSize|orientation"
-            android:label="@string/app_name" />
         <!-- GOOGLE MAPS -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -60,27 +50,9 @@
         <meta-data
             android:name="com.google.android.gms.version"
             android:value="@integer/google_play_services_version" />
-        <!--
-            <meta-data
-            android:name="com.google.android.maps.v2.API_KEY"
-            android:value="@string/API_KEY" />
-        -->
 
-
-        <!-- FACEBOOK -->
-        <activity
-            android:name="com.facebook.CustomTabActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-
-                <data android:scheme="@string/fb_login_protocol_scheme" />
-            </intent-filter>
-        </activity>
         <!-- MANIFEST -->
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -88,6 +60,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".LoginActivity"
             android:label="Login"
@@ -105,40 +78,29 @@
             android:label="Gps"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".MapsActivity"
+            android:name=".Maps.MapsActivity"
             android:label="Maps"
             android:parentActivityName=".MainActivity" />
         <activity
-            android:name=".MapsCalleActivity"
+            android:name=".Maps.MapsCalleActivity"
             android:label="Calle"
-            android:parentActivityName=".MapsActivity" />
+            android:parentActivityName=".Maps.MapsActivity" />
         <activity
             android:name=".NfcActivity"
             android:label="NFC"
             android:parentActivityName=".MainActivity">
 
-            <!-- PARA NFC -->
-            <!--
-                    <intent-filter>
-                    <action android:name="android.nfc.action.TAG_DISCOVERED" />
-                    <category android:name="android.intent.category.DEFAULT" />
-                </intent-filter>
-            -->
             <!-- NFC ENVIAR -->
             <intent-filter>
                 <action android:name="android.nfc.action.NDEF_DISCOVERED" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
                 <data android:mimeType="application/vnd.com.ing_sebasparra.lector" />
             </intent-filter>
             <intent-filter>
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
             </intent-filter>
+
         </activity>
-        <activity
-            android:name=".LoginActivity2"
-            android:label="@string/title_activity_login2"></activity>
     </application>
 
 </manifest>

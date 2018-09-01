@@ -30,10 +30,5 @@ public class Config {
     static final String CREDITOS_SHARED_PREF = "creditos";
     static final String ERR_SHARED_PREF = "err";
 
-    /// cargarlos otros datos id nombre nivel matricula
-    public static final String NOMBRET2_SHARED_PREF = "name";
-    public static final String IDT2_SHARED_PREF = "nivel";
-    // prueba
-    public static final String IDT2_SHARED_PREF1 = "no se";
 }
 //otra prueba

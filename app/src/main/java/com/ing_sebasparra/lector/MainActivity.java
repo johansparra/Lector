@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AlertDialog;
@@ -24,6 +25,8 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import com.ing_sebasparra.lector.Maps.MapsActivity;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.INTERNET;
@@ -40,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     FrameLayout statusBar;
 
     // VARIABLES DEL XML
-    private Button siguiente1,siguiente2;
+    private Button siguiente1;
 
     //comprobando control de versiones
 
@@ -68,7 +71,7 @@ public class MainActivity extends AppCompatActivity {
 
         //CARGAR VARIABLES
         siguiente1 = (Button) findViewById(R.id.siguiente);
-        siguiente2 = (Button) findViewById(R.id.leer);
+
 
         siguiente1.setEnabled(false);
         if(validaPermisos()){
@@ -246,8 +249,24 @@ public class MainActivity extends AppCompatActivity {
     // BOTON ATRAS CELULAR
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(MainActivity.this, MainActivity.class);
+        Intent intent = new Intent(Intent.ACTION_MAIN);
+        intent.addCategory(Intent.CATEGORY_HOME);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(intent);
+
+        System.exit(1);
+        finish();
+
+        System.exit(0);
+        ActivityCompat.finishAffinity(this);
+        System.exit(1);
+
+
+        System.exit(1);
+        moveTaskToBack(true);
+        android.os.Process.killProcess(android.os.Process.myPid());
+        System.exit(1);
     }
     // HASTA ACA BOTON ATRAS
     // TEMA NO CAMBIAR
@@ -313,10 +332,7 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, LoginActivity.class);
         startActivity(i);
     }
-    public void siguiente_2(View view) {
-        Intent i = new Intent(this, LoginActivity2.class);
-        startActivity(i);
-    }
+
     //CERRRAR SESION
     private void logout() {
         // Creación de un cuadro de diálogo de alerta para confirmar el cierre de sesión

@@ -22,6 +22,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ing_sebasparra.lector.Maps.MapsActivity;
+
 import java.io.File;
 
 public class NfcActivity extends AppCompatActivity {

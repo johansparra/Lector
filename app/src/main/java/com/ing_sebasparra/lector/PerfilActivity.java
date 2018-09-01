@@ -5,8 +5,6 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -26,12 +24,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.facebook.FacebookSdk;
-import com.facebook.appevents.AppEventsLogger;
-import com.facebook.login.LoginManager;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-
 import java.io.File;
 
 /*public class PerfilActivity extends AppCompatActivity implements View.OnClickListener {*/
@@ -43,11 +35,6 @@ public class PerfilActivity extends AppCompatActivity {
     SharedPreferences sharedPreferences;
     Boolean homeButton = false, themeChanged;
     FrameLayout statusBar;
-
-    //FACEBOOK
-    private TextView nameTextView, emailTextView, uidTextView;
-    private Bitmap loadedImage;
-    private Button botonlogout;
 
     //VARIABLES
     private TextView emailTV, nombreTV, cargoTV, fotoTV, cedulaTV, nmostrar;
@@ -62,8 +49,6 @@ public class PerfilActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Seleccionar el tema guardado por el usuario (siempre antes de setContentView)
         theme();
-        FacebookSdk.sdkInitialize(getApplicationContext());
-        AppEventsLogger.activateApp(this);
         setContentView(R.layout.activity_perfil);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -89,31 +74,6 @@ public class PerfilActivity extends AppCompatActivity {
         emailTV.setText(email1);
         nombre1 = sharedPreferences.getString(Config.NOMBRE_SHARED_PREF, "No Disponible");
         nombreTV.setText(nombre1);
-
-    /*    botonlogout.setOnClickListener(this);*/
-
-        //FACEBOOK
-
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-        if (user != null) {
-            String name = user.getDisplayName();
-            String email = user.getEmail();
-            Uri photoUrl = user.getPhotoUrl();
-            String uid = user.getUid();
-            /*NO SE VA A MOSTRAR POR AHORA DATOS DE FACEBOOK */
-
-        nameTextView = (TextView) findViewById(R.id.nameTextView);
-       /* emailTextView = (TextView) findViewById(R.id.emailTextView);
-        uidTextView = (TextView) findViewById(R.id.uidTextView);*/
-       /* botonlogout = (Button) findViewById(R.id.btn_logout);*/
-            nameTextView.setText(name);
-           /* emailTextView.setText(email);
-            uidTextView.setText(uid);*/
-
-        } else {
-            goLoginScreen();
-        }
 
     }
 
@@ -146,7 +106,8 @@ public class PerfilActivity extends AppCompatActivity {
             logout();
         }
         if (id == R.id.action_logout_firebase) {
-            logout_facebook();
+            // QUITE TODAS LAS OPCIONES DE FACEBOOK
+           // logout_facebook();
         }
 
 
@@ -352,33 +313,7 @@ public class PerfilActivity extends AppCompatActivity {
         alertDialog.show();
     }
 
-    //FACEBOOK
-    private void goLoginScreen() {
-        Intent intent = new Intent(this, OpcionesActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(intent);
-    }
-
-/*
-    public void onClick(View v) {
-
-        if (v == botonlogout) {
-            logout_facebook();
-        }
-        return;
-    }*/
-
-    public void logout_facebook() {
-
-            FirebaseAuth.getInstance().signOut();
-            LoginManager.getInstance().logOut();
-            goLoginScreen();
-
-    }
-
-
 }
 
-// aca otro nuevo1 el otro
 
-//siiiiimmmasdsadasd
+

@@ -49,19 +49,6 @@
             android:text="@string/siguiente"
             android:textColor="?attr/colorControlNormal" />
 
-        <Button
-            android:id="@+id/leer"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/siguiente"
-            android:layout_below="@+id/siguiente"
-            android:layout_marginStart="87dp"
-            android:layout_marginTop="72dp"
-            android:onClick="siguiente_2"
-            android:background="?attr/colorPrimary"
-            android:text="@string/firebase"
-            android:textColor="?attr/colorControlNormal" />
-
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -88,9 +75,9 @@
             android:id="@+id/textView12"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_above="@+id/leer"
+            android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="75dp"
+            android:layout_marginTop="193dp"
             android:text="@string/ajustes_avanzados" />
 
         <!-- textAppearance Y textColor PARA CAMBIAR EL COLOR SEGUN EL TEMA -->
