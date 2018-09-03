@@ -29,6 +29,7 @@ public class Config {
     static final String MATRICULA_SHARED_PREF = "matricula";
     static final String CREDITOS_SHARED_PREF = "creditos";
     static final String ERR_SHARED_PREF = "err";
+    static final String SHARED_BEAM = "";
 
 }
 //otra prueba

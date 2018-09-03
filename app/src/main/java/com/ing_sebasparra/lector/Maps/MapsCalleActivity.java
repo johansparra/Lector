@@ -25,10 +25,10 @@ import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
+import com.ing_sebasparra.lector.Beam;
 import com.ing_sebasparra.lector.GpsActivity;
 import com.ing_sebasparra.lector.LoginActivity;
 import com.ing_sebasparra.lector.MainActivity;
-import com.ing_sebasparra.lector.NfcActivity;
 import com.ing_sebasparra.lector.OpcionesActivity;
 import com.ing_sebasparra.lector.R;
 
@@ -58,7 +58,7 @@ public class MapsCalleActivity extends AppCompatActivity implements OnStreetView
         theme();
         setContentView(R.layout.activity_maps1);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //Siguiente del tema bar---
@@ -66,8 +66,8 @@ public class MapsCalleActivity extends AppCompatActivity implements OnStreetView
         themeChanged();
         // hasta aca va el tema
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        drawerLayout = findViewById(R.id.navigation_drawer_layout);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         }
@@ -157,7 +157,7 @@ public class MapsCalleActivity extends AppCompatActivity implements OnStreetView
                                 menuItem.setChecked(true);
                                 Toast.makeText(MapsCalleActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent3 = new Intent(MapsCalleActivity.this, NfcActivity.class);
+                                Intent intent3 = new Intent(MapsCalleActivity.this, Beam.class);
                                 startActivity(intent3);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:
@@ -201,8 +201,8 @@ public class MapsCalleActivity extends AppCompatActivity implements OnStreetView
     }
 
     public void toolbarStatusBar() {
-        statusBar = (FrameLayout) findViewById(R.id.statusBar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        statusBar = findViewById(R.id.statusBar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Titulo que se visualiza en en action bar
         getSupportActionBar().setTitle("Google Maps Calle");
@@ -285,7 +285,7 @@ public class MapsCalleActivity extends AppCompatActivity implements OnStreetView
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.msg_limpiar,
                 (ViewGroup) findViewById(R.id.lytLayout));
-        TextView txtMsg = (TextView) layout.findViewById(R.id.txtMensaje);
+        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
         txtMsg.setText("Memoria Limpiada");
         toast3.setDuration(Toast.LENGTH_SHORT);
         toast3.setView(layout);

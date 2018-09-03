@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">Pasaje RFID</string>
+
+    <!--NFC-->
+    <string name="message_write_tag">Write to NFC Tag</string>
+    <string name="message_tap_tag">Tap the NFC Tag to your device !</string>
+
     <!--TEMAS-->
     <string name="verificar_temas">Algunos widgets para verificar los colores del tema</string>
     <string name="cambiar_titulo">Cambiar título de widget</string>

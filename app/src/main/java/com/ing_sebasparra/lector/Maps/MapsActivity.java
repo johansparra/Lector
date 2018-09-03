@@ -31,10 +31,10 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.CircleOptions;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.ing_sebasparra.lector.Beam;
 import com.ing_sebasparra.lector.GpsActivity;
 import com.ing_sebasparra.lector.LoginActivity;
 import com.ing_sebasparra.lector.MainActivity;
-import com.ing_sebasparra.lector.NfcActivity;
 import com.ing_sebasparra.lector.OpcionesActivity;
 import com.ing_sebasparra.lector.R;
 
@@ -56,7 +56,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     GoogleMapOptions options = new GoogleMapOptions();
     private Button otro, btnMap, btnSatellite, btnHybrid, otro2, btncalle;
-
 
     // para marker boton
     static final CameraPosition CASA = CameraPosition.builder()
@@ -260,7 +259,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                                 menuItem.setChecked(true);
                                 Toast.makeText(MapsActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent3 = new Intent(MapsActivity.this, NfcActivity.class);
+                                Intent intent3 = new Intent(MapsActivity.this, Beam.class);
                                 startActivity(intent3);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:

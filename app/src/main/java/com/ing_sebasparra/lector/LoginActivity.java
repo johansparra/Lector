@@ -31,7 +31,6 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -91,7 +90,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         theme();
         setContentView(R.layout.activity_login);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //Siguiente del tema bar---
@@ -99,8 +98,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         themeChanged();
         // hasta aca va el tema
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        drawerLayout = findViewById(R.id.navigation_drawer_layout);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         }
@@ -108,15 +107,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //DECLARACION
 
-        editTextEmail = (EditText) findViewById(R.id.editTextEmailf);
-        editTextPassword = (EditText) findViewById(R.id.editTextPassword);
-        buttonLogin1 = (Button) findViewById(R.id.buttonLogin);
+        editTextEmail = findViewById(R.id.editTextEmailf);
+        editTextPassword = findViewById(R.id.editTextPassword);
+        buttonLogin1 = findViewById(R.id.buttonLogin);
 
         // Adición detector de clics
         buttonLogin1.setOnClickListener(this);
         //LOOGIN
-        inputLayoutCorreo = (TextInputLayout) findViewById(R.id.layout_email);
-        inputLayoutPassword= (TextInputLayout) findViewById(R.id.layout_password);
+        inputLayoutCorreo = findViewById(R.id.layout_email);
+        inputLayoutPassword = findViewById(R.id.layout_password);
         mProgressView = findViewById(R.id.login_progress);
 
     }
@@ -182,7 +181,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 menuItem.setChecked(true);
                                 Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent3 = new Intent(LoginActivity.this, NfcActivity.class);
+                                Intent intent3 = new Intent(LoginActivity.this, Beam.class);
                                 startActivity(intent3);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:
@@ -222,8 +221,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         homeButton = true;
     }
     public void toolbarStatusBar() {
-        statusBar = (FrameLayout) findViewById(R.id.statusBar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        statusBar = findViewById(R.id.statusBar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Titulo que se visualiza en en action bar
         getSupportActionBar().setTitle("Inicio de Sesión");
@@ -303,7 +302,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.msg_limpiar,
                 (ViewGroup) findViewById(R.id.lytLayout));
-        TextView txtMsg = (TextView)layout.findViewById(R.id.txtMensaje);
+        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
         txtMsg.setText("Memoria Limpiada");
         toast3.setDuration(Toast.LENGTH_SHORT);
         toast3.setView(layout);
@@ -406,7 +405,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     }
                 }) {
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
+            protected Map<String, String> getParams() {
                 Map<String, String> params = new HashMap<>();
                 // Añadiendo parámetros a la solicitud
                 params.put(Config.KEY_EMAIL, email);
@@ -521,7 +520,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     public void validar_campo() {
         String mailError = null;
         if (TextUtils.isEmpty(editTextEmail.getText())) {
-            mailError = getResources().getString(R.string.error_campo);;
+            mailError = getResources().getString(R.string.error_campo);
         }
         toggleTextInputLayoutError(inputLayoutCorreo,mailError);
 

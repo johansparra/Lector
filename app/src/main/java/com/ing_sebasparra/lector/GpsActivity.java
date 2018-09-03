@@ -52,7 +52,7 @@ public class GpsActivity extends AppCompatActivity {
         theme();
         setContentView(R.layout.activity_gps);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //Siguiente del tema bar---
@@ -60,16 +60,16 @@ public class GpsActivity extends AppCompatActivity {
         themeChanged();
         // hasta aca va el tema
 
-        drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
-        NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        drawerLayout = findViewById(R.id.navigation_drawer_layout);
+        NavigationView navigationView = findViewById(R.id.navigation_view);
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         }
         setupNavigationDrawerContent(navigationView);
 
         //GPS
-        mensaje1 = (TextView) findViewById(R.id.coordenadaid);
-        coordenadas = (TextView) findViewById(R.id.coordenadas_mostrar);
+        mensaje1 = findViewById(R.id.coordenadaid);
+        coordenadas = findViewById(R.id.coordenadas_mostrar);
         // permisos para el gps
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
@@ -92,8 +92,8 @@ public class GpsActivity extends AppCompatActivity {
             ActivityCompat.requestPermissions(this, new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION,}, 1000);
             return;
         }
-        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, (LocationListener) Local);
-        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, (LocationListener) Local);
+        mlocManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, Local);
+        mlocManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, Local);
     }
 
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -233,7 +233,7 @@ public class GpsActivity extends AppCompatActivity {
                                 menuItem.setChecked(true);
                                 Toast.makeText(GpsActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent2 = new Intent(GpsActivity.this, NfcActivity.class);
+                                Intent intent2 = new Intent(GpsActivity.this, Beam.class);
                                 startActivity(intent2);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:
@@ -277,8 +277,8 @@ public class GpsActivity extends AppCompatActivity {
     }
 
     public void toolbarStatusBar() {
-        statusBar = (FrameLayout) findViewById(R.id.statusBar);
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        statusBar = findViewById(R.id.statusBar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         // Titulo que se visualiza en en action bar
         getSupportActionBar().setTitle("GPS");
@@ -361,7 +361,7 @@ public class GpsActivity extends AppCompatActivity {
         LayoutInflater inflater = getLayoutInflater();
         View layout = inflater.inflate(R.layout.msg_limpiar,
                 (ViewGroup) findViewById(R.id.lytLayout));
-        TextView txtMsg = (TextView) layout.findViewById(R.id.txtMensaje);
+        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
         txtMsg.setText("Memoria Limpiada");
         toast3.setDuration(Toast.LENGTH_SHORT);
         toast3.setView(layout);
