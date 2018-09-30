@@ -37,8 +37,8 @@ public class PerfilActivity extends AppCompatActivity {
     FrameLayout statusBar;
 
     //VARIABLES
-    private TextView emailTV, nombreTV,apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar;
-    private String email1, nombre1,apellido1, cargo1, foto1, cedula1;
+    private TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar;
+    private String email1, nombre1, apellido1, cargo1, foto1, cedula1;
     // para la iamgen
     ImageView ivImageFromUrl;
     // el scan
@@ -113,7 +113,7 @@ public class PerfilActivity extends AppCompatActivity {
         }
         if (id == R.id.action_logout_firebase) {
             // QUITE TODAS LAS OPCIONES DE FACEBOOK
-           // logout_facebook();
+            // logout_facebook();
         }
 
 
@@ -147,9 +147,11 @@ public class PerfilActivity extends AppCompatActivity {
                                 return true;
                             case R.id.item_navigation_drawer_nfc:
                                 menuItem.setChecked(true);
-                                Toast.makeText(PerfilActivity.this, "no hace nada " + menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
+                                Intent intent3 = new Intent(PerfilActivity.this, Beam.class);
+                                startActivity(intent3);
                                 return true;
+
                             case R.id.item_navigation_drawer_configuracion:
                                 menuItem.setChecked(true);
                                 Toast.makeText(PerfilActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
@@ -281,7 +283,7 @@ public class PerfilActivity extends AppCompatActivity {
     }
     // HASTA ACA LIMPIAR
 
-    //XML
+
     private void logout() {
         // Creación de un cuadro de diálogo de alerta para confirmar el cierre de sesión
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
@@ -293,15 +295,10 @@ public class PerfilActivity extends AppCompatActivity {
 
                         // Salir de las preferencias compartidas
                         SharedPreferences preferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                        // Obtener editor
                         SharedPreferences.Editor editor = preferences.edit();
-                        // Poner el valor false para iniciar sesión
                         editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-                        // Poner valor en blanco en el correo electrónico
                         editor.putString(Config.EMAIL_SHARED_PREF, "");
-                        // Guardar las preferencias compartidas
                         editor.commit();
-                        //Lanzando el activity del usuario
                         Intent intent = new Intent(PerfilActivity.this, LoginActivity.class);
                         startActivity(intent);
                     }

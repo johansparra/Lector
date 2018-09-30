@@ -270,7 +270,7 @@ public class MainActivity extends AppCompatActivity {
                                 return true;
                             case R.id.item_navigation_drawer_nfc:
                                 menuItem.setChecked(true);
-                                Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                               // Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 Intent intent3 = new Intent(MainActivity.this, Beam.class);
                                 startActivity(intent3);

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/textColor">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/md_white_1000"
+        android:orientation="vertical">
+
+            <FrameLayout
+            android:id="@+id/statusBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/statusBarHeight"
+            android:background="?attr/colorPrimaryDark"
+            android:theme="@style/AlertDialog.AppCompat.Light"
+            android:translationZ="4dp" />
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imagen"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/transmi1" />
+
+    <LinearLayout
+        android:layout_width="156dp"
+        android:layout_height="178dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="380dp"
+        android:layout_marginBottom="10dp"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/cedula"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="-15dp"
+            android:layout_marginVertical="10dp"
+            android:gravity="center"
+            android:rotation="90"
+            android:text="numero"
+            android:textColor="@color/md_text"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/apellido"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="-35dp"
+            android:gravity="center"
+            android:rotation="90"
+            android:text="apellido"
+            android:textColor="@color/md_text"
+            android:textSize="11sp" />
+
+        <TextView
+            android:id="@+id/nombre"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginHorizontal="-35dp"
+            android:gravity="center"
+            android:rotation="90"
+            android:text="nombre"
+            android:textColor="@color/md_text"
+            android:textSize="11sp" />
+
+
+        <!--  <TextView
+              android:id="@+id/rotated_text"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:layout_alignParentLeft="true"
+              android:layout_centerVertical="true"
+              android:alpha=".3"
+              android:gravity="center"
+              android:textColor="@android:color/white"
+              android:textSize="14sp"
+              android:padding="4dp"
+              android:layout_marginLeft="-50dp"
+              android:rotation="90"
+              android:text="Andrew Coder" />-->
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

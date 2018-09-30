@@ -1,7 +1,9 @@
 package com.ing_sebasparra.lector;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
 import android.nfc.NfcAdapter;
@@ -12,6 +14,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
+import android.support.v7.widget.Toolbar;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,9 +23,6 @@ import android.widget.Toast;
 public class Beam extends Activity implements CreateNdefMessageCallback,
         OnNdefPushCompleteCallback {
     private static final int MESSAGE_SENT = 1;
-    /**
-     * This handler receives a message from onNdefPushComplete
-     */
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -38,33 +39,72 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
     NfcAdapter mNfcAdapter;
     TextView mInfoText;
 
+    private boolean loggedIn = false;
+    //VARIABLES
+    private TextView emailTV, nombreTV,apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar;
+    private String email1, nombre1,apellido1, cargo1, foto1, cedula1;
+
+    Toolbar toolbar;
+    FrameLayout statusBar;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.main);
+        setContentView(R.layout.activity_beam);//main
+        sabersiestalog();
 
         mInfoText = findViewById(R.id.textView);
-        // Check for available NFC Adapter
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mNfcAdapter == null) {
             mInfoText = findViewById(R.id.textView);
             mInfoText.setText("NFC no es compatible con este dispositivo");
         } else {
-            // Register callback to set NDEF message
             mNfcAdapter.setNdefPushMessageCallback(this, this);
-            // Register callback to listen for message-sent success
             mNfcAdapter.setOnNdefPushCompleteCallback(this, this);
         }
+
+
+        //VARIABLES
+
+        nombreTV = (TextView) findViewById(R.id.nombre);
+        apellidoTV = (TextView) findViewById(R.id.apellido);
+        cedulaTV = (TextView) findViewById(R.id.cedula);
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        nombre1 = sharedPreferences.getString(Config.NOMBRE_SHARED_PREF, "No Disponible");
+        nombreTV.setText(nombre1);
+        apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
+        apellidoTV.setText(apellido1);
+        cedula1 = sharedPreferences.getString(Config.MATRICULA_SHARED_PREF, "No Disponible");
+        cedulaTV.setText(cedula1);
+
+
+        toolbarStatusBar();
+        //toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
+
     }
 
-    /**
-     * Implementation for the CreateNdefMessageCallback interface
-     */
+
+    public void toolbarStatusBar() {
+        statusBar = (FrameLayout) findViewById(R.id.statusBar);
+       // toolbar = (Toolbar) findViewById(R.id.toolbar);
+   /*     setSupportActionBar(toolbar);
+        // Titulo que se visualiza en en action bar
+        getSupportActionBar().setTitle("Perfil");
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
+    }
+
+
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
-        String texto = ("Val"+"1069738505");
+        //String texto = ("Val"+"1069738505");
+       // String texto = ("1069738505");
+        String texto = (cedula1);
         NdefMessage msg = new NdefMessage(NdefRecord.createMime(
-                "application/com.example.android.beam", texto.getBytes())
+                "Aplicacion Transmilenio", texto.getBytes())
+                //"application/com.example.android.beam", texto.getBytes())
                 /**
                  * The Android Application Record (AAR) is commented out. When a device
                  * receives a push with an AAR in it, the application specified in the AAR
@@ -83,8 +123,6 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
      */
     @Override
     public void onNdefPushComplete(NfcEvent arg0) {
-        // A handler is needed to send messages to the activity when this
-        // callback occurs, because it happens from a binder thread
         mHandler.obtainMessage(MESSAGE_SENT).sendToTarget();
     }
 
@@ -96,14 +134,24 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
          /*   Intent intent3 = new Intent(Beam.this, Beam.class);
             startActivity(intent3);*/
-
             processIntent(getIntent());
+
         }
     }
 
+    private void sabersiestalog() {
+        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
+        if (!loggedIn) {
+            Toast.makeText(this, "Tienes que ingresar a tu cuenta", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Beam.this, LoginActivity.class);
+            startActivity(intent);
+        }
+    }
+
+
     @Override
     public void onNewIntent(Intent intent) {
-        // onResume gets called after this to handle the intent
         setIntent(intent);
     }
 
@@ -113,9 +161,7 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
     void processIntent(Intent intent) {
         Parcelable[] rawMsgs = intent.getParcelableArrayExtra(
                 NfcAdapter.EXTRA_NDEF_MESSAGES);
-        // only one message sent during the beam
         NdefMessage msg = (NdefMessage) rawMsgs[0];
-        // record 0 contains the MIME type, record 1 is the AAR, if present
         mInfoText.setText(new String(msg.getRecords()[0].getPayload()));
     }
 
