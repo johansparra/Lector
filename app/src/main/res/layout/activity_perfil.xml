@@ -50,6 +50,7 @@
             android:background="?attr/colorPrimary"
             android:drawableStart="@mipmap/ic_codigo"
             android:text="@string/siguiente"
+            android:paddingRight="6dp"
             android:textColor="?attr/colorControlNormal"
             tools:layout_editor_absoluteX="145dp"
             tools:layout_editor_absoluteY="358dp" />
