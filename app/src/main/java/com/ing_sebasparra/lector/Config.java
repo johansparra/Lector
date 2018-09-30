@@ -25,6 +25,7 @@ public class Config {
 
     /// guardar los otros datos id nombre nivel matricula
     static final String NOMBRE_SHARED_PREF = "name";
+    static final String APELLIDOS_SHARED_PREF = "apellido";
     static final String NIVEL_SHARED_PREF = "nivel";
     static final String MATRICULA_SHARED_PREF = "matricula";
     static final String CREDITOS_SHARED_PREF = "creditos";

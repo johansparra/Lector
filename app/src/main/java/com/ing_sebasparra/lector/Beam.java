@@ -27,7 +27,7 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MESSAGE_SENT:
-                    Toast.makeText(getApplicationContext(), "Message sent!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Mensaje enviado!", Toast.LENGTH_LONG).show();
                     Intent intent3 = new Intent(Beam.this, MainActivity.class);
                     startActivity(intent3);
                     break;
@@ -48,7 +48,7 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mNfcAdapter == null) {
             mInfoText = findViewById(R.id.textView);
-            mInfoText.setText("NFC is not available on this device.");
+            mInfoText.setText("NFC no es compatible con este dispositivo");
         } else {
             // Register callback to set NDEF message
             mNfcAdapter.setNdefPushMessageCallback(this, this);
@@ -62,8 +62,7 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
      */
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
-        String texto = ("Beam me up!\n\n" +
-                "Beam Time: ");
+        String texto = ("Val"+"1069738505");
         NdefMessage msg = new NdefMessage(NdefRecord.createMime(
                 "application/com.example.android.beam", texto.getBytes())
                 /**

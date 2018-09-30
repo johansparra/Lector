@@ -70,7 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     // inicialmente es falso
     private boolean loggedIn = false;
     // mirar si carga los datos
-    String PASSWORDT1 = null, EMAILT1 = null, NOMBRET1 = null, NIVELT1 = null, MATRICULAT1 = null, CREDITOST1 =null;
+    String PASSWORDT1 = null, EMAILT1 = null, NOMBRET1 = null, APELLIDOT1 = null, NIVELT1 = null, CEDULAT1 = null, CREDITOST1 =null;
     //hasta aca
 
     // saber si hay conexion a ineternet
@@ -465,10 +465,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 JSONObject root = new JSONObject(s);
                 JSONObject user_data = root.getJSONObject("user_data");
                 NOMBRET1 = user_data.getString("name");
+                APELLIDOT1 = user_data.getString("apellidos");
                 EMAILT1 = user_data.getString("email");
                 PASSWORDT1 = user_data.getString("password");
                 NIVELT1 = user_data.getString("nivel");
-                MATRICULAT1 = user_data.getString("matricula");
+                CEDULAT1 = user_data.getString("cedula");
                 CREDITOST1 = user_data.getString("creditos");
 
             } catch (JSONException e) {
@@ -479,9 +480,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
             editor.putString(Config.NOMBRE_SHARED_PREF, NOMBRET1);
+            editor.putString(Config.APELLIDOS_SHARED_PREF, APELLIDOT1);
             editor.putString(Config.EMAIL_SHARED_PREF, EMAILT1);
             editor.putString(Config.NIVEL_SHARED_PREF, NIVELT1);
-            editor.putString(Config.MATRICULA_SHARED_PREF, MATRICULAT1);
+            editor.putString(Config.MATRICULA_SHARED_PREF, CEDULAT1);
             editor.putString(Config.CREDITOS_SHARED_PREF, CREDITOST1);
             editor.putString(Config.ERR_SHARED_PREF, err);// si sale error  pero nunca va  salir por el condicional
             editor.commit();

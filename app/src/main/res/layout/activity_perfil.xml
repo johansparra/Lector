@@ -54,24 +54,7 @@
             tools:layout_editor_absoluteX="145dp"
             tools:layout_editor_absoluteY="358dp" />
 
-        <TextView
-            android:id="@+id/emailview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txt_email"
-            android:layout_below="@+id/txt_email"
-            android:text="@string/acavaelemail1"
-            android:textColor="@color/md_black_1000"
-            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txt_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/nombreview"
-            android:layout_below="@+id/nombreview"
-            android:text="@string/Emaill1"
-            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/txt_nombre"
@@ -84,34 +67,75 @@
             android:text="@string/Nombrel1"
             android:textSize="17sp" />
 
-        <TextView
-            android:id="@+id/txt_nombre_fb"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/emailview"
-            android:layout_below="@+id/emailview"
-            android:text="@string/nombre_fb"
-            android:textSize="17sp" />
 
         <TextView
             android:id="@+id/nombreview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txt_nombre"
             android:layout_below="@+id/txt_nombre"
+            android:layout_alignStart="@+id/txt_nombre"
             android:text="@string/acavaelnombre1"
             android:textColor="@color/md_black_1000"
             android:textSize="18sp" />
 
         <TextView
-            android:id="@+id/nameTextView"
+            android:id="@+id/txt_apellidos"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/txt_nombre_fb"
-            android:layout_below="@+id/txt_nombre_fb"
-            android:text="@string/acavaelnombre2"
+            android:layout_below="@+id/nombreview"
+            android:layout_alignStart="@+id/nombreview"
+            android:text="Apellidos"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/apellidosview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_apellidos"
+            android:layout_alignStart="@+id/txt_nombre"
+            android:text="@string/acavaelnombre1"
             android:textColor="@color/md_black_1000"
             android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_email"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/apellidosview"
+            android:layout_alignStart="@+id/nombreview"
+            android:text="@string/Emaill1"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/emailview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_email"
+            android:layout_alignStart="@+id/txt_email"
+            android:text="@string/acavaelemail1"
+            android:textColor="@color/md_black_1000"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txt_cedula"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/emailview"
+            android:layout_alignStart="@+id/nombreview"
+            android:text="Cedula"
+            android:textSize="17sp" />
+
+        <TextView
+            android:id="@+id/cedulaview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_cedula"
+            android:layout_alignStart="@+id/txt_email"
+            android:text="@string/acavaelemail1"
+            android:textColor="@color/md_black_1000"
+            android:textSize="18sp" />
+
+
     </RelativeLayout>
 
     <android.support.design.widget.NavigationView

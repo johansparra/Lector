@@ -37,8 +37,8 @@ public class PerfilActivity extends AppCompatActivity {
     FrameLayout statusBar;
 
     //VARIABLES
-    private TextView emailTV, nombreTV, cargoTV, fotoTV, cedulaTV, nmostrar;
-    private String email1, nombre1, cargo1, foto1, cedula1;
+    private TextView emailTV, nombreTV,apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar;
+    private String email1, nombre1,apellido1, cargo1, foto1, cedula1;
     // para la iamgen
     ImageView ivImageFromUrl;
     // el scan
@@ -69,11 +69,17 @@ public class PerfilActivity extends AppCompatActivity {
         //VARIABLES
         emailTV = (TextView) findViewById(R.id.emailview);
         nombreTV = (TextView) findViewById(R.id.nombreview);
+        apellidoTV = (TextView) findViewById(R.id.apellidosview);
+        cedulaTV = (TextView) findViewById(R.id.cedulaview);
         SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         email1 = sharedPreferences.getString(Config.EMAIL_SHARED_PREF, "No Disponible");
         emailTV.setText(email1);
         nombre1 = sharedPreferences.getString(Config.NOMBRE_SHARED_PREF, "No Disponible");
         nombreTV.setText(nombre1);
+        apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
+        apellidoTV.setText(apellido1);
+        cedula1 = sharedPreferences.getString(Config.MATRICULA_SHARED_PREF, "No Disponible");
+        cedulaTV.setText(cedula1);
 
     }
 
