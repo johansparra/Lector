@@ -32,21 +32,32 @@
 
     </FrameLayout>
 
-    <RelativeLayout
+
+    <ScrollView
+        android:id="@+id/todo"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
+    </ScrollView>
+
+    <RelativeLayout
+        android:id="@+id/rela1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
 
         <ProgressBar
             android:id="@+id/login_progress"
             style="?android:attr/progressBarStyleLarge"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="8dp"
             android:layout_below="@+id/layout_email"
-            android:layout_gravity = "center"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
+            android:layout_gravity="center"
+            android:layout_marginBottom="8dp"
             android:visibility="gone" />
+
+
 
         <EditText
             android:id="@+id/referencia"
@@ -67,9 +78,9 @@
             android:id="@+id/layout_password"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/layout_email"
-            android:layout_alignStart="@+id/layout_email"
             android:layout_below="@+id/layout_email"
+            android:layout_alignStart="@+id/layout_email"
+            android:layout_alignEnd="@+id/layout_email"
             android:textColor="@color/textColor"
             android:textColorHint="@color/colorHint"
             app:passwordToggleEnabled="true"
@@ -89,8 +100,8 @@
             android:id="@+id/layout_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/referencia"
             android:layout_alignStart="@+id/referencia"
+            android:layout_alignEnd="@+id/referencia"
             android:layout_centerVertical="true"
             android:textColorHint="@color/colorHint">
 
@@ -98,8 +109,8 @@
                 android:id="@+id/editTextEmailf"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignStart="@+id/editTextPassword"
                 android:layout_below="@+id/layout_email"
+                android:layout_alignStart="@+id/editTextPassword"
                 android:layout_marginTop="40dp"
                 android:layout_weight="1"
                 android:hint="@string/Digitesuemail"

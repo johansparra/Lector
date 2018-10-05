@@ -3,7 +3,9 @@ package com.ing_sebasparra.lector;
 public class Config {
     // URL de nuestro archivo login.php
     // A TODOS LES QUITE EL public
-    static final String LOGIN_URL = "https://johansparra1.000webhostapp.com/Registro/logmenu/login.php";
+ //   static final String LOGIN_URL = "https://johansparra1.000webhostapp.com/Registro/logmenu/login.php";
+    static final String LOGIN_URL= "http://api-transmilenio.us-west-1.elasticbeanstalk.com/API_TRANSMI/V0/User/Cuenta/ValorPasaje/";
+
 
     // Claves para el correo electrónico y la contraseña como se define  $_POST['key'] en login.php
     static final String KEY_EMAIL = "email";

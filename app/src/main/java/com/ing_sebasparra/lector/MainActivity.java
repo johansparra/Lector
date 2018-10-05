@@ -1,7 +1,6 @@
 package com.ing_sebasparra.lector;
 
 import android.app.Dialog;
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -134,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
 //nfc
 
-    @Override
+/*    @Override
     public void onResume() {
         super.onResume();
         NfcAdapter adapter = NfcAdapter.getDefaultAdapter(this);
@@ -144,7 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 new Intent(this, getClass()).addFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP),
                 0);
         adapter.enableForegroundDispatch(this, pi, null, null);
-    }
+    }*/
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

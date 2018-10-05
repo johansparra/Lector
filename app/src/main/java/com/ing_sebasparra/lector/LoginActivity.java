@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,26 +30,10 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.ing_sebasparra.lector.Maps.MapsActivity;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.ing_sebasparra.lector.WebServices.ApiRes;
 
 import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -363,36 +346,41 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         // HASTA ACA SI HAY CONEXION INTERNET
 
     }
-
-    private void login() {
-        // Obtención de valores de textos de edición
+    private void login(){
         final String email = editTextEmail.getText().toString().trim();
         final String password = editTextPassword.getText().toString().trim();
 
-        // Creacion a de peticion a un string
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, Config.LOGIN_URL,
+        ApiRes apires =new ApiRes();
+        apires.getLogin(email,password,this);
+
+    /*    ApiSebas apiSe=new ApiSebas();
+        apiSe.getLoginSebas(email,password,this);
+*/
+    }
+
+/*    private void login() {
+        // Obtención de valores de textos de edición
+        final String email = editTextEmail.getText().toString().trim();
+    //    final String password = editTextPassword.getText().toString().trim();
+
+        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.LOGIN_URL+email,
                 new Response.Listener<String>() {
 
                     @Override
                     public void onResponse(String response) {
-                        // Si tenemos éxito desde el servidor
-                        if (response.equalsIgnoreCase(Config.LOGIN_SUCCESS)) {
-                            // Creación de una preferencia compartida
+                        Toast.makeText(LoginActivity.this, "salida: "+ response, Toast.LENGTH_SHORT).show();
+                        if (!response.equalsIgnoreCase(Config.LOGIN_SUCCESS)) {
                             SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                            // Creación de un editor para almacenar valores en preferencias compartidas
                             SharedPreferences.Editor editor = sharedPreferences.edit();
-                            // Añadiendo valores al editor
                             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
                             editor.putString(Config.EMAIL_SHARED_PREF, email);
-                            // Para guardar los valores en el editor
                             editor.commit();
 
-                            CargarDatos b = new CargarDatos();
-                            b.execute(email, password);
+                         //   CargarDatos b = new CargarDatos();
+                           // b.execute(email, password);
+                        //    b.execute(email);
                             showProgress(true);
                         } else {
-                            // Si la respuesta del servidor no tiene éxito
-                            // Visualización de un mensaje de error
                             Toast.makeText(LoginActivity.this, " Usuario o password Incorrectos!", Toast.LENGTH_LONG).show();
                             showProgress(false);
                         }
@@ -401,7 +389,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        // Puedes manejar el error aquí si quieres
                     }
                 }) {
             @Override
@@ -409,7 +396,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 Map<String, String> params = new HashMap<>();
                 // Añadiendo parámetros a la solicitud
                 params.put(Config.KEY_EMAIL, email);
-                params.put(Config.KEY_PASSWORD, password);
+             //   params.put(Config.KEY_PASSWORD, password);
                 //Retornando los parametros
                 return params;
             }
@@ -417,23 +404,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Añandiendo el string de la solicitud en cola
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
-    }
+    }*/
     // hasta ca va el login
 
     // CARGAR DATOS DEL USUARIO QUE INICIO SESION
-    class CargarDatos extends AsyncTask<String, String, String> {
+/*    class CargarDatos extends AsyncTask<String, String, String> {
 
         @Override
         protected String doInBackground(String... params) {
             String email = params[0];
-            String password = params[1];
+           // String password = params[1];
             String data = "";
             int tmp;
 
             try {
-                URL url = new URL("https://johansparra1.000webhostapp.com/Registro/logmenu/mirar_datos/login.php");
-                String urlParams = "email=" + email + "&password=" + password;
+                URL url = new URL( "http://api-transmilenio.us-west-1.elasticbeanstalk.com/API_TRANSMI/V0/User/Cuenta/ValorPasaje/");
+             //   String urlParams = "email=" + email + "&password=" + password;
+                String urlParams = "email=" + email ;
                 HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+               // int status = Integer.valueOf(httpURLConnection.getResponseMessage());
+
+
                 httpURLConnection.setDoOutput(true);
                 OutputStream os = httpURLConnection.getOutputStream();
                 os.write(urlParams.getBytes());
@@ -463,14 +454,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             String err = null;
             try {
                 JSONObject root = new JSONObject(s);
-                JSONObject user_data = root.getJSONObject("user_data");
-                NOMBRET1 = user_data.getString("name");
+               // JSONObject user_data = root.getJSONObject("estado");
+               // JSONObject user_data = root.getJSONObject("user_data");
+                NOMBRET1 = root.getString("estado");
+              *//*  NOMBRET1 = user_data.getString("name");
                 APELLIDOT1 = user_data.getString("apellidos");
                 EMAILT1 = user_data.getString("email");
                 PASSWORDT1 = user_data.getString("password");
                 NIVELT1 = user_data.getString("nivel");
                 CEDULAT1 = user_data.getString("cedula");
-                CREDITOST1 = user_data.getString("creditos");
+                CREDITOST1 = user_data.getString("creditos");*//*
 
             } catch (JSONException e) {
                 e.printStackTrace();
@@ -480,18 +473,18 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
             editor.putString(Config.NOMBRE_SHARED_PREF, NOMBRET1);
-            editor.putString(Config.APELLIDOS_SHARED_PREF, APELLIDOT1);
+*//*            editor.putString(Config.APELLIDOS_SHARED_PREF, APELLIDOT1);
             editor.putString(Config.EMAIL_SHARED_PREF, EMAILT1);
             editor.putString(Config.NIVEL_SHARED_PREF, NIVELT1);
             editor.putString(Config.MATRICULA_SHARED_PREF, CEDULAT1);
             editor.putString(Config.CREDITOS_SHARED_PREF, CREDITOST1);
-            editor.putString(Config.ERR_SHARED_PREF, err);// si sale error  pero nunca va  salir por el condicional
+            editor.putString(Config.ERR_SHARED_PREF, err);// si sale error  pero nunca va  salir por el condicional*//*
             editor.commit();
             //Iniciando el  activity
             Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
             startActivity(intent);
         }
-    }
+    }*/
 
     // BARRA DE PROGRESO
     private void showProgress(final boolean show) {
@@ -521,16 +514,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     //MIRAR SI ESTA VACIO LOS EDIT TEXT
     public void validar_campo() {
         String mailError = null;
-        if (TextUtils.isEmpty(editTextEmail.getText())) {
+        String email = editTextEmail.getText().toString().trim();
+        Boolean mensaje;
+
+        if (TextUtils.isEmpty(editTextEmail.getText())  ) {
             mailError = getResources().getString(R.string.error_campo);
         }
+
         toggleTextInputLayoutError(inputLayoutCorreo,mailError);
 
         String passError = null;
+        String ErrorEmail = null;
         if (TextUtils.isEmpty(editTextPassword.getText())) {
             passError = getString(R.string.error_campo);
         }
         toggleTextInputLayoutError(inputLayoutPassword, passError);
+
+        ValidacionDatos validar =new ValidacionDatos();
+        mensaje =validar.validaremail(email);
+        if(mensaje) {
+           // Toast.makeText(this, "Email invalido", Toast.LENGTH_SHORT).show();
+            ErrorEmail = getString(R.string.error_invalid_email_di);
+
+        }
+        toggleTextInputLayoutError(inputLayoutCorreo, ErrorEmail);
+
     }
 
     private  void toggleTextInputLayoutError(@NonNull TextInputLayout textInputLayout,
