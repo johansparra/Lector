@@ -69,50 +69,55 @@ public class Tema extends DialogFragment implements View.OnClickListener {
     }
 
     public void onClick(View v) {
+        SeleccionTema tema=new SeleccionTema();
+      //  tema.setThemeFragment(1);
+
         switch (v.getId()) {
             case R.id.card_view1:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(1);
+                tema.setThemeFragment(1,sharedPreferences);
                 break;
             case R.id.card_view2:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(2);
+                tema.setThemeFragment(2,sharedPreferences);
                 break;
             case R.id.card_view3:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(3);
+                tema.setThemeFragment(3,sharedPreferences);
                 break;
             case R.id.card_view4:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(4);
+                tema.setThemeFragment(4,sharedPreferences);
                 break;
             case R.id.card_view5:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(5);
+                tema.setThemeFragment(5,sharedPreferences);
                 break;
             case R.id.card_view6:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(6);
+                tema.setThemeFragment(6,sharedPreferences);
                 break;
             case R.id.card_view7:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(7);
+                tema.setThemeFragment(7,sharedPreferences);
                 break;
             case R.id.card_view8:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(8);
+                tema.setThemeFragment(8,sharedPreferences);
                 break;
             case R.id.card_view9:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(9);
+                tema.setThemeFragment(9,sharedPreferences);
                 break;
             case R.id.card_view10:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", true).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(10);
+              //  ((OpcionesActivity) getActivity()).setThemeFragment(10);
+                tema.setThemeFragment(10,sharedPreferences);
                 break;
             case R.id.buttonDisagree:
                 sharedPreferences.edit().putBoolean("THEMECHANGED", false).apply();
-                ((OpcionesActivity) getActivity()).setThemeFragment(currentTheme);
+               // ((OpcionesActivity) getActivity()).setThemeFragment(currentTheme);
+                tema.setThemeFragment(currentTheme,sharedPreferences);
                 getDialog().dismiss();
                 break;
             case R.id.buttonAgree:

@@ -33,6 +33,7 @@ import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.Conexion;
 import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.ValidacionDatos;
+import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
 
 public class LoginActivity extends AppCompatActivity {
@@ -62,7 +63,9 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Seleccionar el tema guardado por el usuario (siempre antes de setContentView)
-        theme();
+       // theme();
+        SeleccionTema selecTema =new SeleccionTema();
+        selecTema.theme(this);
         setContentView(R.layout.activity_login);
 
         toolbar = findViewById(R.id.toolbar);
@@ -70,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
 
         //Siguiente del tema bar---
         toolbarStatusBar();
-        themeChanged();
+       // themeChanged();
 
         drawerLayout = findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
@@ -424,7 +427,7 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     // TEMA NO CAMBIAR
-    public void theme() {
+  /*  public void theme() {
         sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
         int theme = sharedPreferences.getInt("THEME", 0);
         settingTheme(theme);
@@ -433,7 +436,7 @@ public class LoginActivity extends AppCompatActivity {
     private void themeChanged() {
         themeChanged = sharedPreferences.getBoolean("THEMECHANGED", false);
         homeButton = true;
-    }
+    }*/
 
     public void toolbarStatusBar() {
         statusBar = findViewById(R.id.statusBar);
@@ -445,7 +448,7 @@ public class LoginActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void settingTheme(int theme) {
+  /*  public void settingTheme(int theme) {
         switch (theme) {
             case 1:
                 setTheme(R.style.AppTheme);
@@ -481,7 +484,7 @@ public class LoginActivity extends AppCompatActivity {
                 setTheme(R.style.AppTheme);
                 break;
         }
-    }
+    }*/
     // HASTA ACA CARGAR EL TEMA
 
 

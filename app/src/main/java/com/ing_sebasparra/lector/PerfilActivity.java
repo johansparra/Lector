@@ -21,8 +21,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ing_sebasparra.lector.Maps.MapsActivity;
 import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.LimpiarMemoria;
+import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.View.LoginActivity;
 import com.ing_sebasparra.lector.View.OpcionesActivity;
 import com.ing_sebasparra.lector.View.PagoNFC;
@@ -33,7 +35,7 @@ public class PerfilActivity extends AppCompatActivity {
     //CARGAR EL TEMA
     DrawerLayout drawerLayout;
     Toolbar toolbar;
-    SharedPreferences sharedPreferences;
+   // SharedPreferences sharedPreferences;
     Boolean homeButton = false, themeChanged;
     FrameLayout statusBar;
 
@@ -49,7 +51,8 @@ public class PerfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Seleccionar el tema guardado por el usuario (siempre antes de setContentView)
-        theme();
+        SeleccionTema selecTema =new SeleccionTema();
+        selecTema.theme(this);
         setContentView(R.layout.activity_perfil);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -57,7 +60,7 @@ public class PerfilActivity extends AppCompatActivity {
 
         //Siguiente del tema bar---
         toolbarStatusBar();
-        themeChanged();
+        //themeChanged();
         // hasta aca va el tema
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
@@ -169,7 +172,8 @@ public class PerfilActivity extends AppCompatActivity {
                                 menuItem.setChecked(true);
                                 Toast.makeText(PerfilActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                return true;
+                                Intent intent6 = new Intent(PerfilActivity.this, MapsActivity.class);
+                                startActivity(intent6);
                         }
                         return true;
                     }
@@ -185,16 +189,17 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
     // TEMA NO CAMBIAR
-    public void theme() {
+
+/*    public void theme() {
         sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
         int theme = sharedPreferences.getInt("THEME", 0);
         settingTheme(theme);
-    }
+    }*/
 
-    private void themeChanged() {
+ /*   private void themeChanged() {
         themeChanged = sharedPreferences.getBoolean("THEMECHANGED", false);
         homeButton = true;
-    }
+    }*/
 
     public void toolbarStatusBar() {
         statusBar = (FrameLayout) findViewById(R.id.statusBar);

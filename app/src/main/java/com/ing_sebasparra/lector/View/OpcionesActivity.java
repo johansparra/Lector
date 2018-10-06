@@ -1,7 +1,6 @@
 package com.ing_sebasparra.lector.View;
 
 import android.app.Dialog;
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -18,9 +17,10 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.ing_sebasparra.lector.R;
+import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.Temas.Tema;
 
-public class OpcionesActivity extends AppCompatActivity implements View.OnClickListener {
+public class OpcionesActivity extends AppCompatActivity {
 
     DrawerLayout drawerLayout;
     Toolbar toolbar;
@@ -38,22 +38,34 @@ public class OpcionesActivity extends AppCompatActivity implements View.OnClickL
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Seleccionar el tema guardado por el usuario (siempre antes de setContentView)
-        theme();
+        SeleccionTema selecTema = new SeleccionTema();
+        selecTema.theme(this);
         setContentView(R.layout.activity_opciones);
 
         toolbarStatusBar();
-        settingsButtons();
-        themeChanged();
+        //settingsButtons();
+        // themeChanged();
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
+        layoutParamsStatusBar = statusBar.getLayoutParams();
 
+        relativeLayoutChooseTheme = (RelativeLayout) findViewById(R.id.relativeLayoutChooseTheme);
+        relativeLayoutChooseTheme.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                Tema dialog = new Tema();
+                dialog.show(fragmentManager, "fragment_color_chooser");
+                // break;
+            }
+        });
     }
 
-    @Override
+/*    @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.relativeLayoutChooseTheme:
@@ -62,7 +74,7 @@ public class OpcionesActivity extends AppCompatActivity implements View.OnClickL
                 dialog.show(fragmentManager, "fragment_color_chooser");
                 break;
         }
-    }
+    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,7 +103,7 @@ public class OpcionesActivity extends AppCompatActivity implements View.OnClickL
     }
 
     // TEMA NO CAMBIAR
-    public void theme() {
+  /*  public void theme() {
         sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
         theme = sharedPreferences.getInt("THEME", 0);
         settingTheme(theme);
@@ -100,13 +112,13 @@ public class OpcionesActivity extends AppCompatActivity implements View.OnClickL
     private void themeChanged() {
         themeChanged = sharedPreferences.getBoolean("THEMECHANGED", false);
         homeButton = true;
-    }
+    }*/
 
-    private void settingsButtons() {
-        relativeLayoutChooseTheme = (RelativeLayout) findViewById(R.id.relativeLayoutChooseTheme);
-        layoutParamsStatusBar = statusBar.getLayoutParams();
-        relativeLayoutChooseTheme.setOnClickListener(this);
-    }
+/*    private void settingsButtons() {
+
+
+        //relativeLayoutChooseTheme.setOnClickListener(OpcionesActivity.this);
+    }*/
 
     public void toolbarStatusBar() {
         statusBar = (FrameLayout) findViewById(R.id.statusBar);
