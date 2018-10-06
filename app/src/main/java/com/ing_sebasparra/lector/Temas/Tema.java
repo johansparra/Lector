@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 
-import com.ing_sebasparra.lector.OpcionesActivity;
+import com.ing_sebasparra.lector.View.OpcionesActivity;
 import com.ing_sebasparra.lector.R;
 
 

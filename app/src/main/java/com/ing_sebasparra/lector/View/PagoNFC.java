@@ -1,4 +1,4 @@
-package com.ing_sebasparra.lector;
+package com.ing_sebasparra.lector.View;
 
 import android.app.Activity;
 import android.content.Context;
@@ -20,8 +20,12 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ing_sebasparra.lector.PerfilActivity;
+import com.ing_sebasparra.lector.R;
+import com.ing_sebasparra.lector.Recursos.Config;
 
-public class Beam extends Activity implements CreateNdefMessageCallback,
+
+public class PagoNFC extends Activity implements CreateNdefMessageCallback,
         OnNdefPushCompleteCallback {
     private static final int MESSAGE_SENT = 1;
     private final Handler mHandler = new Handler() {
@@ -30,7 +34,7 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
             switch (msg.what) {
                 case MESSAGE_SENT:
                     Toast.makeText(getApplicationContext(), "Mensaje enviado!", Toast.LENGTH_LONG).show();
-                    Intent intent3 = new Intent(Beam.this, PerfilActivity.class);
+                    Intent intent3 = new Intent(PagoNFC.this, PerfilActivity.class);
                     startActivity(intent3);
                     break;
             }
@@ -95,7 +99,7 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
         loggedIn = sharedPreferences.getBoolean(config.LOGGEDIN_SHARED_PREF, false);
         if (!loggedIn) {
             Toast.makeText(this, "Tienes que ingresar a tu cuenta", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Beam.this, LoginActivity.class);
+            Intent intent = new Intent(PagoNFC.this, LoginActivity.class);
             startActivity(intent);
         }
     }
@@ -144,10 +148,10 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
     @Override
     public void onResume() {
         super.onResume();
-        // Check to see that the Activity started due to an Android Beam
+        // Check to see that the Activity started due to an Android PagoNFC
 
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
-         /*   Intent intent3 = new Intent(Beam.this, Beam.class);
+         /*   Intent intent3 = new Intent(PagoNFC.this, PagoNFC.class);
             startActivity(intent3);*/
             processIntent(getIntent());
 

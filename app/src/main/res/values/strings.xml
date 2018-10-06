@@ -119,4 +119,6 @@ AIzaSyBzIyAhKl-Vk1OdwknsPZUeu5wAcZp9J80
         completions."
     </string>
 
+    <!--LIMPIAR MEMORIA-->
+    <string name="texto_limpiar">Memoria Limpiada</string>
 </resources>

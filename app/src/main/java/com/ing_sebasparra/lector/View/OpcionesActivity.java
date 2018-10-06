@@ -1,4 +1,4 @@
-package com.ing_sebasparra.lector;
+package com.ing_sebasparra.lector.View;
 
 import android.app.Dialog;
 import android.content.Context;
@@ -15,9 +15,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
-import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Temas.Tema;
 
 public class OpcionesActivity extends AppCompatActivity implements View.OnClickListener {
@@ -33,9 +33,7 @@ public class OpcionesActivity extends AppCompatActivity implements View.OnClickL
     Boolean homeButton = false, themeChanged;
     ViewGroup.LayoutParams layoutParamsStatusBar;
 
-   private ProgressBar progressBar;
 
-/*     private TextView info;*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +86,7 @@ public class OpcionesActivity extends AppCompatActivity implements View.OnClickL
     // boton atras del celular
     @Override
     public void onBackPressed() {
-        intent = new Intent(OpcionesActivity.this, MainActivity.class);
+        intent = new Intent(OpcionesActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 

@@ -29,6 +29,9 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.Maps.MapsActivity;
+import com.ing_sebasparra.lector.View.LoginActivity;
+import com.ing_sebasparra.lector.View.OpcionesActivity;
+import com.ing_sebasparra.lector.View.PagoNFC;
 
 import java.io.File;
 
@@ -184,10 +187,10 @@ public class GpsActivity extends AppCompatActivity {
             dialog.show();
             return true;
         }
-        if (id == R.id.action_configuracion) {
+      /*  if (id == R.id.action_configuracion) {
             Intent i = new Intent(this, OpcionesActivity.class);
             startActivity(i);
-        }
+        }*/
         if (id == R.id.action_limpiar) {
             deleteCache(this);
             // Toast.makeText(LoginActivity.this, "Memoria Limpiada " , Toast.LENGTH_SHORT).show();
@@ -233,7 +236,7 @@ public class GpsActivity extends AppCompatActivity {
                                 menuItem.setChecked(true);
                                 Toast.makeText(GpsActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent2 = new Intent(GpsActivity.this, Beam.class);
+                                Intent intent2 = new Intent(GpsActivity.this, PagoNFC.class);
                                 startActivity(intent2);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:

@@ -1,4 +1,4 @@
-package com.ing_sebasparra.lector;
+package com.ing_sebasparra.lector.Recursos;
 
 public class Config {
     // URL de nuestro archivo login.php

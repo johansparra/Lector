@@ -58,7 +58,7 @@
             android:value="true" />
         <!-- MANIFEST -->
 
-        <activity android:name=".LoginActivity">
+        <activity android:name=".View.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -71,9 +71,9 @@
             android:label="Login"
             android:parentActivityName=".MainActivity" />-->
         <activity
-            android:name=".OpcionesActivity"
+            android:name=".View.OpcionesActivity"
             android:label="Opciones"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".View.LoginActivity" />
         <activity
             android:name=".PerfilActivity"
             android:label="Perfil"
@@ -91,7 +91,7 @@
             android:label="Calle"
             android:parentActivityName=".Maps.MapsActivity" />
         <activity
-            android:name=".Beam"
+            android:name=".View.PagoNFC"
             android:label="NFC"
             android:parentActivityName=".MainActivity">
 

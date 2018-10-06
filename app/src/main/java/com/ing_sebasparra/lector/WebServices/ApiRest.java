@@ -12,9 +12,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-import com.ing_sebasparra.lector.Config;
+import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.PerfilActivity;
-import com.ing_sebasparra.lector.UrlServices;
+import com.ing_sebasparra.lector.Recursos.UrlServices;
 
 import org.json.JSONException;
 import org.json.JSONObject;

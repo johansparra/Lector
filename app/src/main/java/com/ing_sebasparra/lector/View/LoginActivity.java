@@ -1,4 +1,4 @@
-package com.ing_sebasparra.lector;
+package com.ing_sebasparra.lector.View;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
@@ -16,22 +16,24 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ing_sebasparra.lector.GpsActivity;
+import com.ing_sebasparra.lector.MainActivity;
 import com.ing_sebasparra.lector.Maps.MapsActivity;
+import com.ing_sebasparra.lector.PerfilActivity;
+import com.ing_sebasparra.lector.R;
+import com.ing_sebasparra.lector.Recursos.Conexion;
+import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.ValidacionDatos;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
-
-import java.io.File;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -53,8 +55,6 @@ public class LoginActivity extends AppCompatActivity {
     //hasta aca
 
     public TextInputLayout inputLayoutCorreo, inputLayoutPassword;
-
-
     private View mProgressView;
 
 
@@ -117,7 +117,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        Config config=new Config();
+        Config config = new Config();
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         loggedIn = sharedPreferences.getBoolean(config.LOGGEDIN_SHARED_PREF, false);
         if (loggedIn) {
@@ -347,13 +347,14 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show();
             return true;
         }
-        if (id == R.id.action_configuracion) {
+   /*     if (id == R.id.action_configuracion) {
             Intent i = new Intent(this, OpcionesActivity.class);
             startActivity(i);
-        }
+        }*/
         if (id == R.id.action_limpiar) {
-            deleteCache(this);
-            // Toast.makeText(LoginActivity.this, "Memoria Limpiada " , Toast.LENGTH_SHORT).show();
+       /*     LimpiarMemoria limpiar = new LimpiarMemoria();
+            limpiar.deleteCache(this,pe);*/
+
         }
 
 
@@ -392,7 +393,7 @@ public class LoginActivity extends AppCompatActivity {
                                 menuItem.setChecked(true);
                                 Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent3 = new Intent(LoginActivity.this, Beam.class);
+                                Intent intent3 = new Intent(LoginActivity.this, PagoNFC.class);
                                 startActivity(intent3);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:
@@ -483,47 +484,5 @@ public class LoginActivity extends AppCompatActivity {
     }
     // HASTA ACA CARGAR EL TEMA
 
-    // LIMPIAR MEMORIA
-    public void deleteCache(Context context) {
-        try {
-            File dir = context.getCacheDir();
-            texto_titulo();
-            deleteDir(dir);
-        } catch (Exception e) {
-        }
-    }
 
-    public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-
-
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-
-                    return false;
-                }
-            }
-            return dir.delete();
-        } else if (dir != null && dir.isFile())
-            return dir.delete();
-        else {
-            return false;
-        }
-    }
-
-    public void texto_titulo() {
-        Toast toast3 = new Toast(getApplicationContext());
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.msg_limpiar,
-                (ViewGroup) findViewById(R.id.lytLayout));
-        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
-        txtMsg.setText("Memoria Limpiada");
-        toast3.setDuration(Toast.LENGTH_SHORT);
-        toast3.setView(layout);
-        toast3.show();
-    }
-// HASTA ACA LIMPIAR
 }

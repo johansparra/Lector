@@ -5,9 +5,9 @@ import android.support.design.widget.TextInputLayout;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.ing_sebasparra.lector.LoginActivity;
+import com.ing_sebasparra.lector.View.LoginActivity;
 import com.ing_sebasparra.lector.R;
-import com.ing_sebasparra.lector.ValidacionDatos;
+import com.ing_sebasparra.lector.Recursos.ValidacionDatos;
 
 public class LoginModel extends LoginActivity {
 

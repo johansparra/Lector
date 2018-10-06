@@ -20,6 +20,8 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.ing_sebasparra.lector.View.OpcionesActivity;
+
 import java.io.File;
 
 public class EjemploActivity extends AppCompatActivity {
@@ -72,10 +74,10 @@ public class EjemploActivity extends AppCompatActivity {
             dialog.show();
             return true;
         }
-        if (id == R.id.action_configuracion) {
+    /*    if (id == R.id.action_configuracion) {
             Intent i = new Intent(this, OpcionesActivity.class);
             startActivity(i);
-        }
+        }*/
         if (id == R.id.action_limpiar) {
             deleteCache(this);
             // Toast.makeText(LoginActivity.this, "Memoria Limpiada " , Toast.LENGTH_SHORT).show();

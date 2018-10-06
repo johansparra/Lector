@@ -25,11 +25,11 @@ import com.google.android.gms.maps.StreetViewPanorama;
 import com.google.android.gms.maps.StreetViewPanoramaFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.StreetViewPanoramaCamera;
-import com.ing_sebasparra.lector.Beam;
+import com.ing_sebasparra.lector.View.PagoNFC;
 import com.ing_sebasparra.lector.GpsActivity;
-import com.ing_sebasparra.lector.LoginActivity;
+import com.ing_sebasparra.lector.View.LoginActivity;
 import com.ing_sebasparra.lector.MainActivity;
-import com.ing_sebasparra.lector.OpcionesActivity;
+import com.ing_sebasparra.lector.View.OpcionesActivity;
 import com.ing_sebasparra.lector.R;
 
 import java.io.File;
@@ -109,10 +109,10 @@ public class MapsCalleActivity extends AppCompatActivity implements OnStreetView
             dialog.show();
             return true;
         }
-        if (id == R.id.action_configuracion) {
+     /*   if (id == R.id.action_configuracion) {
             Intent i = new Intent(this, OpcionesActivity.class);
             startActivity(i);
-        }
+        }*/
         if (id == R.id.action_limpiar) {
             deleteCache(this);
             // Toast.makeText(LoginActivity.this, "Memoria Limpiada " , Toast.LENGTH_SHORT).show();
@@ -157,7 +157,7 @@ public class MapsCalleActivity extends AppCompatActivity implements OnStreetView
                                 menuItem.setChecked(true);
                                 Toast.makeText(MapsCalleActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent3 = new Intent(MapsCalleActivity.this, Beam.class);
+                                Intent intent3 = new Intent(MapsCalleActivity.this, PagoNFC.class);
                                 startActivity(intent3);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:

@@ -30,6 +30,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.Maps.MapsActivity;
+import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.View.LoginActivity;
+import com.ing_sebasparra.lector.View.OpcionesActivity;
+import com.ing_sebasparra.lector.View.PagoNFC;
 
 import static android.Manifest.permission.ACCESS_FINE_LOCATION;
 import static android.Manifest.permission.INTERNET;
@@ -82,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             NdefRecord rec = NdefRecord.createUri("http://www.google.com");
             NdefMessage msg = new NdefMessage(rec);
             adapter.setNdefPushMessage(msg, this);*/
-           /* Intent ListSong = new Intent(getApplicationContext(), Beam.class);
+           /* Intent ListSong = new Intent(getApplicationContext(), PagoNFC.class);
             startActivity(ListSong);
 */
 
@@ -204,7 +208,7 @@ public class MainActivity extends AppCompatActivity {
             if (intent.getAction().equals(NfcAdapter.ACTION_TAG_DISCOVERED) ||
                     intent.getAction().equals(NfcAdapter.ACTION_NDEF_DISCOVERED) ||
                     intent.getAction().equals(NfcAdapter.ACTION_TECH_DISCOVERED)) {
-                Intent intent3 = new Intent(MainActivity.this, Beam.class);
+                Intent intent3 = new Intent(MainActivity.this, PagoNFC.class);
                 startActivity(intent3);
 
 
@@ -272,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                                 menuItem.setChecked(true);
                                // Toast.makeText(MainActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent3 = new Intent(MainActivity.this, Beam.class);
+                                Intent intent3 = new Intent(MainActivity.this, PagoNFC.class);
                                 startActivity(intent3);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:
