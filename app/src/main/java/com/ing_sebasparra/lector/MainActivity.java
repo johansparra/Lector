@@ -51,6 +51,7 @@ public class MainActivity extends AppCompatActivity {
     //comprobando control de versiones
     TextView mInfoText;
     NfcAdapter mNfcAdapter;
+    Config config=new Config();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -401,13 +402,13 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(DialogInterface arg0, int arg1) {
 
                         // Salir de las preferencias compartidas
-                        SharedPreferences preferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                        SharedPreferences preferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                         // Obtener editor
                         SharedPreferences.Editor editor = preferences.edit();
                         // Poner el valor false para iniciar sesión
-                        editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, false);
+                        editor.putBoolean(config.LOGGEDIN_SHARED_PREF, false);
                         // Poner valor en blanco en el correo electrónico
-                        editor.putString(Config.EMAIL_SHARED_PREF, "");
+                        editor.putString(config.EMAIL_SHARED_PREF, "");
                         // Guardar las preferencias compartidas
                         editor.commit();
                         //Lanzando el activity del usuario

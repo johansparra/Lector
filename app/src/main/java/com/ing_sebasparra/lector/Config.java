@@ -16,14 +16,14 @@ public class Config {
 
     // Claves para las preferencias compartidas
     // Este sería el nombre de nuestras preferencias compartidas
-    static final String SHARED_PREF_NAME = "myloginapp";
+   public final String SHARED_PREF_NAME = "myloginapp";
 
     // Esto sería usado para almacenar el correo electrónico del usuario registrado en el momento
-    static final String EMAIL_SHARED_PREF = "email";
+    public final String EMAIL_SHARED_PREF = "email";
 
     // Usaremos esto para almacenar el booleano en preferencia compartida
     // para rastrear que el usuario ha iniciado sesión o no
-    static final String LOGGEDIN_SHARED_PREF = "loggedin";
+    public final String LOGGEDIN_SHARED_PREF = "loggedin";
 
     /// guardar los otros datos id nombre nivel matricula
     static final String NOMBRE_SHARED_PREF = "name";
@@ -33,6 +33,8 @@ public class Config {
     static final String CREDITOS_SHARED_PREF = "creditos";
     static final String ERR_SHARED_PREF = "err";
     static final String SHARED_BEAM = "";
+
+    public final String CEDULA_SHARED_PRF="cedula";
 
 }
 //otra prueba

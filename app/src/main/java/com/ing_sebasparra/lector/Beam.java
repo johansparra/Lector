@@ -15,6 +15,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
 import android.support.v7.widget.Toolbar;
+import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +30,7 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
             switch (msg.what) {
                 case MESSAGE_SENT:
                     Toast.makeText(getApplicationContext(), "Mensaje enviado!", Toast.LENGTH_LONG).show();
-                    Intent intent3 = new Intent(Beam.this, MainActivity.class);
+                    Intent intent3 = new Intent(Beam.this, PerfilActivity.class);
                     startActivity(intent3);
                     break;
             }
@@ -46,6 +47,9 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
 
     Toolbar toolbar;
     FrameLayout statusBar;
+
+    //
+    Config config=new Config();
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -69,12 +73,14 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
         nombreTV = (TextView) findViewById(R.id.nombre);
         apellidoTV = (TextView) findViewById(R.id.apellido);
         cedulaTV = (TextView) findViewById(R.id.cedula);
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        nombre1 = sharedPreferences.getString(Config.NOMBRE_SHARED_PREF, "No Disponible");
+
+        SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        nombre1 = sharedPreferences.getString(config.EMAIL_SHARED_PREF, "No Disponible");
         nombreTV.setText(nombre1);
-        apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
-        apellidoTV.setText(apellido1);
-        cedula1 = sharedPreferences.getString(Config.MATRICULA_SHARED_PREF, "No Disponible");
+      /*  apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
+        apellidoTV.setText(apellido1);*/
+         apellidoTV.setVisibility(View.GONE);
+        cedula1 = sharedPreferences.getString(config.CEDULA_SHARED_PRF, "No Disponible");
         cedulaTV.setText(cedula1);
 
 
@@ -83,6 +89,15 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
 
 
 
+    }
+    private void sabersiestalog() {
+        SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        loggedIn = sharedPreferences.getBoolean(config.LOGGEDIN_SHARED_PREF, false);
+        if (!loggedIn) {
+            Toast.makeText(this, "Tienes que ingresar a tu cuenta", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Beam.this, LoginActivity.class);
+            startActivity(intent);
+        }
     }
 
 
@@ -139,15 +154,7 @@ public class Beam extends Activity implements CreateNdefMessageCallback,
         }
     }
 
-    private void sabersiestalog() {
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-        if (!loggedIn) {
-            Toast.makeText(this, "Tienes que ingresar a tu cuenta", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(Beam.this, LoginActivity.class);
-            startActivity(intent);
-        }
-    }
+
 
 
     @Override

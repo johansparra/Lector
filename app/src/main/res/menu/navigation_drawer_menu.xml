@@ -18,6 +18,7 @@
         <item
             android:id="@+id/item_navigation_drawer_nfc"
             android:icon="@drawable/ic_nfc"
+            android:visible="true"
             android:title="@string/nfc" />
     </group>
 

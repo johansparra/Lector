@@ -6,8 +6,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -31,11 +29,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.Maps.MapsActivity;
-import com.ing_sebasparra.lector.WebServices.ApiRes;
+import com.ing_sebasparra.lector.WebServices.ApiRest;
 
 import java.io.File;
 
-public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
+public class LoginActivity extends AppCompatActivity {
 
     //cargar el tema
     DrawerLayout drawerLayout;
@@ -45,23 +43,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     FrameLayout statusBar;
 
     // Definición de variables
-    private EditText editTextEmail;
-    private EditText editTextPassword;
+    public EditText editTextEmail;
+    public EditText editTextPassword;
     private Button buttonLogin1;
 
-    // variable booleana para comprobar que el usuario ha iniciado sesión o no
-    // inicialmente es falso
     private boolean loggedIn = false;
     // mirar si carga los datos
-    String PASSWORDT1 = null, EMAILT1 = null, NOMBRET1 = null, APELLIDOT1 = null, NIVELT1 = null, CEDULAT1 = null, CREDITOST1 =null;
+    String PASSWORDT1 = null, EMAILT1 = null, NOMBRET1 = null, APELLIDOT1 = null, NIVELT1 = null, CEDULAT1 = null, CREDITOST1 = null;
     //hasta aca
 
-    // saber si hay conexion a ineternet
-    boolean tipoConexion1 = false;
-    boolean tipoConexion2 = false;
-    //LOGIN CAMPOS VACIOS
-    private TextInputLayout inputLayoutCorreo, inputLayoutPassword;
-    private boolean camposVacios = false;
+    public TextInputLayout inputLayoutCorreo, inputLayoutPassword;
+
 
     private View mProgressView;
 
@@ -79,283 +71,66 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //Siguiente del tema bar---
         toolbarStatusBar();
         themeChanged();
-        // hasta aca va el tema
 
         drawerLayout = findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
+
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         }
         setupNavigationDrawerContent(navigationView);
 
-        //DECLARACION
+        inicializeValues();
 
+
+    }
+
+    private void inicializeValues() {
         editTextEmail = findViewById(R.id.editTextEmailf);
         editTextPassword = findViewById(R.id.editTextPassword);
         buttonLogin1 = findViewById(R.id.buttonLogin);
-
-        // Adición detector de clics
-        buttonLogin1.setOnClickListener(this);
-        //LOOGIN
         inputLayoutCorreo = findViewById(R.id.layout_email);
         inputLayoutPassword = findViewById(R.id.layout_password);
         mProgressView = findViewById(R.id.login_progress);
 
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_en_perfil, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.action_acerca) {
-            Dialog dialog = new Dialog(LoginActivity.this);
-            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-            dialog.setContentView(R.layout.dialogo_acerca);
-            dialog.show();
-            return true;
-        }
-        if (id == R.id.action_configuracion) {
-            Intent i = new Intent(this, OpcionesActivity.class);
-            startActivity(i);
-        }
-        if (id == R.id.action_limpiar) {
-            deleteCache(this);
-            // Toast.makeText(LoginActivity.this, "Memoria Limpiada " , Toast.LENGTH_SHORT).show();
-        }
-
-
-        if (id == android.R.id.home) {
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
-    private void setupNavigationDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.item_navigation_drawer_inicio:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                return true;
-                            case R.id.item_navigation_drawer_perfil:
-                                menuItem.setChecked(true);
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                return true;
-                            case R.id.item_navigation_drawer_gps:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent2 = new Intent(LoginActivity.this, GpsActivity.class);
-                                startActivity(intent2);
-                                return true;
-                            case R.id.item_navigation_drawer_nfc:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent3 = new Intent(LoginActivity.this, Beam.class);
-                                startActivity(intent3);
-                                return true;
-                            case R.id.item_navigation_drawer_configuracion:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent4 = new Intent(LoginActivity.this, OpcionesActivity.class);
-                                startActivity(intent4);
-                                return true;
-                            case R.id.item_navigation_drawer_maps:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent6 = new Intent(LoginActivity.this, MapsActivity.class);
-                                startActivity(intent6);
-                                return true;
-                        }
-                        return true;
-                    }
-                });
-    }
-
-    // boton atras del celular
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-        startActivity(intent);
-    }
-    // TEMA NO CAMBIAR
-    public void theme() {
-        sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
-        int theme = sharedPreferences.getInt("THEME", 0);
-        settingTheme(theme);
-    }
-    private void themeChanged() {
-        themeChanged = sharedPreferences.getBoolean("THEMECHANGED",false);
-        homeButton = true;
-    }
-    public void toolbarStatusBar() {
-        statusBar = findViewById(R.id.statusBar);
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        // Titulo que se visualiza en en action bar
-        getSupportActionBar().setTitle("Inicio de Sesión");
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-    }
-    public void settingTheme(int theme) {
-        switch (theme) {
-            case 1:
-                setTheme(R.style.AppTheme);
-                break;
-            case 2:
-                setTheme(R.style.AppTheme2);
-                break;
-            case 3:
-                setTheme(R.style.AppTheme3);
-                break;
-            case 4:
-                setTheme(R.style.AppTheme4);
-                break;
-            case 5:
-                setTheme(R.style.AppTheme5);
-                break;
-            case 6:
-                setTheme(R.style.AppTheme6);
-                break;
-            case 7:
-                setTheme(R.style.AppTheme7);
-                break;
-            case 8:
-                setTheme(R.style.AppTheme8);
-                break;
-            case 9:
-                setTheme(R.style.AppTheme9);
-                break;
-            case 10:
-                setTheme(R.style.AppTheme10);
-                break;
-            default:
-                setTheme(R.style.AppTheme);
-                break;
-        }
-    }
-    // HASTA ACA CARGAR EL TEMA
-
-    // LIMPIAR MEMORIA
-    public void deleteCache(Context context) {
-        try {
-            File dir = context.getCacheDir();
-            texto_titulo();
-            deleteDir(dir);
-        } catch (Exception e) {
-        }
-    }
-    public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-
-
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-
-                    return false;
+        buttonLogin1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = "";
+                String password = "";
+                Conexion conect = new Conexion();
+                if (!conect.conexionWifi(LoginActivity.this)) {
+                    Toast.makeText(LoginActivity.this, "Error de conexión No Hay internet! ", Toast.LENGTH_SHORT).show();
+                    return;
                 }
+                email = editTextEmail.getText().toString().trim();
+                password = editTextPassword.getText().toString().trim();
+                if (validar_campo(email, password))
+                    servicesLogin(email, password);
             }
-            return dir.delete();
-        } else if (dir != null && dir.isFile())
-            return dir.delete();
-        else {
-            return false;
-        }
+        });
     }
-    public void texto_titulo(){
-        Toast toast3 = new Toast(getApplicationContext());
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.msg_limpiar,
-                (ViewGroup) findViewById(R.id.lytLayout));
-        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
-        txtMsg.setText("Memoria Limpiada");
-        toast3.setDuration(Toast.LENGTH_SHORT);
-        toast3.setView(layout);
-        toast3.show();
-    }
-    // HASTA ACA LIMPIAR
 
 
     //XML
 
-    // Login
     @Override
     protected void onResume() {
         super.onResume();
-        // En el valor de recuperación de búsqueda de preferencias compartidas
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-
-        // Recuperación del valor booleano de las preferencias compartidas
-        loggedIn = sharedPreferences.getBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-
-        // Si llegamos a obtener el valor verdadero
+        Config config=new Config();
+        SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        loggedIn = sharedPreferences.getBoolean(config.LOGGEDIN_SHARED_PREF, false);
         if (loggedIn) {
-            // Iniciaremos la Activity del Perfil
             Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
             startActivity(intent);
         }
     }
-    @Override
-    public void onClick(View v) {
-        // mirar primero si hay conexion a internet para poder seguir
 
-        ConnectivityManager cm;
-        NetworkInfo ni;
-        cm = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-        ni = cm.getActiveNetworkInfo();
-        if (ni != null) {
-            ConnectivityManager connManager1 = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mWifi = connManager1.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-            ConnectivityManager connManager2 = (ConnectivityManager) this.getSystemService(Context.CONNECTIVITY_SERVICE);
-            NetworkInfo mMobile = connManager2.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
+    private void servicesLogin(String email, String password) {
+        ApiRest apires = new ApiRest();
+        apires.getLogin(email, password, this);
 
-            if (mWifi.isConnected()) {
-                tipoConexion1 = true;
-            }
-            if (mMobile.isConnected()) {
-                tipoConexion2 = true;
-            }
-          /*  if (tipoConexion1 == true || tipoConexion2 == true) {*/
-                if (tipoConexion1 || tipoConexion2 ) {
-                //Llamando a la funcion login
-                validar_campo();
-                login();
-            }
-        } else {
-            Toast.makeText(LoginActivity.this, "Error de conexión No Hay internet! ", Toast.LENGTH_SHORT).show();
-        }
-        // HASTA ACA SI HAY CONEXION INTERNET
-
-    }
-    private void login(){
-        final String email = editTextEmail.getText().toString().trim();
-        final String password = editTextPassword.getText().toString().trim();
-
-        ApiRes apires =new ApiRes();
-        apires.getLogin(email,password,this);
-
-    /*    ApiSebas apiSe=new ApiSebas();
-        apiSe.getLoginSebas(email,password,this);
-*/
     }
 
 /*    private void login() {
@@ -494,7 +269,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
-                mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
             mProgressView.animate().setDuration(shortAnimTime).alpha(
                     show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
                 @Override
@@ -503,8 +278,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 }
             });
         } else {
-            // The ViewPropertyAnimator APIs are not available, so simply show
-            // and hide the relevant UI components.
             mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
 
         }
@@ -512,37 +285,40 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     //MIRAR SI ESTA VACIO LOS EDIT TEXT
-    public void validar_campo() {
+    public boolean validar_campo(String email, String password) {
         String mailError = null;
-        String email = editTextEmail.getText().toString().trim();
         Boolean mensaje;
-
-        if (TextUtils.isEmpty(editTextEmail.getText())  ) {
-            mailError = getResources().getString(R.string.error_campo);
-        }
-
-        toggleTextInputLayoutError(inputLayoutCorreo,mailError);
-
+        Boolean validaCampos = true;
         String passError = null;
         String ErrorEmail = null;
-        if (TextUtils.isEmpty(editTextPassword.getText())) {
+
+        if (TextUtils.isEmpty(email)) {
+            mailError = getResources().getString(R.string.error_campo);
+            validaCampos = false;
+        }
+        toggleTextInputLayoutError(inputLayoutCorreo, mailError);
+
+        if (TextUtils.isEmpty(password)) {
             passError = getString(R.string.error_campo);
+            validaCampos = false;
         }
         toggleTextInputLayoutError(inputLayoutPassword, passError);
 
-        ValidacionDatos validar =new ValidacionDatos();
-        mensaje =validar.validaremail(email);
-        if(mensaje) {
-           // Toast.makeText(this, "Email invalido", Toast.LENGTH_SHORT).show();
-            ErrorEmail = getString(R.string.error_invalid_email_di);
-
+        if (validaCampos) {
+            ValidacionDatos validar = new ValidacionDatos();
+            mensaje = validar.validaremail(email);
+            if (mensaje) {
+                ErrorEmail = getString(R.string.error_invalid_email_di);
+                validaCampos = false;
+            }
+            toggleTextInputLayoutError(inputLayoutCorreo, ErrorEmail);
         }
-        toggleTextInputLayoutError(inputLayoutCorreo, ErrorEmail);
+        return validaCampos;
 
     }
 
-    private  void toggleTextInputLayoutError(@NonNull TextInputLayout textInputLayout,
-                                             String msg) {
+    private void toggleTextInputLayoutError(@NonNull TextInputLayout textInputLayout,
+                                            String msg) {
         textInputLayout.setError(msg);
         if (msg == null) {
             textInputLayout.setErrorEnabled(false);
@@ -551,6 +327,203 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
-}
 
 //login de aca
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu_en_perfil, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id = item.getItemId();
+        if (id == R.id.action_acerca) {
+            Dialog dialog = new Dialog(LoginActivity.this);
+            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+            dialog.setContentView(R.layout.dialogo_acerca);
+            dialog.show();
+            return true;
+        }
+        if (id == R.id.action_configuracion) {
+            Intent i = new Intent(this, OpcionesActivity.class);
+            startActivity(i);
+        }
+        if (id == R.id.action_limpiar) {
+            deleteCache(this);
+            // Toast.makeText(LoginActivity.this, "Memoria Limpiada " , Toast.LENGTH_SHORT).show();
+        }
+
+
+    /*    if (id == android.R.id.home) {
+            drawerLayout.openDrawer(GravityCompat.START);
+            return true;
+        }*/
+        return super.onOptionsItemSelected(item);
+    }
+
+    private void setupNavigationDrawerContent(NavigationView navigationView) {
+        navigationView.setNavigationItemSelectedListener(
+                new NavigationView.OnNavigationItemSelectedListener() {
+                    @Override
+                    public boolean onNavigationItemSelected(MenuItem menuItem) {
+                        switch (menuItem.getItemId()) {
+                            case R.id.item_navigation_drawer_inicio:
+                                menuItem.setChecked(true);
+                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(intent);
+                                return true;
+                            case R.id.item_navigation_drawer_perfil:
+                                menuItem.setChecked(true);
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                return true;
+                            case R.id.item_navigation_drawer_gps:
+                                menuItem.setChecked(true);
+                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                Intent intent2 = new Intent(LoginActivity.this, GpsActivity.class);
+                                startActivity(intent2);
+                                return true;
+                            case R.id.item_navigation_drawer_nfc:
+                                menuItem.setChecked(true);
+                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                Intent intent3 = new Intent(LoginActivity.this, Beam.class);
+                                startActivity(intent3);
+                                return true;
+                            case R.id.item_navigation_drawer_configuracion:
+                                menuItem.setChecked(true);
+                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                Intent intent4 = new Intent(LoginActivity.this, OpcionesActivity.class);
+                                startActivity(intent4);
+                                return true;
+                            case R.id.item_navigation_drawer_maps:
+                                menuItem.setChecked(true);
+                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
+                                drawerLayout.closeDrawer(GravityCompat.START);
+                                Intent intent6 = new Intent(LoginActivity.this, MapsActivity.class);
+                                startActivity(intent6);
+                                return true;
+                        }
+                        return true;
+                    }
+                });
+    }
+
+    // boton atras del celular
+    @Override
+    public void onBackPressed() {
+        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+        startActivity(intent);
+    }
+
+    // TEMA NO CAMBIAR
+    public void theme() {
+        sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
+        int theme = sharedPreferences.getInt("THEME", 0);
+        settingTheme(theme);
+    }
+
+    private void themeChanged() {
+        themeChanged = sharedPreferences.getBoolean("THEMECHANGED", false);
+        homeButton = true;
+    }
+
+    public void toolbarStatusBar() {
+        statusBar = findViewById(R.id.statusBar);
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        // Titulo que se visualiza en en action bar
+        getSupportActionBar().setTitle("Inicio de Sesión");
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+    }
+
+    public void settingTheme(int theme) {
+        switch (theme) {
+            case 1:
+                setTheme(R.style.AppTheme);
+                break;
+            case 2:
+                setTheme(R.style.AppTheme2);
+                break;
+            case 3:
+                setTheme(R.style.AppTheme3);
+                break;
+            case 4:
+                setTheme(R.style.AppTheme4);
+                break;
+            case 5:
+                setTheme(R.style.AppTheme5);
+                break;
+            case 6:
+                setTheme(R.style.AppTheme6);
+                break;
+            case 7:
+                setTheme(R.style.AppTheme7);
+                break;
+            case 8:
+                setTheme(R.style.AppTheme8);
+                break;
+            case 9:
+                setTheme(R.style.AppTheme9);
+                break;
+            case 10:
+                setTheme(R.style.AppTheme10);
+                break;
+            default:
+                setTheme(R.style.AppTheme);
+                break;
+        }
+    }
+    // HASTA ACA CARGAR EL TEMA
+
+    // LIMPIAR MEMORIA
+    public void deleteCache(Context context) {
+        try {
+            File dir = context.getCacheDir();
+            texto_titulo();
+            deleteDir(dir);
+        } catch (Exception e) {
+        }
+    }
+
+    public static boolean deleteDir(File dir) {
+        if (dir != null && dir.isDirectory()) {
+
+
+            String[] children = dir.list();
+            for (int i = 0; i < children.length; i++) {
+
+                boolean success = deleteDir(new File(dir, children[i]));
+                if (!success) {
+
+                    return false;
+                }
+            }
+            return dir.delete();
+        } else if (dir != null && dir.isFile())
+            return dir.delete();
+        else {
+            return false;
+        }
+    }
+
+    public void texto_titulo() {
+        Toast toast3 = new Toast(getApplicationContext());
+        LayoutInflater inflater = getLayoutInflater();
+        View layout = inflater.inflate(R.layout.msg_limpiar,
+                (ViewGroup) findViewById(R.id.lytLayout));
+        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
+        txtMsg.setText("Memoria Limpiada");
+        toast3.setDuration(Toast.LENGTH_SHORT);
+        toast3.setView(layout);
+        toast3.show();
+    }
+// HASTA ACA LIMPIAR
+}

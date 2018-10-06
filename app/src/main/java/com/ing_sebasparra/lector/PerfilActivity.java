@@ -61,6 +61,11 @@ public class PerfilActivity extends AppCompatActivity {
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+/*        DrawerLayout nfc=findViewById(R.id.item_navigation_drawer_nfc);
+        //nfc.setVisibility(View.INVISIBLE);
+      //  nfc.setEnabled(false);*/
+
         if (navigationView != null) {
             setupNavigationDrawerContent(navigationView);
         }
@@ -71,15 +76,17 @@ public class PerfilActivity extends AppCompatActivity {
         nombreTV = (TextView) findViewById(R.id.nombreview);
         apellidoTV = (TextView) findViewById(R.id.apellidosview);
         cedulaTV = (TextView) findViewById(R.id.cedulaview);
-        SharedPreferences sharedPreferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        email1 = sharedPreferences.getString(Config.EMAIL_SHARED_PREF, "No Disponible");
+        Config config=new Config();
+        SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        email1 = sharedPreferences.getString(config.EMAIL_SHARED_PREF, "No Disponible");
         emailTV.setText(email1);
-        nombre1 = sharedPreferences.getString(Config.NOMBRE_SHARED_PREF, "No Disponible");
+        cedula1 = sharedPreferences.getString(config.CEDULA_SHARED_PRF, "No Disponible");
+        cedulaTV.setText(cedula1);
+      /*  nombre1 = sharedPreferences.getString(Config.NOMBRE_SHARED_PREF, "No Disponible");
         nombreTV.setText(nombre1);
         apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
         apellidoTV.setText(apellido1);
-        cedula1 = sharedPreferences.getString(Config.MATRICULA_SHARED_PREF, "No Disponible");
-        cedulaTV.setText(cedula1);
+       */
 
     }
 
@@ -126,9 +133,12 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void setupNavigationDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
+
                 new NavigationView.OnNavigationItemSelectedListener() {
+
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
+
                         switch (menuItem.getItemId()) {
                             case R.id.item_navigation_drawer_inicio:
                                 menuItem.setChecked(true);
@@ -146,6 +156,7 @@ public class PerfilActivity extends AppCompatActivity {
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
                             case R.id.item_navigation_drawer_nfc:
+
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 Intent intent3 = new Intent(PerfilActivity.this, Beam.class);
@@ -294,10 +305,11 @@ public class PerfilActivity extends AppCompatActivity {
                     public void onClick(DialogInterface arg0, int arg1) {
 
                         // Salir de las preferencias compartidas
-                        SharedPreferences preferences = getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+                        Config config=new Config();
+                        SharedPreferences preferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = preferences.edit();
-                        editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, false);
-                        editor.putString(Config.EMAIL_SHARED_PREF, "");
+                        editor.putBoolean(config.LOGGEDIN_SHARED_PREF, false);
+                        editor.putString(config.EMAIL_SHARED_PREF, "");
                         editor.commit();
                         Intent intent = new Intent(PerfilActivity.this, LoginActivity.class);
                         startActivity(intent);
