@@ -21,6 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.View.OpcionesActivity;
+import com.ing_sebasparra.lector.View.PerfilActivity;
 
 import java.io.File;
 
@@ -97,21 +98,21 @@ public class EjemploActivity extends AppCompatActivity {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         switch (menuItem.getItemId()) {
-                            case R.id.item_navigation_drawer_inicio:
+                         /*   case R.id.item_navigation_drawer_inicio:
                                 menuItem.setChecked(true);
                                 Toast.makeText(EjemploActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 Intent intent = new Intent(EjemploActivity.this, MainActivity.class);
                                 startActivity(intent);
-                                return true;
+                                return true;*/
                             case R.id.item_navigation_drawer_perfil:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
-                            case R.id.item_navigation_drawer_gps:
+                           /* case R.id.item_navigation_drawer_gps:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                return true;
+                                return true;*/
                             case R.id.item_navigation_drawer_nfc:
                                 menuItem.setChecked(true);
                                 Toast.makeText(EjemploActivity.this, "no hace nada " + menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
@@ -139,7 +140,7 @@ public class EjemploActivity extends AppCompatActivity {
     // BOTON ATRAS CELULAR
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(EjemploActivity.this, MainActivity.class);
+        Intent intent = new Intent(EjemploActivity.this, PerfilActivity.class);
         startActivity(intent);
     }
     // TEMA NO CAMBIAR

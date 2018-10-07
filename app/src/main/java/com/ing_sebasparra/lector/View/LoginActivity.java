@@ -9,10 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.NavigationView;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.TextUtils;
@@ -25,10 +22,6 @@ import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-import com.ing_sebasparra.lector.GpsActivity;
-import com.ing_sebasparra.lector.MainActivity;
-import com.ing_sebasparra.lector.Maps.MapsActivity;
-import com.ing_sebasparra.lector.PerfilActivity;
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.Conexion;
 import com.ing_sebasparra.lector.Recursos.Config;
@@ -39,10 +32,7 @@ import com.ing_sebasparra.lector.WebServices.ApiRest;
 public class LoginActivity extends AppCompatActivity {
 
     //cargar el tema
-    DrawerLayout drawerLayout;
     Toolbar toolbar;
-    SharedPreferences sharedPreferences;
-    Boolean homeButton = false, themeChanged;
     FrameLayout statusBar;
 
     // Definición de variables
@@ -63,8 +53,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         // Seleccionar el tema guardado por el usuario (siempre antes de setContentView)
-       // theme();
-        SeleccionTema selecTema =new SeleccionTema();
+        SeleccionTema selecTema = new SeleccionTema();
         selecTema.theme(this);
         setContentView(R.layout.activity_login);
 
@@ -73,16 +62,6 @@ public class LoginActivity extends AppCompatActivity {
 
         //Siguiente del tema bar---
         toolbarStatusBar();
-       // themeChanged();
-
-        drawerLayout = findViewById(R.id.navigation_drawer_layout);
-        NavigationView navigationView = findViewById(R.id.navigation_view);
-
-        if (navigationView != null) {
-            setupNavigationDrawerContent(navigationView);
-        }
-        setupNavigationDrawerContent(navigationView);
-
         inicializeValues();
 
 
@@ -108,14 +87,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 email = editTextEmail.getText().toString().trim();
                 password = editTextPassword.getText().toString().trim();
-                if (validar_campo(email, password))
+                if (validar_campo(email, password)) {
+                    showProgress(true);
                     servicesLogin(email, password);
+                    showProgress(false);
+                }
             }
         });
     }
-
-
-    //XML
 
     @Override
     protected void onResume() {
@@ -129,11 +108,9 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
-
     private void servicesLogin(String email, String password) {
         ApiRest apires = new ApiRest();
         apires.getLogin(email, password, this);
-
     }
 
 /*    private void login() {
@@ -266,9 +243,6 @@ public class LoginActivity extends AppCompatActivity {
 
     // BARRA DE PROGRESO
     private void showProgress(final boolean show) {
-        // On Honeycomb MR2 we have the ViewPropertyAnimator APIs, which allow
-        // for very easy animations. If available, use these APIs to fade-in
-        // the progress spinner.
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
             int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
 
@@ -320,6 +294,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
+
     private void toggleTextInputLayoutError(@NonNull TextInputLayout textInputLayout,
                                             String msg) {
         textInputLayout.setError(msg);
@@ -331,13 +306,10 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-//login de aca
-
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_en_perfil, menu);
-        return true;
+        getMenuInflater().inflate(R.menu.menu_login_acerca, menu);
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -350,142 +322,25 @@ public class LoginActivity extends AppCompatActivity {
             dialog.show();
             return true;
         }
-   /*     if (id == R.id.action_configuracion) {
-            Intent i = new Intent(this, OpcionesActivity.class);
-            startActivity(i);
-        }*/
-        if (id == R.id.action_limpiar) {
-       /*     LimpiarMemoria limpiar = new LimpiarMemoria();
-            limpiar.deleteCache(this,pe);*/
-
-        }
-
-
-    /*    if (id == android.R.id.home) {
-            drawerLayout.openDrawer(GravityCompat.START);
-            return true;
-        }*/
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupNavigationDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.item_navigation_drawer_inicio:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                return true;
-                            case R.id.item_navigation_drawer_perfil:
-                                menuItem.setChecked(true);
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                return true;
-                            case R.id.item_navigation_drawer_gps:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent2 = new Intent(LoginActivity.this, GpsActivity.class);
-                                startActivity(intent2);
-                                return true;
-                            case R.id.item_navigation_drawer_nfc:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent3 = new Intent(LoginActivity.this, PagoNFC.class);
-                                startActivity(intent3);
-                                return true;
-                            case R.id.item_navigation_drawer_configuracion:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent4 = new Intent(LoginActivity.this, OpcionesActivity.class);
-                                startActivity(intent4);
-                                return true;
-                            case R.id.item_navigation_drawer_maps:
-                                menuItem.setChecked(true);
-                                Toast.makeText(LoginActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent6 = new Intent(LoginActivity.this, MapsActivity.class);
-                                startActivity(intent6);
-                                return true;
-                        }
-                        return true;
-                    }
-                });
-    }
-
-    // boton atras del celular
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
         startActivity(intent);
     }
 
-    // TEMA NO CAMBIAR
-  /*  public void theme() {
-        sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
-        int theme = sharedPreferences.getInt("THEME", 0);
-        settingTheme(theme);
-    }
-
-    private void themeChanged() {
-        themeChanged = sharedPreferences.getBoolean("THEMECHANGED", false);
-        homeButton = true;
-    }*/
-
     public void toolbarStatusBar() {
         statusBar = findViewById(R.id.statusBar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Titulo que se visualiza en en action bar
-        getSupportActionBar().setTitle("Inicio de Sesión");
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+       // getSupportActionBar().setTitle("Inicio de Sesión");
+        getSupportActionBar().setTitle(getResources().getString(R.string.inicio_sesion));
+
     }
 
-  /*  public void settingTheme(int theme) {
-        switch (theme) {
-            case 1:
-                setTheme(R.style.AppTheme);
-                break;
-            case 2:
-                setTheme(R.style.AppTheme2);
-                break;
-            case 3:
-                setTheme(R.style.AppTheme3);
-                break;
-            case 4:
-                setTheme(R.style.AppTheme4);
-                break;
-            case 5:
-                setTheme(R.style.AppTheme5);
-                break;
-            case 6:
-                setTheme(R.style.AppTheme6);
-                break;
-            case 7:
-                setTheme(R.style.AppTheme7);
-                break;
-            case 8:
-                setTheme(R.style.AppTheme8);
-                break;
-            case 9:
-                setTheme(R.style.AppTheme9);
-                break;
-            case 10:
-                setTheme(R.style.AppTheme10);
-                break;
-            default:
-                setTheme(R.style.AppTheme);
-                break;
-        }
-    }*/
-    // HASTA ACA CARGAR EL TEMA
+
 
 
 }

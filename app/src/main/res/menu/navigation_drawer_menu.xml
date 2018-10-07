@@ -3,26 +3,27 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:checked="true"
-            android:id="@+id/item_navigation_drawer_inicio"
-            android:icon="@drawable/ic_home"
-            android:title="@string/inicio" />
-        <item
             android:id="@+id/item_navigation_drawer_perfil"
             android:icon="@drawable/ic_login"
             android:title="@string/perfil" />
         <item
-            android:id="@+id/item_navigation_drawer_gps"
-            android:icon="@drawable/ic_action_content_send"
-            android:title="@string/gps" />
-        <item
             android:id="@+id/item_navigation_drawer_nfc"
-            android:icon="@drawable/ic_nfc"
+            android:icon="@drawable/ic_pago"
             android:visible="true"
-            android:title="@string/nfc" />
+            android:title="@string/pago" />
+        <item
+            android:id="@+id/item_navigation_drawer_recargar"
+            android:icon="@drawable/ic_recarga"
+            android:visible="true"
+            android:title="@string/recargar" />
+        <item
+            android:id="@+id/item_navigation_drawer_historial"
+            android:icon="@drawable/ic_historial"
+            android:visible="true"
+            android:title="@string/historial" />
     </group>
 
-    <item android:title="@string/ajustes">
+    <item android:title="@string/opciones">
         <menu>
             <item
                 android:id="@+id/item_navigation_drawer_configuracion"
@@ -30,8 +31,12 @@
                 android:title="@string/configuracion_1" />
             <item
                 android:id="@+id/item_navigation_drawer_maps"
-                android:icon="@drawable/ic_map1"
+                android:icon="@drawable/ic_ubicacion"
                 android:title="@string/googlemaps" />
+            <item
+                android:id="@+id/item_navigation_drawer_acercade"
+                android:icon="@drawable/ic_acera_menu"
+                android:title="@string/acerca" />
         </menu>
     </item>
 

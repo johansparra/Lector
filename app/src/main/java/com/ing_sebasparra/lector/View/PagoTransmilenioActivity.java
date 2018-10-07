@@ -1,6 +1,8 @@
 package com.ing_sebasparra.lector.View;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -20,21 +22,25 @@ import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.ing_sebasparra.lector.PerfilActivity;
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.squareup.picasso.Picasso;
+
+import de.hdodenhof.circleimageview.CircleImageView;
 
 
-public class PagoNFC extends Activity implements CreateNdefMessageCallback,
+public class PagoTransmilenioActivity extends Activity implements CreateNdefMessageCallback,
         OnNdefPushCompleteCallback {
     private static final int MESSAGE_SENT = 1;
+
+    @SuppressLint("HandlerLeak")
     private final Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             switch (msg.what) {
                 case MESSAGE_SENT:
                     Toast.makeText(getApplicationContext(), "Mensaje enviado!", Toast.LENGTH_LONG).show();
-                    Intent intent3 = new Intent(PagoNFC.this, PerfilActivity.class);
+                    Intent intent3 = new Intent(PagoTransmilenioActivity.this, PerfilActivity.class);
                     startActivity(intent3);
                     break;
             }
@@ -46,33 +52,26 @@ public class PagoNFC extends Activity implements CreateNdefMessageCallback,
 
     private boolean loggedIn = false;
     //VARIABLES
-    private TextView emailTV, nombreTV,apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar;
-    private String email1, nombre1,apellido1, cargo1, foto1, cedula1;
+    private TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar;
+    private String email1, nombre1, apellido1, cargo1, foto1, cedula1;
 
     Toolbar toolbar;
     FrameLayout statusBar;
 
     //
-    Config config=new Config();
+    Config config = new Config();
+
+    Dialog myDialog;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dispositivoCompatible();
         setContentView(R.layout.activity_beam);//main
-        sabersiestalog();
+
+
 
         mInfoText = findViewById(R.id.textView);
-        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
-        if (mNfcAdapter == null) {
-            mInfoText = findViewById(R.id.textView);
-            mInfoText.setText("NFC no es compatible con este dispositivo");
-        } else {
-            mNfcAdapter.setNdefPushMessageCallback(this, this);
-            mNfcAdapter.setOnNdefPushCompleteCallback(this, this);
-        }
-
-
-        //VARIABLES
 
         nombreTV = (TextView) findViewById(R.id.nombre);
         apellidoTV = (TextView) findViewById(R.id.apellido);
@@ -83,7 +82,7 @@ public class PagoNFC extends Activity implements CreateNdefMessageCallback,
         nombreTV.setText(nombre1);
       /*  apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
         apellidoTV.setText(apellido1);*/
-         apellidoTV.setVisibility(View.GONE);
+        apellidoTV.setVisibility(View.GONE);
         cedula1 = sharedPreferences.getString(config.CEDULA_SHARED_PRF, "No Disponible");
         cedulaTV.setText(cedula1);
 
@@ -92,34 +91,56 @@ public class PagoNFC extends Activity implements CreateNdefMessageCallback,
         //toolbar = (Toolbar) findViewById(R.id.toolbar);
 
 
-
     }
-    private void sabersiestalog() {
-        SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        loggedIn = sharedPreferences.getBoolean(config.LOGGEDIN_SHARED_PREF, false);
-        if (!loggedIn) {
-            Toast.makeText(this, "Tienes que ingresar a tu cuenta", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(PagoNFC.this, LoginActivity.class);
+
+    private void dispositivoCompatible() {
+     /*   mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if (mNfcAdapter == null) {
+            //  mInfoText = findViewById(R.id.textView);
+            //  mInfoText.setText("NFC no es compatible con este dispositivo");
+
+            Toast.makeText(this, "NFC no es compatible con este dispositivo", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(PagoTransmilenioActivity.this, PerfilActivity.class);
             startActivity(intent);
+        } else {
+            mNfcAdapter.setNdefPushMessageCallback(this, this);
+            mNfcAdapter.setOnNdefPushCompleteCallback(this, this);
+        }*/
+        mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
+        if (mNfcAdapter == null) {
+            dialogomostrar();
+            Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
+            finish();
+            return;
         }
+        // Register callback
+        mNfcAdapter.setNdefPushMessageCallback(this, this);
+
+
     }
 
+    private void dialogomostrar() {
+
+        myDialog = new Dialog(this);
+        myDialog.setContentView(R.layout.dialogo_error_nfc);
+        TextView dialog_name = (TextView) myDialog.findViewById(R.id.titulo_dialogo_texto);
+        CircleImageView imagen_name = (CircleImageView) myDialog.findViewById(R.id.imagen_dialogo);
+        dialog_name.setText("error");
+        Picasso.get().load(R.drawable.profile_image).placeholder(R.drawable.profile_image).into(imagen_name);
+
+
+        myDialog.show();
+    }
 
     public void toolbarStatusBar() {
         statusBar = (FrameLayout) findViewById(R.id.statusBar);
-       // toolbar = (Toolbar) findViewById(R.id.toolbar);
-   /*     setSupportActionBar(toolbar);
-        // Titulo que se visualiza en en action bar
-        getSupportActionBar().setTitle("Perfil");
-        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);*/
     }
 
 
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
         //String texto = ("Val"+"1069738505");
-       // String texto = ("1069738505");
+        // String texto = ("1069738505");
         String texto = (cedula1);
         NdefMessage msg = new NdefMessage(NdefRecord.createMime(
                 "Aplicacion Transmilenio", texto.getBytes())
@@ -137,10 +158,7 @@ public class PagoNFC extends Activity implements CreateNdefMessageCallback,
         return msg;
     }
 
-    /**
-     * Implementation for the OnNdefPushCompleteCallback interface
-     */
-    @Override
+     @Override
     public void onNdefPushComplete(NfcEvent arg0) {
         mHandler.obtainMessage(MESSAGE_SENT).sendToTarget();
     }
@@ -148,17 +166,15 @@ public class PagoNFC extends Activity implements CreateNdefMessageCallback,
     @Override
     public void onResume() {
         super.onResume();
-        // Check to see that the Activity started due to an Android PagoNFC
+        // Check to see that the Activity started due to an Android PagoTransmilenioActivity
 
         if (NfcAdapter.ACTION_NDEF_DISCOVERED.equals(getIntent().getAction())) {
-         /*   Intent intent3 = new Intent(PagoNFC.this, PagoNFC.class);
+         /*   Intent intent3 = new Intent(PagoTransmilenioActivity.this, PagoTransmilenioActivity.class);
             startActivity(intent3);*/
             processIntent(getIntent());
 
         }
     }
-
-
 
 
     @Override

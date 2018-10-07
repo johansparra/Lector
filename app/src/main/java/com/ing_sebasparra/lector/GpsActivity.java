@@ -18,22 +18,17 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.ing_sebasparra.lector.Maps.MapsActivity;
-import com.ing_sebasparra.lector.View.LoginActivity;
-import com.ing_sebasparra.lector.View.OpcionesActivity;
-import com.ing_sebasparra.lector.View.PagoNFC;
-
-import java.io.File;
+import com.ing_sebasparra.lector.Recursos.LimpiarMemoria;
+import com.ing_sebasparra.lector.Recursos.NavegationLateral;
+import com.ing_sebasparra.lector.Temas.SeleccionTema;
+import com.ing_sebasparra.lector.View.PerfilActivity;
 
 public class GpsActivity extends AppCompatActivity {
 
@@ -51,24 +46,23 @@ public class GpsActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Seleccionar el tema guardado por el usuario (siempre antes de setContentView)
-        theme();
+
+        SeleccionTema selecTema = new SeleccionTema();
+        selecTema.theme(this);
         setContentView(R.layout.activity_gps);
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        //Siguiente del tema bar---
         toolbarStatusBar();
-        themeChanged();
-        // hasta aca va el tema
 
         drawerLayout = findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
         if (navigationView != null) {
-            setupNavigationDrawerContent(navigationView);
+
+            NavegationLateral navegation =new NavegationLateral();
+            navegation.navegationContent(navigationView,this,drawerLayout);
         }
-        setupNavigationDrawerContent(navigationView);
 
         //GPS
         mensaje1 = findViewById(R.id.coordenadaid);
@@ -187,16 +181,10 @@ public class GpsActivity extends AppCompatActivity {
             dialog.show();
             return true;
         }
-      /*  if (id == R.id.action_configuracion) {
-            Intent i = new Intent(this, OpcionesActivity.class);
-            startActivity(i);
-        }*/
         if (id == R.id.action_limpiar) {
-            deleteCache(this);
-            // Toast.makeText(LoginActivity.this, "Memoria Limpiada " , Toast.LENGTH_SHORT).show();
+            LimpiarMemoria limpiar = new LimpiarMemoria();
+            limpiar.deleteCache(this);
         }
-
-
         if (id == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
@@ -204,80 +192,12 @@ public class GpsActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    private void setupNavigationDrawerContent(NavigationView navigationView) {
-        navigationView.setNavigationItemSelectedListener(
-                new NavigationView.OnNavigationItemSelectedListener() {
-                    @Override
-                    public boolean onNavigationItemSelected(MenuItem menuItem) {
-                        switch (menuItem.getItemId()) {
-                            case R.id.item_navigation_drawer_inicio:
-                                menuItem.setChecked(true);
-                                Toast.makeText(GpsActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent = new Intent(GpsActivity.this, MainActivity.class);
-                                startActivity(intent);
-                                return true;
-                            case R.id.item_navigation_drawer_perfil:
-                                menuItem.setChecked(true);
-                                Toast.makeText(GpsActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent1 = new Intent(GpsActivity.this, LoginActivity.class);
-                                startActivity(intent1);
-                                return true;
-                            case R.id.item_navigation_drawer_gps:
-                                menuItem.setChecked(true);
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                return true;
-                            case R.id.item_navigation_drawer_nfc:
-                               /* menuItem.setChecked(true);
-                                Toast.makeText(GpsActivity.this, "no hace nada " + menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                return true;*/
-                                menuItem.setChecked(true);
-                                Toast.makeText(GpsActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent2 = new Intent(GpsActivity.this, PagoNFC.class);
-                                startActivity(intent2);
-                                return true;
-                            case R.id.item_navigation_drawer_configuracion:
-                                menuItem.setChecked(true);
-                                Toast.makeText(GpsActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent4 = new Intent(GpsActivity.this, OpcionesActivity.class);
-                                startActivity(intent4);
-                                return true;
-                            case R.id.item_navigation_drawer_maps:
-                                menuItem.setChecked(true);
-                                Toast.makeText(GpsActivity.this, menuItem.getTitle().toString(), Toast.LENGTH_SHORT).show();
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent6 = new Intent(GpsActivity.this, MapsActivity.class);
-                                startActivity(intent6);
-                                return true;
-                        }
-                        return true;
-                    }
-                });
-    }
-    // HASTA ACA MENUS LATERALES
-
-    // BOTON ATRAS CELULAR
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(GpsActivity.this, MainActivity.class);
+        Intent intent = new Intent(GpsActivity.this, PerfilActivity.class);
         startActivity(intent);
     }
 
-    // TEMA NO CAMBIAR
-    public void theme() {
-        sharedPreferences = getSharedPreferences("VALUES", Context.MODE_PRIVATE);
-        int theme = sharedPreferences.getInt("THEME", 0);
-        settingTheme(theme);
-    }
-
-    private void themeChanged() {
-        themeChanged = sharedPreferences.getBoolean("THEMECHANGED", false);
-        homeButton = true;
-    }
 
     public void toolbarStatusBar() {
         statusBar = findViewById(R.id.statusBar);
@@ -289,88 +209,6 @@ public class GpsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
-    public void settingTheme(int theme) {
-        switch (theme) {
-            case 1:
-                setTheme(R.style.AppTheme);
-                break;
-            case 2:
-                setTheme(R.style.AppTheme2);
-                break;
-            case 3:
-                setTheme(R.style.AppTheme3);
-                break;
-            case 4:
-                setTheme(R.style.AppTheme4);
-                break;
-            case 5:
-                setTheme(R.style.AppTheme5);
-                break;
-            case 6:
-                setTheme(R.style.AppTheme6);
-                break;
-            case 7:
-                setTheme(R.style.AppTheme7);
-                break;
-            case 8:
-                setTheme(R.style.AppTheme8);
-                break;
-            case 9:
-                setTheme(R.style.AppTheme9);
-                break;
-            case 10:
-                setTheme(R.style.AppTheme10);
-                break;
-            default:
-                setTheme(R.style.AppTheme);
-                break;
-        }
-    }
-    // HASTA ACA CARGAR EL TEMA
-
-    // LIMPIAR MEMORIA
-    public void deleteCache(Context context) {
-        try {
-            File dir = context.getCacheDir();
-            texto_titulo();
-            deleteDir(dir);
-        } catch (Exception e) {
-        }
-    }
-
-    public static boolean deleteDir(File dir) {
-        if (dir != null && dir.isDirectory()) {
-
-
-            String[] children = dir.list();
-            for (int i = 0; i < children.length; i++) {
-
-                boolean success = deleteDir(new File(dir, children[i]));
-                if (!success) {
-
-                    return false;
-                }
-            }
-            return dir.delete();
-        } else if (dir != null && dir.isFile())
-            return dir.delete();
-        else {
-            return false;
-        }
-    }
-
-    public void texto_titulo() {
-        Toast toast3 = new Toast(getApplicationContext());
-        LayoutInflater inflater = getLayoutInflater();
-        View layout = inflater.inflate(R.layout.msg_limpiar,
-                (ViewGroup) findViewById(R.id.lytLayout));
-        TextView txtMsg = layout.findViewById(R.id.txtMensaje);
-        txtMsg.setText("Memoria Limpiada");
-        toast3.setDuration(Toast.LENGTH_SHORT);
-        toast3.setView(layout);
-        toast3.show();
-    }
-    // HASTA ACA LIMPIAR
 
 }
 

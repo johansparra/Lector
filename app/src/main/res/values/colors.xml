@@ -8,6 +8,7 @@
     <color name="colorHint">#546E7A</color>
     <color name="colorAccent">#ffc640</color>
     <color name="textColor">#546E7A</color>
+    <color name="transparent">#00000000</color>
 
 
 <!--

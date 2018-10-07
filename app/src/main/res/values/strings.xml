@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Pasaje RFID</string>
+    <string name="app_name">Jhasp Travel</string>
 
     <!--NFC-->
     <string name="message_write_tag">Write to NFC Tag</string>
@@ -16,10 +16,11 @@
     <string name="facebook_id">Facebook ID</string>
     <string name="descripcion">Descripcion</string>
     <!--MENU DIALOGO-->
-    <string name="acerca">Acerca</string>
-    <string name="configuracion">Configuracion</string>
+    <string name="acerca">Acerca de</string>
     <string name="acerca_1">Pasaje RFI App, es una aplicación diseñada por Johan Sebastian Parra Alvira</string>
     <string name="diseñado">Diseñado por: www.facebook.com/johansparra</string>
+    <string name="configuracion">Configuracion</string>
+
     <!--MENU-->
     <string name="limpiar">Limpiar Memoria</string>
     <string name="logout">Cerrar Sesión</string>
@@ -46,6 +47,8 @@
     <item name="visible" type="id" />
     <item name="masked" type="id" />
     <string name="error_campo">Error campo vacio</string>
+    <string name="inicio_sesion">Inicio Sesión</string>
+
     <!--ACTIVITY PERFIL-->
     <string name="Nombrel1">Nombre:</string>
     <string name="Emaill1">Email:</string>
@@ -66,20 +69,25 @@
     <string name="titulo">Titulo</string>
 
     <!--MAIN MAPS-->
-    <string name="casa">Casa</string>
-    <string name="us">US</string>
-    <string name="calle">Calle</string>
+    <string name="estoy_aqui">Estoy aqui</string>
+    <string name="panoramica">Panoramica</string>
 
     <!--DRAWER-->
-    <string name="inicio">Inicio</string>
     <string name="perfil">Perfil</string>
-    <string name="ajustes">Ajustes</string>
+    <string name="pago">Pago Transmilenio</string>
+    <string name="recargar">Recargar Tarjeta</string>
+
+
+    <string name="inicio">Inicio</string>
+
+
+    <string name="opciones">Opciones</string>
     <string name="nose">No se todavia en blanco</string>
-    <string name="configuracion_1">Configuracion</string>
+    <string name="configuracion_1">Configuración</string>
     <string name="Imagencargada">Imagen Cargada</string>
     <string name="nombre">Bienvenido</string>
     <string name="correo">App NFC</string>
-    <string name="nfc">Lector NFC</string>
+
     <string name="gps">GPS</string>
     <string name="googlemaps">Google Maps</string>
     <!--FACEBOOK-->
@@ -121,4 +129,6 @@ AIzaSyBzIyAhKl-Vk1OdwknsPZUeu5wAcZp9J80
 
     <!--LIMPIAR MEMORIA-->
     <string name="texto_limpiar">Memoria Limpiada</string>
+    <string name="historial">Historial Pagos Transmilenio</string>
+
 </resources>

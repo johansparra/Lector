@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
-        android:background="@drawable/header"
+        android:background="@drawable/header1"
         android:contentDescription="@string/descripcion" />
 
     <ImageView
@@ -21,6 +21,7 @@
         android:layout_height="64dp"
         android:scaleType="centerCrop"
         android:src="@drawable/logo"
+        android:visibility="gone"
         android:contentDescription="@string/descripcion" />
 
     <LinearLayout

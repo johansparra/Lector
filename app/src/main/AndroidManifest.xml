@@ -40,7 +40,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/ic_launcher_bus"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
@@ -66,34 +66,34 @@
             </intent-filter>
         </activity>
 
-    <!--    <activity
-            android:name=".LoginActivity"
-            android:label="Login"
-            android:parentActivityName=".MainActivity" />-->
+        <!--    <activity
+                android:name=".LoginActivity"
+                android:label="Login"
+                android:parentActivityName=".MainActivity" />-->
         <activity
             android:name=".View.OpcionesActivity"
             android:label="Opciones"
             android:parentActivityName=".View.LoginActivity" />
         <activity
-            android:name=".PerfilActivity"
+            android:name=".View.PerfilActivity"
             android:label="Perfil"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".View.PerfilActivity" />
         <activity
             android:name=".GpsActivity"
             android:label="Gps"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".View.PerfilActivity" />
         <activity
-            android:name=".Maps.MapsActivity"
+            android:name=".View.MapsActivity"
             android:label="Maps"
-            android:parentActivityName=".MainActivity" />
+            android:parentActivityName=".View.PerfilActivity" />
         <activity
-            android:name=".Maps.MapsCalleActivity"
+            android:name=".View.MapsCalleActivity"
             android:label="Calle"
-            android:parentActivityName=".Maps.MapsActivity" />
+            android:parentActivityName=".View.MapsActivity" />
         <activity
-            android:name=".View.PagoNFC"
+            android:name=".View.PagoTransmilenioActivity"
             android:label="NFC"
-            android:parentActivityName=".MainActivity">
+            android:parentActivityName=".View.PerfilActivity">
 
             <!-- NFC ENVIAR -->
             <intent-filter>
@@ -106,7 +106,6 @@
                 <category android:name="android.intent.category.BROWSABLE" />
                 <!--
                             <data android:scheme="https" android:host="www.andreasjakl.com" />
-
                             <data android:scheme="http" />
                             -->
 

@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context=".Maps.MapsActivity">
+    tools:context=".View.MapsActivity">
 
 
     <FrameLayout
@@ -45,17 +45,19 @@
         android:paddingTop="@dimen/activity_vertical_margin">
 
         <Button
-            android:id="@+id/btnotro"
+            android:id="@+id/btnestoyqui"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_above="@+id/linearLayout"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="31dp"
-            android:text="@string/us"
+            android:text="@string/estoy_aqui"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
             android:background="?attr/colorPrimary"
             android:textColor="?attr/colorControlNormal" />
 
-        <Button
+        <!--<Button
             android:id="@+id/btnotro2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -64,7 +66,7 @@
             android:layout_toEndOf="@+id/btnotro"
             android:text="@string/casa"
             android:background="?attr/colorPrimary"
-            android:textColor="?attr/colorControlNormal" />
+            android:textColor="?attr/colorControlNormal" />-->
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -119,10 +121,12 @@
             android:id="@+id/btncalle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignBottom="@+id/btnotro"
+            android:layout_alignBottom="@+id/btnestoyqui"
             android:layout_marginEnd="20dp"
-            android:layout_toStartOf="@+id/btnotro"
-            android:text="@string/calle"
+            android:layout_toStartOf="@+id/btnestoyqui"
+            android:text="@string/panoramica"
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
             android:background="?attr/colorPrimary"
             android:textColor="?attr/colorControlNormal" />
 

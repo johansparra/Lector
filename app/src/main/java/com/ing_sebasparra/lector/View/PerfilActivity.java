@@ -1,40 +1,41 @@
 package com.ing_sebasparra.lector.View;
 
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
-import android.support.v4.app.FragmentManager;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.FrameLayout;
-import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.CerrarSesion;
+import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.LimpiarMemoria;
 import com.ing_sebasparra.lector.Recursos.NavegationLateral;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
-import com.ing_sebasparra.lector.Temas.Tema;
 
 import java.util.Objects;
 
-public class OpcionesActivity extends AppCompatActivity {
+public class PerfilActivity extends AppCompatActivity {
 
+    //CARGAR EL TEMA
     DrawerLayout drawerLayout;
     Toolbar toolbar;
 
-    Intent intent;
     FrameLayout statusBar;
-    RelativeLayout relativeLayoutChooseTheme;
 
-    ViewGroup.LayoutParams layoutParamsStatusBar;
+    //VARIABLES
+    private TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar;
+    private String email1, nombre1, apellido1, cargo1, foto1, cedula1;
 
 
     @Override
@@ -43,35 +44,49 @@ public class OpcionesActivity extends AppCompatActivity {
 
         SeleccionTema selecTema = new SeleccionTema();
         selecTema.theme(this);
-        setContentView(R.layout.activity_opciones);
+        setContentView(R.layout.activity_perfil);
 
         toolbarStatusBar();
-        layoutParamsStatusBar = statusBar.getLayoutParams();
+
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
+
+/*        DrawerLayout nfc=findViewById(R.id.item_navigation_drawer_nfc);
+        //nfc.setVisibility(View.INVISIBLE);
+      //  nfc.setEnabled(false);*/
+
         if (navigationView != null) {
 
-            NavegationLateral navegation =new NavegationLateral();
-            navegation.navegationContent(navigationView,this,drawerLayout);
+            NavegationLateral navegation = new NavegationLateral();
+            navegation.navegationContent(navigationView, this, drawerLayout);
         }
 
 
-        relativeLayoutChooseTheme = (RelativeLayout) findViewById(R.id.relativeLayoutChooseTheme);
-        relativeLayoutChooseTheme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                Tema dialog = new Tema();
-                dialog.show(fragmentManager, "fragment_color_chooser");
+        //VARIABLES
+        emailTV = (TextView) findViewById(R.id.emailview);
+        nombreTV = (TextView) findViewById(R.id.nombreview);
+        apellidoTV = (TextView) findViewById(R.id.apellidosview);
+        cedulaTV = (TextView) findViewById(R.id.cedulaview);
+        Config config = new Config();
+        SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        email1 = sharedPreferences.getString(config.EMAIL_SHARED_PREF, "No Disponible");
+        emailTV.setText(email1);
+        cedula1 = sharedPreferences.getString(config.CEDULA_SHARED_PRF, "No Disponible");
+        cedulaTV.setText(cedula1);
+      /*  nombre1 = sharedPreferences.getString(Config.NOMBRE_SHARED_PREF, "No Disponible");
+        nombreTV.setText(nombre1);
+        apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
+        apellidoTV.setText(apellido1);
+       */
 
-            }
-        });
     }
 
+
+    // MENUS LATERALES
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_opciones, menu);
+        getMenuInflater().inflate(R.menu.menu_en_perfil, menu);
         return true;
     }
 
@@ -79,17 +94,21 @@ public class OpcionesActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_acerca) {
-            Dialog dialog = new Dialog(OpcionesActivity.this);
+            Dialog dialog = new Dialog(PerfilActivity.this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.dialogo_acerca);
             dialog.show();
             return true;
         }
-
+        if (id == R.id.action_limpiar) {
+            LimpiarMemoria limpiar = new LimpiarMemoria();
+            limpiar.deleteCache(this);
+        }
         if (id == R.id.action_logout) {
             CerrarSesion cerrar = new CerrarSesion();
             cerrar.logout(this);
         }
+
         if (id == android.R.id.home) {
             drawerLayout.openDrawer(GravityCompat.START);
             return true;
@@ -99,7 +118,7 @@ public class OpcionesActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        intent = new Intent(OpcionesActivity.this, LoginActivity.class);
+        Intent intent = new Intent(PerfilActivity.this, PerfilActivity.class);
         startActivity(intent);
     }
 
@@ -107,9 +126,12 @@ public class OpcionesActivity extends AppCompatActivity {
         statusBar = (FrameLayout) findViewById(R.id.statusBar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.opciones));
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.perfil));
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
 }
+
+
+
