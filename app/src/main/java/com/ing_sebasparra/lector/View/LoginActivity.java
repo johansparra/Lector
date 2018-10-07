@@ -82,7 +82,7 @@ public class LoginActivity extends AppCompatActivity {
                 String password = "";
                 ConexionApp conect = new ConexionApp();
                 if (!conect.conexionWifi(LoginActivity.this)) {
-                    Toast.makeText(LoginActivity.this, "Error de conexión No Hay internet! ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.error_mensaje_conexion), Toast.LENGTH_SHORT).show();
                     return;
                 }
                 email = editTextEmail.getText().toString().trim();

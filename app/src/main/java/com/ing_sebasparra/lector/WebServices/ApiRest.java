@@ -21,7 +21,7 @@ import org.json.JSONObject;
 
 
 public class ApiRest {
-    UrlServices url = new UrlServices();
+    private UrlServices url = new UrlServices();
 
 
     public void getLogin(String email, String password, final Context context) {
@@ -49,6 +49,7 @@ public class ApiRest {
                                 celudareq = request.getString("cedula");
                                 //Toast.makeText(context, "email: " + request, Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
+                                Log.e("Error getLogin",e.getMessage());
                             }
 
                             Log.e("bien", respuesta.toString());
@@ -61,7 +62,7 @@ public class ApiRest {
                             editor.putBoolean(config.LOGGEDIN_SHARED_PREF, true);
                             editor.putString(config.EMAIL_SHARED_PREF, emailreq);
                             editor.putString(config.CEDULA_SHARED_PRF, celudareq);
-                            editor.commit();
+                            editor.apply();
 
 
                             Intent intent = new Intent(context, PerfilActivity.class);

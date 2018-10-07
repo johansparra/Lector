@@ -19,6 +19,7 @@ public class ConexionApp {
                     (ConnectivityManager) login.getSystemService(Context.CONNECTIVITY_SERVICE);
             boolean isWifiConn = false;
             boolean isMobileConn = false;
+            assert connMgr != null;
             for (Network network : connMgr.getAllNetworks()) {
                 NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
                 if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
