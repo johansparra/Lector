@@ -32,7 +32,7 @@ public class SalirAplicacion {
 
     private void salir(Context ctx1, Activity ctx) {
 
-        ctx.finish();
+      //  ctx.finish();
         ActivityCompat.finishAffinity(ctx);
         System.exit(1);
 
