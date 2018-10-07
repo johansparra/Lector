@@ -75,6 +75,7 @@ public class GpsActivity extends AppCompatActivity {
         }
     }
     //nose
+    //mmm
     // GPS
     private void locationStart() {
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
