@@ -1,15 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android"
+
+    >
+
+
+    <!--   <item
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:drawable="@drawable/image">
+           &lt;!&ndash;
+               <item>
+                   <bitmap
+                       android:layout_width="match_parent"
+                       android:gravity="center"
+                        android:gravity="fill_horizontal|fill_vertical"
+                       android:src="@mipmap/ic_launcher_bus" />&ndash;&gt;
+       </item>-->
+    <item
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:drawable="@drawable/fondo_bienvenido">
+    </item>
 
     <item
-        android:drawable="@drawable/image"
-        android:gravity="fill_horizontal|fill_vertical">
-<!--
-    <item>
+        >
         <bitmap
-            android:layout_width="match_parent"
             android:gravity="center"
-            android:src="@mipmap/ic_launcher_bus" />-->
+            android:src="@mipmap/ic_launcher_bus" />
     </item>
 
 </layer-list>
+
+
+

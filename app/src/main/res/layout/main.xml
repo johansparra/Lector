@@ -10,7 +10,8 @@
         android:layout_height="551dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="78dp"
-        tools:layout_editor_absoluteY="8dp">
+        tools:layout_editor_absoluteY="8dp"
+        tools:ignore="MissingConstraints">
 
         <TextView
             android:id="@+id/nombre2"
@@ -27,7 +28,10 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView"
+            android:fontFamily="@font/letraprueba"
+            android:text="este es el texto que cambia"
+              android:textColor="@color/md_black_1000"
+            android:textStyle="normal"
             tools:ignore="MissingConstraints"
             tools:layout_editor_absoluteX="8dp"
             tools:layout_editor_absoluteY="108dp" />
@@ -40,6 +44,7 @@
             android:inputType="textPersonName"
             android:text="Name"
             tools:layout_editor_absoluteX="66dp"
+
             tools:layout_editor_absoluteY="245dp" />
     </LinearLayout>
 
