@@ -2,6 +2,7 @@ package com.ing_sebasparra.lector.Recursos;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
+import android.net.Network;
 import android.net.NetworkInfo;
 import android.util.Log;
 
@@ -9,39 +10,31 @@ import com.ing_sebasparra.lector.View.LoginActivity;
 
 public class ConexionApp {
 
-    public boolean conexionWifi (LoginActivity login){
-        boolean wifimobile= false;
-        boolean wifiDatos= false;
+    public boolean conexionWifi(LoginActivity login) {
+
         boolean conexion = false;
 
         try {
-            ConnectivityManager cm;
-            NetworkInfo ni;
-            cm = (ConnectivityManager) login.getSystemService(Context.CONNECTIVITY_SERVICE);
-            ni = cm.getActiveNetworkInfo();
-            if (ni != null) {
-                ConnectivityManager connManager1 = (ConnectivityManager) login.getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo mWifi = connManager1.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-
-                ConnectivityManager connManager2 = (ConnectivityManager) login.getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo mMobile = connManager2.getNetworkInfo(ConnectivityManager.TYPE_MOBILE);
-
-                if (mWifi.isConnected()) {
-                    wifiDatos = true;
+            ConnectivityManager connMgr =
+                    (ConnectivityManager) login.getSystemService(Context.CONNECTIVITY_SERVICE);
+            boolean isWifiConn = false;
+            boolean isMobileConn = false;
+            for (Network network : connMgr.getAllNetworks()) {
+                NetworkInfo networkInfo = connMgr.getNetworkInfo(network);
+                if (networkInfo.getType() == ConnectivityManager.TYPE_WIFI) {
+                    isWifiConn |= networkInfo.isConnected();
                 }
-                if (mMobile.isConnected()) {
-                    wifimobile = true;
-                }
-                if (wifiDatos || wifimobile ) {
-                    conexion = true;
-                    //Llamando a la funcion login
-                   // validar_campo();
-                   // login();
+                if (networkInfo.getType() == ConnectivityManager.TYPE_MOBILE) {
+                    isMobileConn |= networkInfo.isConnected();
                 }
             }
+            if (isWifiConn || isMobileConn) {
+                conexion = true;
+            }
 
-        }catch (Exception ex){
-            Log.e("Error conexion wifi",ex.getMessage());
+
+        } catch (Exception ex) {
+            Log.e("Error conexion wifi", ex.getMessage());
 
         }
         return conexion;
