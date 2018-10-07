@@ -11,7 +11,6 @@ import android.view.Window;
 
 import com.ing_sebasparra.lector.GpsActivity;
 import com.ing_sebasparra.lector.R;
-import com.ing_sebasparra.lector.View.HistorialPagosActivity;
 import com.ing_sebasparra.lector.View.MapsActivity;
 import com.ing_sebasparra.lector.View.OpcionesActivity;
 import com.ing_sebasparra.lector.View.PagoTransmilenioActivity;
@@ -51,7 +50,7 @@ public class NavegationLateral {
                             case R.id.item_navigation_drawer_historial:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent historial = new Intent(context, HistorialPagosActivity.class);
+                                Intent historial = new Intent(context, GpsActivity.class);
                                 context.startActivity(historial);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:

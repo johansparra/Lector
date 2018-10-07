@@ -2,7 +2,6 @@ package com.ing_sebasparra.lector.View;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -21,6 +20,7 @@ import com.ing_sebasparra.lector.Recursos.CerrarSesion;
 import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.LimpiarMemoria;
 import com.ing_sebasparra.lector.Recursos.NavegationLateral;
+import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 
 import java.util.Objects;
@@ -37,6 +37,8 @@ public class PerfilActivity extends AppCompatActivity {
     private TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar;
     private String email1, nombre1, apellido1, cargo1, foto1, cedula1;
 
+    private static final int INTERVALO = 2000; //2 segundos para salir
+    private long tiempoPrimerClick;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,6 +82,7 @@ public class PerfilActivity extends AppCompatActivity {
         apellidoTV.setText(apellido1);
        */
 
+
     }
 
 
@@ -116,11 +119,33 @@ public class PerfilActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+/*
     @Override
     public void onBackPressed() {
         Intent intent = new Intent(PerfilActivity.this, PerfilActivity.class);
         startActivity(intent);
     }
+*/
+
+   /* @Override
+    public void onBackPressed(){
+        if (tiempoPrimerClick + INTERVALO > System.currentTimeMillis()){
+            super.onBackPressed();
+            return;
+        }else {
+            Toast.makeText(this, "Vuelve a presionar para salir", Toast.LENGTH_SHORT).show();
+        }
+        tiempoPrimerClick = System.currentTimeMillis();
+    }*/
+
+    @Override
+    public void onBackPressed() {
+
+        SalirAplicacion salirdeaplicacion = new SalirAplicacion();
+        salirdeaplicacion.now(this, PerfilActivity.this, "Pulse otra vez para cerrar", 2500);
+
+    }
+
 
     public void toolbarStatusBar() {
         statusBar = (FrameLayout) findViewById(R.id.statusBar);

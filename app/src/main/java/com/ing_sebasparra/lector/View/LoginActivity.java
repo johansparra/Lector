@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
 import com.ing_sebasparra.lector.Recursos.ValidacionDatos;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
@@ -47,6 +48,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public TextInputLayout inputLayoutCorreo, inputLayoutPassword;
     private View mProgressView;
+    private Button registrarse;
 
 
     @Override
@@ -74,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
         inputLayoutCorreo = findViewById(R.id.layout_email);
         inputLayoutPassword = findViewById(R.id.layout_password);
         mProgressView = findViewById(R.id.login_progress);
+        registrarse = findViewById(R.id.ir_registro);
 
         buttonLogin1.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,6 +97,21 @@ public class LoginActivity extends AppCompatActivity {
                 }
             }
         });
+        registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent activityRegistro = new Intent(LoginActivity.this, RegistroActivity.class);
+                startActivity(activityRegistro);
+            }
+        });
+       /* registrarse.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onLongClick(View v) {
+                Intent activityRegistro = new Intent(LoginActivity.this, RegistroActivity.class);
+                startActivity(activityRegistro);
+
+            }
+        });*/
     }
 
     @Override
@@ -325,22 +343,26 @@ public class LoginActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    /*  @Override
+      public void onBackPressed() {
+          Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
+          startActivity(intent);
+      }*/
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-        startActivity(intent);
+        SalirAplicacion salirdeaplicacion = new SalirAplicacion();
+        salirdeaplicacion.now(this, LoginActivity.this, "Pulse otra vez para cerrar", 2500);
+
     }
 
     public void toolbarStatusBar() {
         statusBar = findViewById(R.id.statusBar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-       // getSupportActionBar().setTitle("Inicio de Sesión");
+        // getSupportActionBar().setTitle("Inicio de Sesión");
         getSupportActionBar().setTitle(getResources().getString(R.string.inicio_sesion));
 
     }
-
-
 
 
 }

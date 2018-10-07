@@ -94,6 +94,9 @@
             android:label="Calle"
             android:parentActivityName=".View.MapsActivity" />
         <activity
+            android:name=".View.RegistroActivity"
+            android:parentActivityName=".View.LoginActivity" />
+        <activity
             android:name=".View.PagoTransmilenioActivity"
             android:label="NFC"
             android:parentActivityName=".View.PerfilActivity">

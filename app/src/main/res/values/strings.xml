@@ -49,7 +49,8 @@
     <string name="error_campo">Error campo vacio</string>
     <string name="inicio_sesion">Inicio Sesión</string>
     <string name="error_mensaje_conexion">Error de conexión No Hay internet! </string>
-
+    <!--ACTIVITY  REGISTRO-->
+    <string name="registro">Registro</string>
     <!--ACTIVITY PERFIL-->
     <string name="Nombrel1">Nombre:</string>
     <string name="Emaill1">Email:</string>

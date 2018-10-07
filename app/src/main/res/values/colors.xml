@@ -10,6 +10,9 @@
     <color name="textColor">#546E7A</color>
     <color name="transparent">#00000000</color>
 
+    <color name="colorTextoMensaje">#757575</color>
+    <color name="colorBlack">#000000</color>
+
 
 <!--
       <color name="colorPrimary">#3F51B5</color>

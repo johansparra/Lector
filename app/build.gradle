@@ -52,11 +52,11 @@ dependencies {
 
     //FACEBOOK
    /* implementation 'com.facebook.android:facebook-android-sdk:4.31.0'*/
-    implementation 'com.google.firebase:firebase-core:16.0.3'
-    implementation 'com.google.firebase:firebase-auth:16.0.3'
+  /*  implementation 'com.google.firebase:firebase-core:16.0.3'
+    implementation 'com.google.firebase:firebase-auth:16.0.3'*/
     //POR CORREO FIREBASE
-    implementation 'com.google.android.gms:play-services-auth:16.0.0'
-    implementation 'com.google.firebase:firebase-messaging:17.3.0'
+  /*  implementation 'com.google.android.gms:play-services-auth:16.0.0'
+    implementation 'com.google.firebase:firebase-messaging:17.3.0'*/
 
     // LOGIN
     implementation 'com.android.volley:volley:1.1.0'
