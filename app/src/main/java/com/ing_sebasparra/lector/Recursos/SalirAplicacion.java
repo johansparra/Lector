@@ -20,7 +20,6 @@ public class SalirAplicacion {
     public void now(Context context, Activity ctx, String mensaje, long tiempo) {
         if (ctx != null && !mensaje.isEmpty() && tiempo != 0) {
             if (lastClickTime + tiempo > System.currentTimeMillis()) {
-                //  ctx.finish();
                 salir(context,ctx);
 
             } else {
@@ -32,7 +31,6 @@ public class SalirAplicacion {
 
     private void salir(Context ctx1, Activity ctx) {
 
-      //  ctx.finish();
         ActivityCompat.finishAffinity(ctx);
         System.exit(1);
 
