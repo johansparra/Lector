@@ -21,13 +21,23 @@
         android:layout_height="match_parent"
         android:drawable="@drawable/fondo_bienvenido">
     </item>
-
     <item
-        >
-        <bitmap
-            android:gravity="center"
-            android:src="@mipmap/ic_launcher_bus" />
+
+        android:gravity="center"
+        android:drawable="@drawable/cool_text_white">
     </item>
+    <!--        android:layout_width="match_parent"
+            android:layout_height="match_parent"-->
+
+    <!--    <item>
+
+
+            <bitmap
+                android:gravity="center"
+                android:src="@drawable/Cool-Text-black" />
+              &lt;!&ndash; android:src="@mipmap/ic_launcher_bus" />&ndash;&gt;
+
+        </item>-->
 
 </layer-list>
 
