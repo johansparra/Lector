@@ -30,8 +30,6 @@
             android:layout_height="match_parent"-->
 
     <!--    <item>
-
-
             <bitmap
                 android:gravity="center"
                 android:src="@drawable/Cool-Text-black" />
