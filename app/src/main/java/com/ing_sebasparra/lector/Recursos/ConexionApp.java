@@ -7,7 +7,7 @@ import android.util.Log;
 
 import com.ing_sebasparra.lector.View.LoginActivity;
 
-public class Conexion {
+public class ConexionApp {
 
     public boolean conexionWifi (LoginActivity login){
         boolean wifimobile= false;

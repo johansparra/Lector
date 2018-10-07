@@ -23,7 +23,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.R;
-import com.ing_sebasparra.lector.Recursos.Conexion;
+import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.ValidacionDatos;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
@@ -80,7 +80,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = "";
                 String password = "";
-                Conexion conect = new Conexion();
+                ConexionApp conect = new ConexionApp();
                 if (!conect.conexionWifi(LoginActivity.this)) {
                     Toast.makeText(LoginActivity.this, "Error de conexión No Hay internet! ", Toast.LENGTH_SHORT).show();
                     return;
