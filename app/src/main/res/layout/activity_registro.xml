@@ -53,19 +53,8 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
-                <de.hdodenhof.circleimageview.CircleImageView
-
-                    android:id="@+id/set_profile_image"
-                    android:layout_width="190dp"
-                    android:layout_height="210dp"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="10dp"
-                    android:src="@drawable/profile_image"
-                    app:civ_border_color="@color/colorPrimary"
-                    app:civ_border_width="2dp" />
-
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layout_status"
+                    android:id="@+id/layout_nombres"
                     android:layout_width="290dp"
                     android:layout_height="62dp"
                     android:layout_gravity="center"
@@ -78,11 +67,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
-                        android:hint="Estado"
+                        android:hint="Nombres"
                         android:imeOptions="actionDone"
                         android:inputType="text|textAutoComplete|textAutoCorrect"
                         android:maxLength="48"
-                        android:nextFocusForward="@id/reg_carrera"
+                        android:nextFocusForward="@id/reg_telefono"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
                         android:singleLine="false"
@@ -91,7 +80,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layout_carrera"
+                    android:id="@+id/layout_apellidos"
                     android:layout_width="290dp"
                     android:layout_height="62dp"
                     android:layout_gravity="center"
@@ -100,88 +89,13 @@
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/reg_carrera"
+                        android:id="@+id/reg_apellidos"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
-                        android:hint="Carrera"
+                        android:hint="Apellidos"
                         android:inputType="textAutoCorrect|textCapWords|textAutoComplete"
                         android:maxLength="46"
-                        android:nextFocusForward="@id/reg_semestre"
-                        android:paddingStart="13sp"
-                        android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layout_semestre"
-                    android:layout_width="290dp"
-                    android:layout_height="62dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:theme="?attr/colorPrimary">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/reg_semestre"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:background="@drawable/boton_registro"
-                        android:hint="Semestre"
-                        android:inputType="text|textAutoCorrect|textAutoComplete|textCapWords"
-                        android:maxLength="30"
-                        android:nextClusterForward="@id/reg_ciudad"
-                        android:nextFocusForward="@id/reg_ciudad"
-                        android:paddingStart="13sp"
-                        android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
-
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layout_ciudad"
-                    android:layout_width="290dp"
-                    android:layout_height="62dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:theme="?attr/colorPrimary"
-                    app:hintTextAppearance="@style/TextoRegistroEditLayout">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/reg_ciudad"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:background="@drawable/boton_registro"
-                        android:hint="Ciudad"
-                        android:inputType="text|textAutoCorrect|textCapWords"
-                        android:maxLength="60"
-                        android:maxLines="2"
-                        android:nextFocusForward="@id/reg_direccion"
-                        android:paddingStart="13sp"
-                        android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
-
-                </android.support.design.widget.TextInputLayout>
-
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layout_direccion"
-                    android:layout_width="290dp"
-                    android:layout_height="62dp"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:theme="?attr/colorPrimary"
-                    app:hintTextAppearance="@style/TextoRegistroEditLayout">
-
-                    <android.support.design.widget.TextInputEditText
-                        android:id="@+id/reg_direccion"
-                        android:layout_width="match_parent"
-                        android:layout_height="45dp"
-                        android:background="@drawable/boton_registro"
-                        android:hint="Direccion"
-                        android:inputType="text|textCapWords|textAutoComplete"
-                        android:maxLength="60"
-                        android:maxLines="2"
                         android:nextFocusForward="@id/reg_telefono"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
@@ -213,38 +127,116 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layout_telefono1"
+                    android:id="@+id/layout_fecha1"
                     android:layout_width="290dp"
                     android:layout_height="62dp"
                     android:layout_gravity="center"
-
                     android:gravity="center"
                     android:theme="?attr/colorPrimary"
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/reg_telefono1"
+                        android:id="@+id/reg_fecha1"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
-                        android:hint="telefono"
-                        android:inputType="phone"
+                        android:clickable="true"
+                        android:focusable="false"
+                        android:hint="Fecha de Nacimiento"
+                        android:inputType="date"
                         android:maxLength="10"
                         android:paddingStart="13sp"
-
                         android:paddingEnd="5sp"
                         android:theme="?attr/colorPrimary" />
 
                 </android.support.design.widget.TextInputLayout>
 
+                <RadioGroup
+                    android:id="@+id/genero_radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/RDhombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Hombre"
+                        android:onClick="onRadioButtonClicked"
+                        android:paddingLeft="25sp"
+                        android:paddingRight="25sp" />
+
+                    <RadioButton
+                        android:id="@+id/RDmujer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Mujer"
+                        android:onClick="onRadioButtonClicked"
+                        android:paddingLeft="25sp"
+                        android:paddingRight="25sp" />
+                </RadioGroup>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_email"
+                    android:layout_width="290dp"
+                    android:layout_height="62dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:theme="?attr/colorPrimary"
+                    app:hintTextAppearance="@style/TextoRegistroEditLayout">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/reg_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_registro"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:maxLength="46"
+                        android:nextFocusForward="@id/reg_telefono"
+                        android:paddingStart="13sp"
+                        android:paddingEnd="5sp"
+                        android:theme="?attr/colorPrimary" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_password"
+                    android:layout_width="290dp"
+                    android:layout_height="62dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:theme="?attr/colorPrimary"
+                    app:hintTextAppearance="@style/TextoRegistroEditLayout"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorHint"
+                    tools:ignore="UnusedAttribute">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/reg_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_registro"
+                        android:hint="Password"
+                        android:inputType="textPassword"
+                        android:maxLength="46"
+                        android:nextFocusForward="@id/reg_telefono"
+                        android:paddingStart="13sp"
+                        android:paddingEnd="5sp"
+                        android:theme="?attr/colorPrimary" />
+
+                </android.support.design.widget.TextInputLayout>
+
+
                 <Button
                     android:id="@+id/buttonLogin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    android:background="?attr/colorPrimary"
-                    android:layout_marginBottom="20dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:background="?attr/colorPrimary"
                     android:drawableStart="@mipmap/ic_codigo"
                     android:text="@string/Entrar"
                     android:textColor="@color/md_brown_50" />

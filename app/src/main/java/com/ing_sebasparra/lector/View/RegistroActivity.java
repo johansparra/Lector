@@ -3,7 +3,10 @@ package com.ing_sebasparra.lector.View;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
@@ -13,6 +16,11 @@ public class RegistroActivity extends AppCompatActivity {
     //cargar el tema
     Toolbar toolbar;
     FrameLayout statusBar;
+    private EditText nombres,apellidos,telefono,fecha,email,password;
+    private RadioGroup genero;
+    private RadioButton radio1, radio2;
+    private String fechapick;
+    private String generoR = null;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
