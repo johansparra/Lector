@@ -51,6 +51,16 @@
     <string name="error_mensaje_conexion">Error de conexión No Hay internet! </string>
     <!--ACTIVITY  REGISTRO-->
     <string name="registro">Registro</string>
+    <string name="identificacion">Seleccione el tipo de identificación</string>
+    <string-array name="tipo_identificacion">
+        <item>Seleccione el tipo de identificación</item>
+        <item>Cedula</item>
+        <item>NIT</item>
+        <item>Pasaporte</item>
+        <item>Tarjeta de Identificación</item>
+        <item>Cedula extranjera</item>
+    </string-array>
+
     <!--ACTIVITY PERFIL-->
     <string name="Nombrel1">Nombre:</string>
     <string name="Emaill1">Email:</string>

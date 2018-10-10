@@ -53,6 +53,7 @@
                 android:layout_height="match_parent"
                 android:orientation="vertical">
 
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layout_nombres"
                     android:layout_width="290dp"
@@ -62,19 +63,17 @@
                     android:theme="?attr/colorPrimary"
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
-                    <EditText
-                        android:id="@+id/set_profile_status"
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/reg_nombres"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
                         android:hint="Nombres"
-                        android:imeOptions="actionDone"
-                        android:inputType="text|textAutoComplete|textAutoCorrect"
-                        android:maxLength="48"
-                        android:nextFocusForward="@id/reg_telefono"
+                        android:inputType="textAutoCorrect|textCapWords|textAutoComplete"
+                        android:maxLength="46"
+                        android:nextFocusForward="@id/reg_apellidos"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
-                        android:singleLine="false"
                         android:theme="?attr/colorPrimary" />
 
                 </android.support.design.widget.TextInputLayout>
@@ -120,6 +119,7 @@
                         android:hint="telefono"
                         android:inputType="phone"
                         android:maxLength="10"
+
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
                         android:theme="?attr/colorPrimary" />
@@ -127,7 +127,7 @@
                 </android.support.design.widget.TextInputLayout>
 
                 <android.support.design.widget.TextInputLayout
-                    android:id="@+id/layout_fecha1"
+                    android:id="@+id/layout_fecha"
                     android:layout_width="290dp"
                     android:layout_height="62dp"
                     android:layout_gravity="center"
@@ -136,7 +136,7 @@
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
                     <android.support.design.widget.TextInputEditText
-                        android:id="@+id/reg_fecha1"
+                        android:id="@+id/reg_fecha"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
@@ -151,31 +151,6 @@
 
                 </android.support.design.widget.TextInputLayout>
 
-                <RadioGroup
-                    android:id="@+id/genero_radio"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center"
-                    android:orientation="horizontal">
-
-                    <RadioButton
-                        android:id="@+id/RDhombre"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="Hombre"
-                        android:onClick="onRadioButtonClicked"
-                        android:paddingLeft="25sp"
-                        android:paddingRight="25sp" />
-
-                    <RadioButton
-                        android:id="@+id/RDmujer"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:hint="Mujer"
-                        android:onClick="onRadioButtonClicked"
-                        android:paddingLeft="25sp"
-                        android:paddingRight="25sp" />
-                </RadioGroup>
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layout_email"
@@ -194,7 +169,7 @@
                         android:hint="Email"
                         android:inputType="textEmailAddress"
                         android:maxLength="46"
-                        android:nextFocusForward="@id/reg_telefono"
+                        android:nextFocusForward="@id/reg_password"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
                         android:theme="?attr/colorPrimary" />
@@ -221,12 +196,47 @@
                         android:hint="Password"
                         android:inputType="textPassword"
                         android:maxLength="46"
-                        android:nextFocusForward="@id/reg_telefono"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
                         android:theme="?attr/colorPrimary" />
 
                 </android.support.design.widget.TextInputLayout>
+
+
+                <Spinner
+                    android:id="@+id/spiner_identificacion"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="20dp"
+                    android:layout_marginTop="20dp">
+
+                </Spinner>
+
+                <RadioGroup
+                    android:id="@+id/genero_radio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <RadioButton
+                        android:id="@+id/RDhombre"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Hombre"
+                        android:onClick="onRadioButtonClicked"
+                        android:paddingLeft="25sp"
+                        android:paddingRight="25sp" />
+
+                    <RadioButton
+                        android:id="@+id/RDmujer"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:hint="Mujer"
+                        android:onClick="onRadioButtonClicked"
+                        android:paddingLeft="25sp"
+                        android:paddingRight="25sp" />
+                </RadioGroup>
 
 
                 <Button
