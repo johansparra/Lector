@@ -2,10 +2,12 @@ package com.ing_sebasparra.lector.View;
 
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -25,6 +27,7 @@ import android.widget.Toast;
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.PermisosPreguntar;
 import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
 import com.ing_sebasparra.lector.Recursos.ValidacionDatos;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
@@ -49,6 +52,12 @@ public class LoginActivity extends AppCompatActivity {
     public TextInputLayout inputLayoutCorreo, inputLayoutPassword;
     private View mProgressView;
     private Button registrarse;
+    private Activity activitypreguntar;
+
+
+
+    public static final int PERMISO = 100;
+    PermisosPreguntar permisosPreguntar =new PermisosPreguntar();
 
 
     @Override
@@ -61,13 +70,110 @@ public class LoginActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        activitypreguntar = this;
 
         //Siguiente del tema bar---
         toolbarStatusBar();
         inicializeValues();
 
 
+
+        permisosPreguntar.validapermisos(this);
+
+
+
+       /* if (validaper()) {
+            //  Toast.makeText(this, "si", Toast.LENGTH_SHORT).show();
+        } else {
+            // Toast.makeText(this, "no", Toast.LENGTH_SHORT).show();
+        }*/
+
+
     }
+
+
+    /*public boolean validaper() {
+        if ((ContextCompat.checkSelfPermission(this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                != PackageManager.PERMISSION_GRANTED) ||
+                (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.RECORD_AUDIO)
+                        != PackageManager.PERMISSION_GRANTED)
+
+                ) {
+            if ((ActivityCompat.shouldShowRequestPermissionRationale(this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) ||
+                    (ActivityCompat.shouldShowRequestPermissionRationale(this,
+                            Manifest.permission.RECORD_AUDIO))) {
+
+                recomendacion();
+
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.RECORD_AUDIO}
+                        , PERMISO);
+            }
+        }
+
+
+        return false;
+    }*/
+
+ /*   public void recomendacion() {
+        AlertDialog.Builder dialogo = new AlertDialog.Builder(this);
+        dialogo.setTitle("Permisos desactivados");
+        dialogo.setMessage("Tienes que aceptar los permisos para poder continuar");
+        dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                ActivityCompat.requestPermissions(LoginActivity.this,
+                        new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE,
+                                Manifest.permission.RECORD_AUDIO}
+                        , PERMISO);
+            }
+        });
+        dialogo.show();
+    }*/
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == 100) {
+            if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED
+                    && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "si pasa", Toast.LENGTH_SHORT).show();
+            } else {
+               // solicitarpermisomanual();
+                permisosPreguntar.solicitarpermisomanual(this);
+            }
+        }
+
+    }
+
+
+ /*   public void solicitarpermisomanual() {
+        final CharSequence[] opciones = {"si", "no"};
+        final AlertDialog.Builder alert = new AlertDialog.Builder(LoginActivity.this);
+        alert.setTitle("Desea configurar los permisos de forma manual");
+        alert.setItems(opciones, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                if (opciones[which].equals("si")) {
+                    Intent intent = new Intent();
+                    intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
+                    Uri url = Uri.fromParts("package", getPackageName(), null);
+                    intent.setData(url);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(LoginActivity.this, "No fueron aceptados", Toast.LENGTH_SHORT).show();
+                    dialog.dismiss();
+                }
+            }
+        });
+        alert.show();
+    }*/
+
 
     private void inicializeValues() {
         editTextEmail = findViewById(R.id.editTextEmailf);
