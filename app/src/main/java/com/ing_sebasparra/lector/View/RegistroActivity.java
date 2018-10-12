@@ -82,6 +82,7 @@ public class RegistroActivity extends AppCompatActivity {
         lay_email=(TextInputLayout)findViewById(R.id.layout_email);
         lay_password=(TextInputLayout)findViewById(R.id.layout_password);
         lay_spiner=(TextInputLayout)findViewById(R.id.layout_spineer);
+        edit_spiner=(EditText) findViewById(R.id.reg_spinner);
 
 
 
@@ -114,9 +115,15 @@ public class RegistroActivity extends AppCompatActivity {
                         (String) adapterView.getItemAtPosition(pos), Toast.LENGTH_SHORT).show();
                 if(pos==0){
                     lay_spiner.setVisibility(View.GONE);
+
                 }
                 if(pos==3){
                     lay_spiner.setVisibility(View.VISIBLE);
+                    edit_spiner.setHint("Pasaporte");
+                }
+                if(pos==4){
+                    lay_spiner.setVisibility(View.VISIBLE);
+                    edit_spiner.setHint("Tarjeta de identificacion");
                 }
             }
 

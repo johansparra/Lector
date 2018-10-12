@@ -221,19 +221,14 @@
                     android:layout_height="62dp"
                     android:layout_gravity="center"
                     android:gravity="center"
-                    android:visibility="gone"
                     android:theme="?attr/colorPrimary"
-                    app:hintTextAppearance="@style/TextoRegistroEditLayout"
-                    app:passwordToggleEnabled="true"
-                    app:passwordToggleTint="@color/colorHint"
-                    tools:ignore="UnusedAttribute">
+                    app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
                     <android.support.design.widget.TextInputEditText
                         android:id="@+id/reg_spinner"
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
-                        android:hint="lo que escogio"
                         android:inputType="textPassword"
                         android:maxLength="46"
                         android:paddingStart="13sp"
