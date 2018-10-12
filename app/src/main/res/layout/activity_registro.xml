@@ -205,13 +205,13 @@
 
                 <Spinner
                     android:id="@+id/spiner_identificacion"
+                    style="@android:style/Widget.Spinner.DropDown"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
-                    android:theme="?attr/colorPrimary"
+                    android:layout_marginTop="20dp"
                     android:spinnerMode="dropdown"
-                    style="@android:style/Widget.Spinner.DropDown"
-                    android:layout_marginTop="20dp">
+                    android:theme="?attr/colorPrimary">
 
                 </Spinner>
 
@@ -229,8 +229,10 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
-                        android:inputType="textPassword"
-                        android:maxLength="46"
+                        android:inputType="number"
+                        android:maxEms="10"
+                        android:maxLength="10"
+                        android:minEms="5"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
                         android:theme="?attr/colorPrimary" />
@@ -242,6 +244,7 @@
                     android:id="@+id/genero_radio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
                     android:gravity="center"
                     android:orientation="horizontal">
 
@@ -249,6 +252,7 @@
                         android:id="@+id/RDhombre"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:buttonTint="?attr/colorPrimary"
                         android:hint="Hombre"
                         android:onClick="onRadioButtonClicked"
                         android:paddingLeft="25sp"
@@ -258,6 +262,7 @@
                         android:id="@+id/RDmujer"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:buttonTint="?attr/colorPrimary"
                         android:hint="Mujer"
                         android:onClick="onRadioButtonClicked"
                         android:paddingLeft="25sp"
@@ -273,8 +278,8 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginBottom="20dp"
                     android:background="?attr/colorPrimary"
-                    android:paddingEnd="10dp"
                     android:drawableStart="@mipmap/ic_codigo"
+                    android:paddingEnd="10dp"
                     android:text="Registrar"
                     android:textColor="@color/md_brown_50" />
 

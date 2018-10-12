@@ -22,6 +22,7 @@ import com.ing_sebasparra.lector.Recursos.ComprobarCampos;
 import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
+import com.ing_sebasparra.lector.WebServices.ApiRest;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -38,11 +39,13 @@ public class RegistroActivity extends AppCompatActivity {
     private RadioGroup genero;
     private RadioButton radio1, radio2;
     private String fechapick;
+    private int n_identificacion=0;
     private String generoR = null;
     private Spinner tipoidentificacion;
     private Button registro;
 
     IraActividades actividadesir = new IraActividades();
+    ApiRest apires = new ApiRest();
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -111,19 +114,38 @@ public class RegistroActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
             {
-                Toast.makeText(adapterView.getContext(),
-                        (String) adapterView.getItemAtPosition(pos), Toast.LENGTH_SHORT).show();
+                /*Toast.makeText(adapterView.getContext(),
+                        (String) adapterView.getItemAtPosition(pos), Toast.LENGTH_SHORT).show();*/
+                registro.setVisibility(View.VISIBLE);
                 if(pos==0){
                     lay_spiner.setVisibility(View.GONE);
-
+                    registro.setVisibility(View.GONE);
+                               }
+                if(pos==1){
+                    lay_spiner.setVisibility(View.VISIBLE);
+                    edit_spiner.setHint("Cedula");
+                    n_identificacion=1;
+                }
+                if(pos==2){
+                    lay_spiner.setVisibility(View.VISIBLE);
+                    edit_spiner.setHint("NIT");
+                    n_identificacion=2;
                 }
                 if(pos==3){
                     lay_spiner.setVisibility(View.VISIBLE);
                     edit_spiner.setHint("Pasaporte");
+                    n_identificacion=3;
                 }
+
                 if(pos==4){
                     lay_spiner.setVisibility(View.VISIBLE);
-                    edit_spiner.setHint("Tarjeta de identificacion");
+                    edit_spiner.setHint("Tarjeta de identificación");
+                    n_identificacion=4;
+                }
+                if(pos==5){
+                    lay_spiner.setVisibility(View.VISIBLE);
+                    edit_spiner.setHint("Cedula extranjera");
+                    n_identificacion=5;
                 }
             }
 
@@ -166,6 +188,7 @@ public class RegistroActivity extends AppCompatActivity {
                 String fecha = "";
                 String email = "";
                 String password = "";
+                String identificacion="";
 
                 ConexionApp conect = new ConexionApp();
                 if (!conect.conexionWifi(RegistroActivity.this)) {
@@ -178,18 +201,23 @@ public class RegistroActivity extends AppCompatActivity {
                 fecha = edit_fecha.getText().toString().trim();
                 email = edit_email.getText().toString().trim();
                 password = edit_password.getText().toString().trim();
+                identificacion = edit_spiner.getText().toString().trim();
                 String setGenero = generoR;
                 ComprobarCampos comprobarCampos=new ComprobarCampos();
                 if (comprobarCampos.validar_campo(RegistroActivity.this,nombres,apellidos,
-                        telefono,fecha,email,password,edit_nombres,edit_apellidos,edit_telefono,
-                        edit_fecha,edit_email,edit_password,setGenero,radio1,radio2)){
+                        telefono,fecha,email,password,identificacion,edit_nombres,edit_apellidos,edit_telefono,
+                        edit_fecha,edit_email,edit_password,edit_spiner,setGenero,radio1,radio2)){
+
+
                     Toast.makeText(RegistroActivity.this, "si", Toast.LENGTH_SHORT).show();
+
+
+                    apires.postRegistro(nombres,apellidos,
+                            telefono,fecha,email,password,n_identificacion,
+                            identificacion,generoR,
+                            RegistroActivity.this);
                 }
-                /*if (validar_campo(email, password)) {
-                    showProgress(true);
-                    servicesLogin(email, password);
-                    showProgress(false);
-                }*/
+
 
 
             }

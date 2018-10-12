@@ -11,9 +11,10 @@ import com.ing_sebasparra.lector.R;
 public class ComprobarCampos {
 
     public boolean validar_campo(Context context, String nombres, String apellidos,
-                                 String telefono, String fecha, String email, String password,
+                                 String telefono, String fecha, String email, String password,String identificacion,
                                  EditText nombre_edit, EditText apellido_edit, EditText telefono_edit,
-                                 EditText fecha_edit, EditText email_edit, EditText password_edit, String setGenero, RadioButton radio1,RadioButton radio2) {
+                                 EditText fecha_edit, EditText email_edit, EditText password_edit,EditText tipo,
+                                 String setGenero, RadioButton radio1,RadioButton radio2) {
 
         Boolean mensaje;
         Boolean validaCampos = true;
@@ -40,6 +41,11 @@ public class ComprobarCampos {
         if (TextUtils.isEmpty(email)) {
             email_edit.setError(context.getString(R.string.error_campo));
             email_edit.requestFocus();
+            validaCampos = false;
+        }
+        if (TextUtils.isEmpty(identificacion)) {
+            tipo.setError(context.getString(R.string.error_campo));
+            tipo.requestFocus();
             validaCampos = false;
         }
         if (TextUtils.isEmpty(password)) {

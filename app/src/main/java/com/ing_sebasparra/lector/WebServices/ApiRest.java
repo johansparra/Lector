@@ -11,13 +11,17 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.ing_sebasparra.lector.Recursos.Config;
-import com.ing_sebasparra.lector.View.PerfilActivity;
 import com.ing_sebasparra.lector.Recursos.UrlServices;
+import com.ing_sebasparra.lector.View.PerfilActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 
 public class ApiRest {
@@ -49,13 +53,13 @@ public class ApiRest {
                                 celudareq = request.getString("cedula");
                                 //Toast.makeText(context, "email: " + request, Toast.LENGTH_SHORT).show();
                             } catch (JSONException e) {
-                                Log.e("Error getLogin",e.getMessage());
+                                Log.e("Error getLogin", e.getMessage());
                             }
 
                             Log.e("bien", respuesta.toString());
-                          //  Toast.makeText(context, "salida: " + respuesta.toString(), Toast.LENGTH_SHORT).show();
+                            //  Toast.makeText(context, "salida: " + respuesta.toString(), Toast.LENGTH_SHORT).show();
 
-                            Config config=new Config();
+                            Config config = new Config();
 
                             SharedPreferences sharedPreferences = context.getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -72,7 +76,7 @@ public class ApiRest {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                 //   Log.e("ocurrio un error", error.toString());
+                    //   Log.e("ocurrio un error", error.toString());
                     Toast.makeText(context, "Correo o password incorrectos", Toast.LENGTH_SHORT).show();
 
                 }
@@ -89,5 +93,43 @@ public class ApiRest {
 
     }
 
+    public void postRegistro(String nombres, String apellidos,
+                             String telefono, String fecha, String email,
+                             String password, int tipo_identificacion, String identificacion,
+                             String genero, final Context context) {
+
+    }
+
+
+    public void prueba(Context context) {
+        RequestQueue respuesta = Volley.newRequestQueue(context);
+        String url = "http://httpbin.org/post";
+        StringRequest postRequest = new StringRequest(Request.Method.POST, url,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        // response
+                        Log.d("Response", response);
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        // error
+                        // Log.d("Error.Response", response);
+                    }
+                }
+        ) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("name", "Alif");
+                params.put("domain", "http://itsalif.info");
+
+                return params;
+            }
+        };
+        respuesta.add(postRequest);
+    }
 
 }

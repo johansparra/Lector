@@ -142,5 +142,6 @@ AIzaSyBzIyAhKl-Vk1OdwknsPZUeu5wAcZp9J80
     <!--LIMPIAR MEMORIA-->
     <string name="texto_limpiar">Memoria Limpiada</string>
     <string name="historial">Historial Pagos Transmilenio</string>
+    <string name="error_seleccion_identificacion">Seleccione un tipo de Identificación</string>
 
 </resources>
