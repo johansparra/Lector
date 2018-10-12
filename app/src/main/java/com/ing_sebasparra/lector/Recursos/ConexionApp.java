@@ -6,11 +6,9 @@ import android.net.Network;
 import android.net.NetworkInfo;
 import android.util.Log;
 
-import com.ing_sebasparra.lector.View.LoginActivity;
-
 public class ConexionApp {
 
-    public boolean conexionWifi(LoginActivity login) {
+    public boolean conexionWifi(Context login) {
 
         boolean conexion = false;
 

@@ -16,6 +16,7 @@ import android.widget.Toast;
 public class PermisosPreguntar {
 
     public static final int PERMISO = 100;
+    IraActividades iraActividades =new IraActividades();
 
     public boolean validapermisos(Context context) {
         if ((ContextCompat.checkSelfPermission(context,
@@ -47,8 +48,8 @@ public class PermisosPreguntar {
 
     public void recomendacion(final Context context) {
         AlertDialog.Builder dialogo = new AlertDialog.Builder(context);
-        dialogo.setTitle("Permisos desactivados");
-        dialogo.setMessage("Tienes que aceptar los permisos para poder continuar");
+        dialogo.setTitle("Permisos Desactivados");
+        dialogo.setMessage("Debes aceptar los permisos para poder continuar");
         dialogo.setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
@@ -62,13 +63,13 @@ public class PermisosPreguntar {
     }
 
     public void solicitarpermisomanual(final Context context) {
-        final CharSequence[] opciones = {"si", "no"};
+        final CharSequence[] opciones = {"Si", "No"};
         final AlertDialog.Builder alert = new AlertDialog.Builder(context);
         alert.setTitle("Desea configurar los permisos de forma manual");
         alert.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                if (opciones[which].equals("si")) {
+                if (opciones[which].equals("Si")) {
                     Intent intent = new Intent();
                     intent.setAction(Settings.ACTION_APPLICATION_DETAILS_SETTINGS);
                     Uri url = Uri.fromParts("package", context.getPackageName(), null);
@@ -77,6 +78,7 @@ public class PermisosPreguntar {
                 } else {
                     Toast.makeText(context, "No fueron aceptados se cerrara session", Toast.LENGTH_SHORT).show();
                     dialog.dismiss();
+                    iraActividades.iraLogin(context);
                 }
             }
         });
