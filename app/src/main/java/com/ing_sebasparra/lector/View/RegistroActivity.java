@@ -6,6 +6,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -20,7 +21,6 @@ import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.ComprobarCampos;
 import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
-import com.ing_sebasparra.lector.Recursos.SpinerTipo;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 
 import java.text.SimpleDateFormat;
@@ -33,8 +33,8 @@ public class RegistroActivity extends AppCompatActivity {
 
     Toolbar toolbar;
     FrameLayout statusBar;
-    private EditText edit_nombres, edit_apellidos, edit_telefono, edit_fecha,edit_email, edit_password;
-    private TextInputLayout lay_nombres,lay_apellidos,lay_telefono,lay_fecha,lay_email,lay_password;
+    private EditText edit_nombres, edit_apellidos, edit_telefono, edit_fecha,edit_email, edit_password,edit_spiner;
+    private TextInputLayout lay_nombres,lay_apellidos,lay_telefono,lay_fecha,lay_email,lay_password,lay_spiner;
     private RadioGroup genero;
     private RadioButton radio1, radio2;
     private String fechapick;
@@ -81,6 +81,7 @@ public class RegistroActivity extends AppCompatActivity {
         lay_fecha=(TextInputLayout)findViewById(R.id.layout_fecha);
         lay_email=(TextInputLayout)findViewById(R.id.layout_email);
         lay_password=(TextInputLayout)findViewById(R.id.layout_password);
+        lay_spiner=(TextInputLayout)findViewById(R.id.layout_spineer);
 
 
 
@@ -93,15 +94,39 @@ public class RegistroActivity extends AppCompatActivity {
         registro = (Button) findViewById(R.id.btn_registro);
 
 
-        // Spinner spinner = (Spinner) findViewById(R.id.spinner);
-// Create an ArrayAdapter using the string array and a default spinner layout
+
+     /*   ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
+                R.array.tipo_identificacion, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        tipoidentificacion.setAdapter(adapter);
+          tipoidentificacion.setOnItemSelectedListener(new SpinerTipo());*/
+
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.tipo_identificacion, android.R.layout.simple_spinner_item);
-// Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-// Apply the adapter to the spinner
         tipoidentificacion.setAdapter(adapter);
-        tipoidentificacion.setOnItemSelectedListener(new SpinerTipo());
+        tipoidentificacion.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int pos, long id)
+            {
+                Toast.makeText(adapterView.getContext(),
+                        (String) adapterView.getItemAtPosition(pos), Toast.LENGTH_SHORT).show();
+                if(pos==0){
+                    lay_spiner.setVisibility(View.GONE);
+                }
+                if(pos==3){
+                    lay_spiner.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent)
+            {    }
+        });
+
+
+
 
 
         edit_fecha.setOnClickListener(new View.OnClickListener() {

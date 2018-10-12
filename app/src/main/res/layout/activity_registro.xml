@@ -208,9 +208,40 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="20dp"
+                    android:theme="?attr/colorPrimary"
+                    android:spinnerMode="dropdown"
+                    style="@android:style/Widget.Spinner.DropDown"
                     android:layout_marginTop="20dp">
 
                 </Spinner>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/layout_spineer"
+                    android:layout_width="290dp"
+                    android:layout_height="62dp"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:visibility="gone"
+                    android:theme="?attr/colorPrimary"
+                    app:hintTextAppearance="@style/TextoRegistroEditLayout"
+                    app:passwordToggleEnabled="true"
+                    app:passwordToggleTint="@color/colorHint"
+                    tools:ignore="UnusedAttribute">
+
+                    <android.support.design.widget.TextInputEditText
+                        android:id="@+id/reg_spinner"
+                        android:layout_width="match_parent"
+                        android:layout_height="45dp"
+                        android:background="@drawable/boton_registro"
+                        android:hint="lo que escogio"
+                        android:inputType="textPassword"
+                        android:maxLength="46"
+                        android:paddingStart="13sp"
+                        android:paddingEnd="5sp"
+                        android:theme="?attr/colorPrimary" />
+
+                </android.support.design.widget.TextInputLayout>
+
 
                 <RadioGroup
                     android:id="@+id/genero_radio"
