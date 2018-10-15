@@ -31,10 +31,12 @@ import com.ing_sebasparra.lector.Recursos.LimpiarMemoria;
 import com.ing_sebasparra.lector.Recursos.NavegationLateral;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 
+import java.util.Objects;
+
 
 public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback {
 
-    //CARGAR EL TEMA
+
     DrawerLayout drawerLayout;
     Toolbar toolbar;
     SharedPreferences sharedPreferences;
@@ -77,19 +79,15 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         selecTema.theme(this);
         setContentView(R.layout.activity_maps);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         toolbarStatusBar();
-
 
         drawerLayout = findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
 
         if (navigationView != null) {
 
-            NavegationLateral navegation =new NavegationLateral();
-            navegation.navegationContent(navigationView,this,drawerLayout);
+            NavegationLateral navegation = new NavegationLateral();
+            navegation.navegationContent(navigationView, this, drawerLayout);
         }
         //MAPS
         estoyAqui = findViewById(R.id.btnestoyqui);
@@ -100,14 +98,7 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                     flyTo(LugarActual);
             }
         });
-   /*     otro = findViewById(R.id.btnotro);
-        otro.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (mapReady)
-                    flyTo(SEATTLE);
-            }
-        });*/
+
         btnMap = findViewById(R.id.btnMap);
         btnMap.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -161,11 +152,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         mMap.addMarker(new MarkerOptions().position(sydney).title("Esta Aqui"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
 
-      /*  LatLng casa = new LatLng(4.339052, -74.3634342);
-        mMap.addMarker(new MarkerOptions().position(casa).title("Mi casa").icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_login)));
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(casa));
-        mMap.isMyLocationEnabled();*/
-
         //PARA HACER UN CIRCULO
         mMap.addCircle(new CircleOptions()
                 .center(renton)
@@ -185,12 +171,6 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         Intent intent = new Intent(MapsActivity.this, PerfilActivity.class);
         startActivity(intent);
     }
-
-    private void boton1() {
-
-
-    }
-
 
     // MENUS LATERALES
     @Override
@@ -223,13 +203,11 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
-
     public void toolbarStatusBar() {
         statusBar = findViewById(R.id.statusBar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Titulo que se visualiza en en action bar
-        getSupportActionBar().setTitle("Google Maps");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Google Maps");
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

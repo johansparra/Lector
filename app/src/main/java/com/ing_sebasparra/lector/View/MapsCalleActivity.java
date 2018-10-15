@@ -24,6 +24,8 @@ import com.ing_sebasparra.lector.Recursos.LimpiarMemoria;
 import com.ing_sebasparra.lector.Recursos.NavegationLateral;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 
+import java.util.Objects;
+
 
 public class MapsCalleActivity extends AppCompatActivity implements OnStreetViewPanoramaReadyCallback {
 
@@ -49,8 +51,7 @@ public class MapsCalleActivity extends AppCompatActivity implements OnStreetView
         selecTema.theme(this);
         setContentView(R.layout.activity_maps1);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+
 
         toolbarStatusBar();
 
@@ -122,10 +123,11 @@ public class MapsCalleActivity extends AppCompatActivity implements OnStreetView
         statusBar = findViewById(R.id.statusBar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Titulo que se visualiza en en action bar
-        getSupportActionBar().setTitle("Google Maps Calle");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("Google Maps Calle");
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+
     }
 
 

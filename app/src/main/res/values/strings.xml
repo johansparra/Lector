@@ -53,6 +53,11 @@
     <string name="nombres">Nombres</string>
     <string name="apellidos">Apellidos</string>
     <string name="telefono">Teléfono</string>
+    <string name="fecha_naci">Fecha de Nacimiento</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="hombre">Hombre</string>
+    <string name="mujer">Mujer</string>
 
     <string-array name="tipo_identificacion">
         <item>Seleccione el tipo de identificación</item>
@@ -98,15 +103,15 @@
     <string name="gps">GPS</string>
     <string name="googlemaps">Google Maps</string>
 
-<!--    &lt;!&ndash;FACEBOOK&ndash;&gt;
-    <string name="facebook_app_id">324584154732775</string>
-    <string name="fb_login_protocol_scheme">fb324584154732775</string>-->
+    <!--    &lt;!&ndash;FACEBOOK&ndash;&gt;
+        <string name="facebook_app_id">324584154732775</string>
+        <string name="fb_login_protocol_scheme">fb324584154732775</string>-->
 
-   <!-- <string name="welcome">Bienvenido</string>
-    <string name="cancel_login">Se canceló la operación</string>
-    <string name="error_login">Ocurrió un error al ingresar</string>
-    <string name="logout1">Cerrar sesión</string>
-    <string name="firebase_error_login">Error al iniciar sesión en Firebase</string>-->
+    <!-- <string name="welcome">Bienvenido</string>
+     <string name="cancel_login">Se canceló la operación</string>
+     <string name="error_login">Ocurrió un error al ingresar</string>
+     <string name="logout1">Cerrar sesión</string>
+     <string name="firebase_error_login">Error al iniciar sesión en Firebase</string>-->
 
     <!--GOOGLE MAPS-->
     <!--   <string name="google_maps_key" templateMergeStrategy="preserve" translatable="false">
@@ -122,18 +127,18 @@ AIzaSyBzIyAhKl-Vk1OdwknsPZUeu5wAcZp9J80
     <string name="title_activity_maps2">Map</string>
     <string name="title_activity_login2">Sign in</string>
 
- <!--   &lt;!&ndash; Strings related to login &ndash;&gt;
-    <string name="prompt_email">Email</string>
-    <string name="action_sign_in">Sign in or register</string>
-    <string name="action_sign_in_short">Sign in</string>
-    <string name="error_invalid_email">This email address is invalid</string>
-    <string name="error_invalid_email_di">Email invalido</string>
-    <string name="error_invalid_password">This password is too short</string>
-    <string name="error_incorrect_password">This password is incorrect</string>
-    <string name="error_field_required">This field is required</string>
-    <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>-->
+  <!--     &lt;!&ndash; Strings related to login &ndash;&gt;
+       <string name="prompt_email">Email</string>
+       <string name="action_sign_in">Sign in or register</string>
+       <string name="action_sign_in_short">Sign in</string>
+       <string name="error_invalid_email">This email address is invalid</string>
+
+       <string name="error_invalid_password">This password is too short</string>
+       <string name="error_incorrect_password">This password is incorrect</string>
+       <string name="error_field_required">This field is required</string>
+       <string name="permission_rationale">"Contacts permissions are needed for providing email
+           completions."
+       </string>-->
 
     <!--LIMPIAR MEMORIA-->
     <string name="texto_limpiar">Memoria Limpiada</string>
@@ -145,5 +150,6 @@ AIzaSyBzIyAhKl-Vk1OdwknsPZUeu5wAcZp9J80
     <string name="error_caracteres">" "caracteres</string>
     <string name="error_nombre_numero">El campo no puede contener numeros</string>
     <string name="error_network_timeout">Error tiempo de respuesta fallida</string>
+    <string name="error_invalid_email_di">Email invalido</string>
 
 </resources>

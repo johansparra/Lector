@@ -49,23 +49,20 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
 
         toolbarStatusBar();
+        cargarVariables();
 
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
-
-/*        DrawerLayout nfc=findViewById(R.id.item_navigation_drawer_nfc);
-        //nfc.setVisibility(View.INVISIBLE);
-      //  nfc.setEnabled(false);*/
 
         if (navigationView != null) {
 
             NavegationLateral navegation = new NavegationLateral();
             navegation.navegationContent(navigationView, this, drawerLayout);
         }
+        }
 
-
-        //VARIABLES
+    private void cargarVariables() {
         emailTV = (TextView) findViewById(R.id.emailview);
         nombreTV = (TextView) findViewById(R.id.nombreview);
         apellidoTV = (TextView) findViewById(R.id.apellidosview);
@@ -81,7 +78,6 @@ public class PerfilActivity extends AppCompatActivity {
         apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
         apellidoTV.setText(apellido1);
        */
-
 
     }
 
@@ -118,25 +114,6 @@ public class PerfilActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-/*
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent(PerfilActivity.this, PerfilActivity.class);
-        startActivity(intent);
-    }
-*/
-
-   /* @Override
-    public void onBackPressed(){
-        if (tiempoPrimerClick + INTERVALO > System.currentTimeMillis()){
-            super.onBackPressed();
-            return;
-        }else {
-            Toast.makeText(this, "Vuelve a presionar para salir", Toast.LENGTH_SHORT).show();
-        }
-        tiempoPrimerClick = System.currentTimeMillis();
-    }*/
 
     @Override
     public void onBackPressed() {

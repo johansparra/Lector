@@ -30,6 +30,8 @@ import com.ing_sebasparra.lector.Recursos.NavegationLateral;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.View.PerfilActivity;
 
+import java.util.Objects;
+
 public class GpsActivity extends AppCompatActivity {
 
     //CARGAR EL TEMA
@@ -51,17 +53,14 @@ public class GpsActivity extends AppCompatActivity {
         selecTema.theme(this);
         setContentView(R.layout.activity_gps);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
         toolbarStatusBar();
 
         drawerLayout = findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = findViewById(R.id.navigation_view);
         if (navigationView != null) {
 
-            NavegationLateral navegation =new NavegationLateral();
-            navegation.navegationContent(navigationView,this,drawerLayout);
+            NavegationLateral navegation = new NavegationLateral();
+            navegation.navegationContent(navigationView, this, drawerLayout);
         }
 
         //GPS
@@ -74,8 +73,7 @@ public class GpsActivity extends AppCompatActivity {
             locationStart();
         }
     }
-    //nose
-    //mmm
+
     // GPS
     private void locationStart() {
         LocationManager mlocManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
@@ -204,8 +202,7 @@ public class GpsActivity extends AppCompatActivity {
         statusBar = findViewById(R.id.statusBar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // Titulo que se visualiza en en action bar
-        getSupportActionBar().setTitle("GPS");
+        Objects.requireNonNull(getSupportActionBar()).setTitle("GPS");
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

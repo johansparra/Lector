@@ -1,14 +1,10 @@
 package com.ing_sebasparra.lector.View;
 
-import android.animation.Animator;
-import android.animation.AnimatorListenerAdapter;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
@@ -33,6 +29,8 @@ import com.ing_sebasparra.lector.Recursos.ValidacionDatos;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
 
+import java.util.Objects;
+
 public class LoginActivity extends AppCompatActivity {
 
     //cargar el tema
@@ -52,31 +50,23 @@ public class LoginActivity extends AppCompatActivity {
     public TextInputLayout inputLayoutCorreo, inputLayoutPassword;
     private View mProgressView;
     private Button registrarse;
-    private Activity activitypreguntar;
-
+    // private Activity activitypreguntar;
 
 
     public static final int PERMISO = 100;
-    PermisosPreguntar permisosPreguntar =new PermisosPreguntar();
+    PermisosPreguntar permisosPreguntar = new PermisosPreguntar();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // Seleccionar el tema guardado por el usuario (siempre antes de setContentView)
+
         SeleccionTema selecTema = new SeleccionTema();
         selecTema.theme(this);
         setContentView(R.layout.activity_login);
 
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        activitypreguntar = this;
-
-        //Siguiente del tema bar---
         toolbarStatusBar();
         inicializeValues();
-
-
 
         permisosPreguntar.validapermisos(this);
 
@@ -88,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
         if (requestCode == 100) {
             if (grantResults.length == 2 && grantResults[0] == PackageManager.PERMISSION_GRANTED
                     && grantResults[1] == PackageManager.PERMISSION_GRANTED) {
-                Toast.makeText(this, "si pasa", Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(this, "si pasa", Toast.LENGTH_SHORT).show();
             } else {
                 permisosPreguntar.solicitarpermisomanual(this);
             }
@@ -118,9 +108,7 @@ public class LoginActivity extends AppCompatActivity {
                 email = editTextEmail.getText().toString().trim();
                 password = editTextPassword.getText().toString().trim();
                 if (validar_campo(email, password)) {
-                    showProgress(true);
                     servicesLogin(email, password);
-                    showProgress(false);
                 }
             }
         });
@@ -131,14 +119,6 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(activityRegistro);
             }
         });
-       /* registrarse.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onLongClick(View v) {
-                Intent activityRegistro = new Intent(LoginActivity.this, RegistroActivity.class);
-                startActivity(activityRegistro);
-
-            }
-        });*/
     }
 
     @Override
@@ -156,153 +136,6 @@ public class LoginActivity extends AppCompatActivity {
     private void servicesLogin(String email, String password) {
         ApiRest apires = new ApiRest();
         apires.getLogin(email, password, this);
-    }
-
-/*    private void login() {
-        // Obtención de valores de textos de edición
-        final String email = editTextEmail.getText().toString().trim();
-    //    final String password = editTextPassword.getText().toString().trim();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.GET, Config.LOGIN_URL+email,
-                new Response.Listener<String>() {
-
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(LoginActivity.this, "salida: "+ response, Toast.LENGTH_SHORT).show();
-                        if (!response.equalsIgnoreCase(Config.LOGIN_SUCCESS)) {
-                            SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPreferences.edit();
-                            editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
-                            editor.putString(Config.EMAIL_SHARED_PREF, email);
-                            editor.commit();
-
-                         //   CargarDatos b = new CargarDatos();
-                           // b.execute(email, password);
-                        //    b.execute(email);
-                            showProgress(true);
-                        } else {
-                            Toast.makeText(LoginActivity.this, " Usuario o password Incorrectos!", Toast.LENGTH_LONG).show();
-                            showProgress(false);
-                        }
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError error) {
-                    }
-                }) {
-            @Override
-            protected Map<String, String> getParams() {
-                Map<String, String> params = new HashMap<>();
-                // Añadiendo parámetros a la solicitud
-                params.put(Config.KEY_EMAIL, email);
-             //   params.put(Config.KEY_PASSWORD, password);
-                //Retornando los parametros
-                return params;
-            }
-        };
-        //Añandiendo el string de la solicitud en cola
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        requestQueue.add(stringRequest);
-    }*/
-    // hasta ca va el login
-
-    // CARGAR DATOS DEL USUARIO QUE INICIO SESION
-/*    class CargarDatos extends AsyncTask<String, String, String> {
-
-        @Override
-        protected String doInBackground(String... params) {
-            String email = params[0];
-           // String password = params[1];
-            String data = "";
-            int tmp;
-
-            try {
-                URL url = new URL( "http://api-transmilenio.us-west-1.elasticbeanstalk.com/API_TRANSMI/V0/User/Cuenta/ValorPasaje/");
-             //   String urlParams = "email=" + email + "&password=" + password;
-                String urlParams = "email=" + email ;
-                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
-               // int status = Integer.valueOf(httpURLConnection.getResponseMessage());
-
-
-                httpURLConnection.setDoOutput(true);
-                OutputStream os = httpURLConnection.getOutputStream();
-                os.write(urlParams.getBytes());
-                os.flush();
-                os.close();
-
-                InputStream is = httpURLConnection.getInputStream();
-                while ((tmp = is.read()) != -1) {
-                    data += (char) tmp;
-                }
-
-                is.close();
-                httpURLConnection.disconnect();
-
-                return data;
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-                return "Exception: " + e.getMessage();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return "Exception: " + e.getMessage();
-            }
-        }
-
-        @Override
-        protected void onPostExecute(String s) {
-            String err = null;
-            try {
-                JSONObject root = new JSONObject(s);
-               // JSONObject user_data = root.getJSONObject("estado");
-               // JSONObject user_data = root.getJSONObject("user_data");
-                NOMBRET1 = root.getString("estado");
-              *//*  NOMBRET1 = user_data.getString("name");
-                APELLIDOT1 = user_data.getString("apellidos");
-                EMAILT1 = user_data.getString("email");
-                PASSWORDT1 = user_data.getString("password");
-                NIVELT1 = user_data.getString("nivel");
-                CEDULAT1 = user_data.getString("cedula");
-                CREDITOST1 = user_data.getString("creditos");*//*
-
-            } catch (JSONException e) {
-                e.printStackTrace();
-                err = "Exception: " + e.getMessage();
-            }
-            SharedPreferences sharedPreferences = LoginActivity.this.getSharedPreferences(Config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.putBoolean(Config.LOGGEDIN_SHARED_PREF, true);
-            editor.putString(Config.NOMBRE_SHARED_PREF, NOMBRET1);
-*//*            editor.putString(Config.APELLIDOS_SHARED_PREF, APELLIDOT1);
-            editor.putString(Config.EMAIL_SHARED_PREF, EMAILT1);
-            editor.putString(Config.NIVEL_SHARED_PREF, NIVELT1);
-            editor.putString(Config.MATRICULA_SHARED_PREF, CEDULAT1);
-            editor.putString(Config.CREDITOS_SHARED_PREF, CREDITOST1);
-            editor.putString(Config.ERR_SHARED_PREF, err);// si sale error  pero nunca va  salir por el condicional*//*
-            editor.commit();
-            //Iniciando el  activity
-            Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
-            startActivity(intent);
-        }
-    }*/
-
-    // BARRA DE PROGRESO
-    private void showProgress(final boolean show) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB_MR2) {
-            int shortAnimTime = getResources().getInteger(android.R.integer.config_shortAnimTime);
-
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-            mProgressView.animate().setDuration(shortAnimTime).alpha(
-                    show ? 1 : 0).setListener(new AnimatorListenerAdapter() {
-                @Override
-                public void onAnimationEnd(Animator animation) {
-                    mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-                }
-            });
-        } else {
-            mProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
-
-        }
     }
 
 
@@ -370,11 +203,6 @@ public class LoginActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    /*  @Override
-      public void onBackPressed() {
-          Intent intent = new Intent(LoginActivity.this, LoginActivity.class);
-          startActivity(intent);
-      }*/
     @Override
     public void onBackPressed() {
         SalirAplicacion salirdeaplicacion = new SalirAplicacion();
@@ -386,9 +214,7 @@ public class LoginActivity extends AppCompatActivity {
         statusBar = findViewById(R.id.statusBar);
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        // getSupportActionBar().setTitle("Inicio de Sesión");
-        getSupportActionBar().setTitle(getResources().getString(R.string.inicio_sesion));
-
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.inicio_sesion));
     }
 
 
