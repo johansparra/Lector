@@ -148,7 +148,7 @@ AIzaSyBzIyAhKl-Vk1OdwknsPZUeu5wAcZp9J80
     <string name="error_seleccion_identificacion">Seleccione un tipo de Identificación</string>
     <string name="error_nombre_menor">Debe tener mas de " "</string>
     <string name="error_caracteres">" "caracteres</string>
-    <string name="error_nombre_numero">El campo no puede contener numeros</string>
+    <string name="error_nombre_numero">El campo no puede contener números</string>
     <string name="error_network_timeout">Error tiempo de respuesta fallida</string>
     <string name="error_invalid_email_di">Email invalido</string>
 

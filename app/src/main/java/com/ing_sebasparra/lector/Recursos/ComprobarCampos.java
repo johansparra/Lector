@@ -8,6 +8,9 @@ import android.widget.RadioButton;
 
 import com.ing_sebasparra.lector.R;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class ComprobarCampos {
 
     public boolean validar_campo(Context context,UsuarioDTO usuarioDTO,
@@ -17,14 +20,11 @@ public class ComprobarCampos {
 
         Boolean mensaje;
         Boolean validaCampos = true;
-        if (TextUtils.isEmpty(usuarioDTO.getNombres())) {
-            nombre_edit.setError(context.getString(R.string.error_campo));
-            nombre_edit.requestFocus();
-            validaCampos = false;
-        }
-     /*   if(validaNumericos(context,nombre_edit,usuarioDTO.getNombres())){
+
+        if(!validaNumericos(context,nombre_edit,usuarioDTO.getNombres())){
             validaCampos=false;
-        }*/
+        }
+
 
         if(validarLongitud(context,nombre_edit,usuarioDTO.getNombres(),3)){
             validaCampos = false;
@@ -40,11 +40,7 @@ public class ComprobarCampos {
             telefono_edit.requestFocus();
             validaCampos = false;
         }
-     /*   if (TextUtils.isEmpty(telefono)) {
-            telefono_edit.setError(context.getString(R.string.error_campo));
-            telefono_edit.requestFocus();
-            validaCampos = false;
-        }*/
+
         if (TextUtils.isEmpty(usuarioDTO.getFechaNaci())) {
             fecha_edit.setError(context.getString(R.string.error_campo));
             fecha_edit.requestFocus();
@@ -95,10 +91,25 @@ public class ComprobarCampos {
         return validaCampos;
 
     }
+    public boolean validaNumericos(Context context,EditText editText, String campo){
+        boolean esNumero=false;
+        Pattern ps = Pattern.compile("^[a-zA-Z ]+$");
+        Matcher ms = ps.matcher(campo);
+        boolean bs = ms.matches();
+        try {
+            if (!campo.matches("^[0-9]*$") ) {
+                esNumero=true;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return esNumero;
+}
 
 /*public boolean validaNumericos(Context context,EditText editText, String campo){
         boolean esNumero=false;
-    if (campo.contains("[0-9]+") == true) {
+   // if (!campo.contains("[0-9._]")) {
+    if (!campo.matches("[0-9]")||campo.contains("[0-9]")) {
         editText.setError(context.getString(R.string.error_nombre_numero));
         editText.requestFocus();
         esNumero=true;
@@ -106,21 +117,7 @@ public class ComprobarCampos {
     return esNumero;
 }*/
 
-  /*  public static boolean isNumeric(String cadena) {
 
-        boolean resultado;
-
-        try {
-            Integer.parseInt(cadena);
-            resultado = true;
-        } catch (NumberFormatException excepcion) {
-            resultado = false;
-
-        }
-
-        return resultado;
-    }
-    */
 
     public boolean validarLongitud(Context context,EditText editText,
                                    String campo,int longitud) {

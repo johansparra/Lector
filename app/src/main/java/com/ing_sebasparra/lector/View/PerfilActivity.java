@@ -64,8 +64,8 @@ public class PerfilActivity extends AppCompatActivity {
 
     private void cargarVariables() {
         emailTV = (TextView) findViewById(R.id.emailview);
-        nombreTV = (TextView) findViewById(R.id.nombreview);
-        apellidoTV = (TextView) findViewById(R.id.apellidosview);
+   /*     nombreTV = (TextView) findViewById(R.id.nombreview);
+        apellidoTV = (TextView) findViewById(R.id.apellidosview);*/
         cedulaTV = (TextView) findViewById(R.id.cedulaview);
         Config config = new Config();
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
@@ -73,11 +73,13 @@ public class PerfilActivity extends AppCompatActivity {
         emailTV.setText(email1);
         cedula1 = sharedPreferences.getString(config.CEDULA_SHARED_PRF, "No Disponible");
         cedulaTV.setText(cedula1);
+
+
+
       /*  nombre1 = sharedPreferences.getString(Config.NOMBRE_SHARED_PREF, "No Disponible");
         nombreTV.setText(nombre1);
         apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
-        apellidoTV.setText(apellido1);
-       */
+        apellidoTV.setText(apellido1);*/
 
     }
 

@@ -193,7 +193,7 @@ public class RegistroActivity extends AppCompatActivity {
                         usuarioDTO, edit_nombres, edit_apellidos, edit_telefono,
                         edit_fecha, edit_email, edit_password, edit_spiner, radio1, radio2)) {
                     loadingbar.setTitle("Registrando");
-                    loadingbar.setMessage("Porfavor espera");
+                    loadingbar.setMessage("Por favor espera");
                     loadingbar.setCanceledOnTouchOutside(false);
                     loadingbar.show();
                     ApiRest apirest = new ApiRest();

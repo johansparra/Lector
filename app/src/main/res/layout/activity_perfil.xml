@@ -5,13 +5,14 @@
     android:id="@+id/navigation_drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     android:fitsSystemWindows="true"
     tools:context=".View.PerfilActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/md_white_1000"
+        android:background="@color/colorTextoMensaje"
         android:orientation="vertical">
 
 
@@ -31,113 +32,163 @@
             android:background="?attr/colorPrimaryDark"
             android:translationZ="4dp" />
 
+
     </FrameLayout>
 
     <RelativeLayout
+        android:id="@+id/contenedor"
         android:layout_width="match_parent"
+
         android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/fondo_bus"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="55dp"
+            android:adjustViewBounds="true"
+            android:scaleType="fitXY"
+            android:src="@drawable/trans_bus" />
 
-        <!-- textAppearance Y textColor PARA CAMBIAR EL COLOR SEGUN EL TEMA -->
-
-        <Button
-            android:id="@+id/tarjeta"
+        <ImageView
+            android:id="@+id/fondo_tarjeta"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="21dp"
-            android:layout_marginBottom="222dp"
-            android:background="?attr/colorPrimary"
-            android:drawableStart="@mipmap/ic_credit_card"
-            android:paddingRight="6dp"
-            android:text="Tarjeta"
-            android:textAllCaps="false"
-            android:textColor="?attr/colorControlNormal"
-            tools:layout_editor_absoluteX="145dp"
-            tools:layout_editor_absoluteY="358dp" />
+            android:layout_marginTop="20dp"
+            android:src="@drawable/transmi2" />
 
-
-
-        <TextView
-            android:id="@+id/txt_nombre"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="175dp"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="79dp"
-            android:text="@string/Nombrel1"
-            android:textSize="17sp" />
+            android:layout_marginStart="10dp"
+            android:gravity="center"
+            android:layout_marginTop="280dp">
 
 
-        <TextView
-            android:id="@+id/nombreview"
+            <TextView
+                android:id="@+id/valor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="30sp"
+                android:textColor="@color/md_white_1000"
+                android:textStyle="bold"
+                android:text="$12.000" />
+        </LinearLayout>
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_nombre"
-            android:layout_alignStart="@+id/txt_nombre"
-            android:text="@string/acavaelnombre1"
-            android:textColor="@color/md_black_1000"
-            android:textSize="18sp" />
+            android:layout_marginStart="210dp"
+            android:layout_marginTop="280dp"
+            android:layout_marginEnd="9dp"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/txt_apellidos"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/nombreview"
-            android:layout_alignStart="@+id/nombreview"
-            android:text="Apellidos"
-            android:textSize="17sp" />
+            <TextView
+                android:id="@+id/emailview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/acavaelemail1"
+                android:textColor="@color/md_black_1000"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/apellidosview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_apellidos"
-            android:layout_alignStart="@+id/txt_nombre"
-            android:text="@string/acavaelnombre1"
-            android:textColor="@color/md_black_1000"
-            android:textSize="18sp" />
+            <TextView
+                android:id="@+id/cedulaview"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="@string/acavaelemail1"
+                android:textColor="@color/md_black_1000"
+                android:textSize="14sp" />
 
-        <TextView
-            android:id="@+id/txt_email"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/apellidosview"
-            android:layout_alignStart="@+id/nombreview"
-            android:text="@string/Emaill1"
-            android:textSize="17sp" />
+        </LinearLayout>
+        <!--
 
-        <TextView
-            android:id="@+id/emailview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_email"
-            android:layout_alignStart="@+id/txt_email"
-            android:text="@string/acavaelemail1"
-            android:textColor="@color/md_black_1000"
-            android:textSize="18sp" />
 
-        <TextView
-            android:id="@+id/txt_cedula"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/emailview"
-            android:layout_alignStart="@+id/nombreview"
-            android:text="Cedula"
-            android:textSize="17sp" />
 
-        <TextView
-            android:id="@+id/cedulaview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/txt_cedula"
-            android:layout_alignStart="@+id/txt_email"
-            android:text="@string/acavaelemail1"
-            android:textColor="@color/md_black_1000"
-            android:textSize="18sp" />
 
+-->
+
+        <!-- <Button
+             android:id="@+id/tarjeta"
+             android:layout_width="wrap_content"
+             android:layout_height="wrap_content"
+             android:layout_alignParentStart="true"
+             android:layout_alignParentBottom="true"
+             android:layout_marginStart="21dp"
+             android:layout_marginBottom="222dp"
+             android:background="?attr/colorPrimary"
+             android:drawableStart="@mipmap/ic_credit_card"
+             android:paddingRight="6dp"
+             android:text="Tarjeta"
+             android:textAllCaps="false"
+             android:textColor="?attr/colorControlNormal"
+             tools:layout_editor_absoluteX="145dp"
+             tools:layout_editor_absoluteY="358dp" />-->
+
+
+        <!--     <TextView
+                 android:id="@+id/txt_nombre"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_alignParentStart="true"
+                 android:layout_alignParentTop="true"
+                 android:layout_marginStart="12dp"
+                 android:layout_below="@+id/fondo"
+                 android:text="@string/Nombrel1"
+                 android:textSize="17sp" />-->
+
+
+        <!--   <TextView
+               android:id="@+id/nombreview"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+
+               android:text="@string/acavaelnombre1"
+               android:textColor="@color/md_black_1000"
+               android:textSize="18sp" />
+
+             &lt;!&ndash;<TextView
+                 android:id="@+id/txt_apellidos"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/nombreview"
+                 android:layout_alignStart="@+id/nombreview"
+                 android:text="Apellidos"
+                 android:textSize="17sp" />&ndash;&gt;
+
+           <TextView
+               android:id="@+id/apellidosview"
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+
+
+               android:text="@string/acavaelnombre1"
+               android:textColor="@color/md_black_1000"
+               android:textSize="18sp" />
+
+      &lt;!&ndash;       <TextView
+                 android:id="@+id/txt_email"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/apellidosview"
+                 android:layout_alignStart="@+id/nombreview"
+                 android:text="@string/Emaill1"
+                 android:textSize="17sp" />&ndash;&gt;
+
+
+
+     &lt;!&ndash;        <TextView
+                 android:id="@+id/txt_cedula"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/emailview"
+                 android:layout_alignStart="@+id/nombreview"
+                 android:text="Cedula"
+                 android:textSize="17sp" />&ndash;&gt;
+
+
+   -->
 
     </RelativeLayout>
 
@@ -151,6 +202,8 @@
         android:layout_marginStart="20dp"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/navigation_drawer_header"
-        app:menu="@menu/navigation_drawer_menu" />
+        app:menu="@menu/navigation_drawer_menu">
+
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>
