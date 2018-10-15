@@ -46,13 +46,14 @@
             android:id="@+id/todo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="55dp">
+            android:layout_marginTop="55dp"
+            tools:ignore="UselessParent">
 
             <LinearLayout
+                android:id="@+id/layout_contenedor"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:orientation="vertical">
-
 
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layout_nombres"
@@ -68,9 +69,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
-                        android:hint="Nombres"
-                        android:inputType="textAutoCorrect|textCapWords|textAutoComplete"
-                        android:maxLength="46"
+                        android:hint="@string/nombres"
+                        android:inputType="textAutoCorrect|textCapWords|textAutoComplete|textPersonName"
+                        android:maxEms="20"
+                        android:maxLength="20"
+                        android:minEms="3"
                         android:nextFocusForward="@id/reg_apellidos"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
@@ -92,7 +95,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
-                        android:hint="Apellidos"
+                        android:hint="@string/apellidos"
                         android:inputType="textAutoCorrect|textCapWords|textAutoComplete"
                         android:maxLength="46"
                         android:nextFocusForward="@id/reg_telefono"
@@ -232,7 +235,7 @@
                         android:inputType="number"
                         android:maxEms="10"
                         android:maxLength="10"
-                        android:minEms="5"
+                        android:minEms="6"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
                         android:theme="?attr/colorPrimary" />
