@@ -13,7 +13,7 @@ import java.util.regex.Pattern;
 
 public class ComprobarCampos {
 
-    public boolean validar_campo(Context context,UsuarioDTO usuarioDTO,
+    public boolean validar_campo(Context context, UsuarioDTO usuarioDTO,
                                  EditText nombre_edit, EditText apellido_edit, EditText telefono_edit,
                                  EditText fecha_edit, EditText email_edit, EditText password_edit, EditText tipo,
                                  RadioButton radio1, RadioButton radio2) {
@@ -21,18 +21,26 @@ public class ComprobarCampos {
         Boolean mensaje;
         Boolean validaCampos = true;
 
-        if(!validaNumericos(context,nombre_edit,usuarioDTO.getNombres())){
-            validaCampos=false;
+
+        if (validaNumericos(context, nombre_edit, usuarioDTO.getNombres())) {
+            validaCampos = false;
         }
-
-
-        if(validarLongitud(context,nombre_edit,usuarioDTO.getNombres(),3)){
+        if (validarLongitud(context, nombre_edit, usuarioDTO.getNombres(), 3)) {
             validaCampos = false;
         }
 
+
+
+        if (validaNumericos(context, apellido_edit, usuarioDTO.getApellidos())) {
+            validaCampos = false;
+        }
         if (TextUtils.isEmpty(usuarioDTO.getApellidos())) {
             apellido_edit.setError(context.getString(R.string.error_campo));
             apellido_edit.requestFocus();
+            validaCampos = false;
+        }
+
+        if (validarCelular(context, telefono_edit, usuarioDTO.getCelular(), 10)) {
             validaCampos = false;
         }
         if (TextUtils.isEmpty(usuarioDTO.getCelular())) {
@@ -40,6 +48,7 @@ public class ComprobarCampos {
             telefono_edit.requestFocus();
             validaCampos = false;
         }
+
 
         if (TextUtils.isEmpty(usuarioDTO.getFechaNaci())) {
             fecha_edit.setError(context.getString(R.string.error_campo));
@@ -87,40 +96,29 @@ public class ComprobarCampos {
         }
 
 
-
         return validaCampos;
 
     }
-    public boolean validaNumericos(Context context,EditText editText, String campo){
-        boolean esNumero=false;
+
+    public boolean validaNumericos(Context context,
+                                   EditText editText, String campo) {
+        boolean esNumero = false;
         Pattern ps = Pattern.compile("^[a-zA-Z ]+$");
         Matcher ms = ps.matcher(campo);
         boolean bs = ms.matches();
-        try {
-            if (!campo.matches("^[0-9]*$") ) {
-                esNumero=true;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (!bs ) {
+            editText.setError(context.getString(R.string.error_nombre_numero));
+            editText.requestFocus();
+            esNumero = true;
         }
+
         return esNumero;
-}
-
-/*public boolean validaNumericos(Context context,EditText editText, String campo){
-        boolean esNumero=false;
-   // if (!campo.contains("[0-9._]")) {
-    if (!campo.matches("[0-9]")||campo.contains("[0-9]")) {
-        editText.setError(context.getString(R.string.error_nombre_numero));
-        editText.requestFocus();
-        esNumero=true;
     }
-    return esNumero;
-}*/
 
 
 
-    public boolean validarLongitud(Context context,EditText editText,
-                                   String campo,int longitud) {
+    public boolean validarLongitud(Context context, EditText editText,
+                                   String campo, int longitud) {
         boolean vallong = false;
         if (campo.length() < longitud) {
             editText.setError(context.getString(R.string.error_nombre_menor) + longitud + context.getString(R.string.error_caracteres));
@@ -131,6 +129,16 @@ public class ComprobarCampos {
         return vallong;
     }
 
+    public boolean validarCelular(Context context, EditText editText,
+                                   String campo, int longitud) {
+        boolean vallong = false;
+        if (campo.length() < longitud) {
+            editText.setError(context.getString(R.string.error_nombre_menor) + longitud + context.getString(R.string.error_caracteres));
+            editText.requestFocus();
+            vallong = true;
 
+        }
+        return vallong;
+    }
 
 }
