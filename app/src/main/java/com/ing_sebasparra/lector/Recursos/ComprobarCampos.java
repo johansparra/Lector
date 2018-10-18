@@ -15,7 +15,7 @@ public class ComprobarCampos {
 
     public boolean validar_campo(Context context, UsuarioDTO usuarioDTO,
                                  EditText nombre_edit, EditText apellido_edit, EditText telefono_edit,
-                                 EditText fecha_edit, EditText email_edit, EditText password_edit, EditText tipo,
+                                 EditText fecha_edit, EditText email_edit, EditText password_edit, EditText tipo_edit,
                                  RadioButton radio1, RadioButton radio2) {
 
         Boolean mensaje;
@@ -28,7 +28,15 @@ public class ComprobarCampos {
         if (validarLongitud(context, nombre_edit, usuarioDTO.getNombres(), 3)) {
             validaCampos = false;
         }
+        if (TextUtils.isEmpty(usuarioDTO.getNombres())) {
+            nombre_edit.setError(context.getString(R.string.error_campo));
+            nombre_edit.requestFocus();
+            validaCampos = false;
+        }
 
+        if (validarLongitud(context, apellido_edit, usuarioDTO.getApellidos(), 4)) {
+            validaCampos = false;
+        }
 
 
         if (validaNumericos(context, apellido_edit, usuarioDTO.getApellidos())) {
@@ -40,7 +48,7 @@ public class ComprobarCampos {
             validaCampos = false;
         }
 
-        if (validarCelular(context, telefono_edit, usuarioDTO.getCelular(), 10)) {
+        if (validarLongitud(context, telefono_edit, usuarioDTO.getCelular(), 10)) {
             validaCampos = false;
         }
         if (TextUtils.isEmpty(usuarioDTO.getCelular())) {
@@ -55,7 +63,11 @@ public class ComprobarCampos {
             fecha_edit.requestFocus();
             validaCampos = false;
         }
-        if (validaCampos) {
+
+        if (validarLongitud(context, email_edit, usuarioDTO.getEmail(), 11)) {
+            validaCampos = false;
+        }
+        if (validaCampos==false) {
             ValidacionDatos validar = new ValidacionDatos();
             mensaje = validar.validaremail(usuarioDTO.getEmail());
             if (mensaje) {
@@ -64,16 +76,26 @@ public class ComprobarCampos {
                 validaCampos = false;
             }
         }
+
         if (TextUtils.isEmpty(usuarioDTO.getEmail())) {
             email_edit.setError(context.getString(R.string.error_campo));
             email_edit.requestFocus();
             validaCampos = false;
         }
-        if (TextUtils.isEmpty(usuarioDTO.getNum_identificacion())) {
-            tipo.setError(context.getString(R.string.error_campo));
-            tipo.requestFocus();
+        if (validarLongitud(context, tipo_edit, usuarioDTO.getNum_identificacion(), 6)) {
             validaCampos = false;
         }
+
+        if (TextUtils.isEmpty(usuarioDTO.getNum_identificacion())) {
+            tipo_edit.setError(context.getString(R.string.error_campo));
+            tipo_edit.requestFocus();
+            validaCampos = false;
+        }
+        if (validarLongitud(context, password_edit, usuarioDTO.getPassword(), 3)) {
+            validaCampos = false;
+        }
+
+
         if (TextUtils.isEmpty(usuarioDTO.getPassword())) {
             // password_edit.setError(context.getString(R.string.error_campo), context.getDrawable(R.drawable.ic_acerca));
             Drawable icon =
@@ -129,16 +151,5 @@ public class ComprobarCampos {
         return vallong;
     }
 
-    public boolean validarCelular(Context context, EditText editText,
-                                   String campo, int longitud) {
-        boolean vallong = false;
-        if (campo.length() < longitud) {
-            editText.setError(context.getString(R.string.error_nombre_menor) + longitud + context.getString(R.string.error_caracteres));
-            editText.requestFocus();
-            vallong = true;
-
-        }
-        return vallong;
-    }
 
 }

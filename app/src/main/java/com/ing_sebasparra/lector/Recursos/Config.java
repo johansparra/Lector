@@ -26,7 +26,7 @@ public class Config {
     public final String LOGGEDIN_SHARED_PREF = "loggedin";
 
     /// guardar los otros datos id nombre nivel matricula
-    static final String NOMBRE_SHARED_PREF = "name";
+  //  static final String NOMBRE_SHARED_PREF = "name";
     static final String APELLIDOS_SHARED_PREF = "apellido";
     static final String NIVEL_SHARED_PREF = "nivel";
     static final String MATRICULA_SHARED_PREF = "matricula";
@@ -34,7 +34,14 @@ public class Config {
     static final String ERR_SHARED_PREF = "err";
     static final String SHARED_BEAM = "";
 
-    public final String CEDULA_SHARED_PRF="cedula";
+
+    public final String SHARED_PREF_CONSULTA = "valor";
+    public final String CONSULTA_SHARED_PREF = "consulta";
+    public final String CEDULA_SHARED_PREF="cedula";
+    public final String ID_USUARIO_SHARED_PREF="idusuario";
+    public final String N_IDENTIFICACION_SHARED_PREF="n_identificacion";
+    public final String NOMBRE_SHARED_PREF="nombre";
+    public final String SALDO_SHARED_PREF="saldo";
 
 }
 //otra prueba

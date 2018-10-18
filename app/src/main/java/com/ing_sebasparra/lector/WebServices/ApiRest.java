@@ -7,6 +7,8 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
+import com.android.volley.Cache;
+import com.android.volley.Network;
 import com.android.volley.NetworkError;
 import com.android.volley.NoConnectionError;
 import com.android.volley.ParseError;
@@ -16,12 +18,14 @@ import com.android.volley.Response;
 import com.android.volley.ServerError;
 import com.android.volley.TimeoutError;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
-import com.ing_sebasparra.lector.Recursos.UrlServices;
 import com.ing_sebasparra.lector.Recursos.UsuarioDTO;
 import com.ing_sebasparra.lector.View.PerfilActivity;
 
@@ -35,51 +39,57 @@ import java.util.Map;
 public class ApiRest {
     private UrlServices url = new UrlServices();
     IraActividades actividades = new IraActividades();
+    Config config = new Config();
 
 
     public void getLogin(String email, String password, final Context context) {
-
+        RequestQueue respuesta = Volley.newRequestQueue(context);
         String urllogin = "email/" + email + "/password/" + password;
 
         try {
-            RequestQueue respuesta = Volley.newRequestQueue(context);
             JsonObjectRequest obejto = new JsonObjectRequest(
                     Request.Method.GET, url.LOGIN_URL_1 + urllogin, null,
                     new Response.Listener<JSONObject>() {
 
                         @Override
                         public void onResponse(JSONObject respuesta) {
-                            String emailreq = "";
-                            String passreq = "";
-                            String celudareq = "";
+                            String idusuario = "";
+                            String n_identificacion = "";
+                            String nombre = "";
                             try {
 
                                 JSONObject request = respuesta.getJSONObject("login");
-                                emailreq = request.getString("email");
-                                passreq = request.getString("password");
-                                celudareq = request.getString("cedula");
+                                idusuario = request.getString("idUsuario");
+                                n_identificacion = request.getString("numIdentificacion");
+                                nombre = request.getString("nombre");
                             } catch (JSONException e) {
                                 Log.e("Error getLogin: ", e.getMessage());
                             }
-                            Config config = new Config();
+
 
                             SharedPreferences sharedPreferences = context.getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putBoolean(config.LOGGEDIN_SHARED_PREF, true);
-                            editor.putString(config.EMAIL_SHARED_PREF, emailreq);
-                            editor.putString(config.CEDULA_SHARED_PRF, celudareq);
+                            editor.putString(config.ID_USUARIO_SHARED_PREF, idusuario);
+                            editor.putString(config.N_IDENTIFICACION_SHARED_PREF, n_identificacion);
+                            editor.putString(config.NOMBRE_SHARED_PREF, nombre);
                             editor.apply();
 
+                            if(idusuario.equals("0")){
+                                Toast.makeText(context, "Correo o password incorrectos", Toast.LENGTH_SHORT).show();
+                            }else {
+                                Intent intent = new Intent(context, PerfilActivity.class);
+                                context.startActivity(intent);
+                            }
 
-                            Intent intent = new Intent(context, PerfilActivity.class);
-                            context.startActivity(intent);
+
+
                         }
 
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Correo o password incorrectos", Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(context, "Error getLogin:"+error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
             );
@@ -90,7 +100,8 @@ public class ApiRest {
             Log.e("ocurrio un error", error.getMessage().toString());
 
         }
-
+        //para terminarlo
+       cancelarRespuestas(respuesta,context);
 
     }
 
@@ -118,6 +129,71 @@ public class ApiRest {
                                 } else {
                                     Toast.makeText(context, consulta, Toast.LENGTH_SHORT).show();
                                 }
+
+                            } catch (JSONException e) {
+                                Toast.makeText(context, "Error Consulta Json: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+
+
+                        }
+
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+
+                }
+            }
+            );
+            respuesta.add(obejto);
+
+
+        } catch (Exception error) {
+            Toast.makeText(context, "Error Consulta: " + error.getMessage(), Toast.LENGTH_SHORT).show();
+        }
+
+
+
+    }
+
+    public void consultarSaldo(final String n_identificacion, final Context context) {
+
+        RequestQueue respuesta;
+        final Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
+        Network network = new BasicNetwork(new HurlStack());
+        respuesta = new RequestQueue(cache, network);
+
+        respuesta.start();
+
+        String urlConsulta = n_identificacion;
+        try {
+          //  RequestQueue respuesta = Volley.newRequestQueue(context);
+            JsonObjectRequest obejto = new JsonObjectRequest(
+                    Request.Method.GET, url.CONSULTA_SALDO_URL + urlConsulta, null,
+                    new Response.Listener<JSONObject>() {
+
+                        @Override
+                        public void onResponse(JSONObject respuesta) {
+
+                            String recarga = "";
+                            String saldo = "";
+                            String fecha = "";
+                            try {
+
+                                JSONObject request = respuesta.getJSONObject("cuenta");
+                                recarga = request.getString("ultimaRecarga");
+                                saldo = request.getString("saldo");
+                                fecha = request.getString("fechaRecarga");
+                               /* ConsultaDTO consultaDTO=new ConsultaDTO();
+                                consultaDTO.setSaldo(saldo);
+                                consultaDTO.setRecarga(recarga);
+                                consultaDTO.setFecha(fecha);*/
+
+                                SharedPreferences sharedPreferences = context.getSharedPreferences(config.SHARED_PREF_CONSULTA, Context.MODE_PRIVATE);
+                                SharedPreferences.Editor editor = sharedPreferences.edit();
+                                editor.putString(config.SALDO_SHARED_PREF, saldo);
+                                editor.apply();
+                                //actividades.iraCuenta(context);
+
 
                             } catch (JSONException e) {
                                 Toast.makeText(context, "Error Consulta Json: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -203,6 +279,14 @@ public class ApiRest {
 
         queue.add(jsonObjReq);
     }
+
+    public void cancelarRespuestas(RequestQueue respuesta,Context context){
+       // respuesta.cancelAll("PETICIONES");
+        respuesta.cancelAll(context);
+
+    }
+
+
 
 
 }

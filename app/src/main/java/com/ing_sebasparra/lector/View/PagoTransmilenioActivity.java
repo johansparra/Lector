@@ -78,12 +78,12 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
         cedulaTV = (TextView) findViewById(R.id.cedula);
 
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        nombre1 = sharedPreferences.getString(config.EMAIL_SHARED_PREF, "No Disponible");
+        nombre1 = sharedPreferences.getString(config.NOMBRE_SHARED_PREF, "No Disponible");
         nombreTV.setText(nombre1);
       /*  apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
         apellidoTV.setText(apellido1);*/
         apellidoTV.setVisibility(View.GONE);
-        cedula1 = sharedPreferences.getString(config.CEDULA_SHARED_PRF, "No Disponible");
+        cedula1 = sharedPreferences.getString(config.N_IDENTIFICACION_SHARED_PREF, "No Disponible");
         cedulaTV.setText(cedula1);
 
 

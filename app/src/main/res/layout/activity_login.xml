@@ -94,6 +94,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="40dp"
                 android:hint="@string/Digitesucontraseña"
+                android:maxEms="20"
+                android:maxLength="20"
+                android:minEms="4"
                 android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>

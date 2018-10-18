@@ -10,7 +10,6 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,11 +20,11 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.R;
+import com.ing_sebasparra.lector.Recursos.ComprobarCamposLogin;
 import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.PermisosPreguntar;
 import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
-import com.ing_sebasparra.lector.Recursos.ValidacionDatos;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
 
@@ -107,9 +106,14 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 email = editTextEmail.getText().toString().trim();
                 password = editTextPassword.getText().toString().trim();
-                if (validar_campo(email, password)) {
+
+                ComprobarCamposLogin comprobarCampos = new ComprobarCamposLogin();
+                if(comprobarCampos.validar_campo(LoginActivity.this, email,password,editTextEmail,editTextPassword)){
                     servicesLogin(email, password);
                 }
+               /* if (validar_campo(email, password)) {
+                    servicesLogin(email, password);
+                }*/
             }
         });
         registrarse.setOnClickListener(new View.OnClickListener() {
@@ -140,7 +144,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
     //MIRAR SI ESTA VACIO LOS EDIT TEXT
-    public boolean validar_campo(String email, String password) {
+   /* public boolean validar_campo(String email, String password) {
         String mailError = null;
         Boolean mensaje;
         Boolean validaCampos = true;
@@ -152,6 +156,11 @@ public class LoginActivity extends AppCompatActivity {
             validaCampos = false;
         }
         toggleTextInputLayoutError(inputLayoutCorreo, mailError);
+
+        if (TextUtils.isEmpty(password)) {
+            passError = getString(R.string.error_campo);
+            validaCampos = false;
+        }
 
         if (TextUtils.isEmpty(password)) {
             passError = getString(R.string.error_campo);
@@ -172,7 +181,6 @@ public class LoginActivity extends AppCompatActivity {
 
     }
 
-
     private void toggleTextInputLayoutError(@NonNull TextInputLayout textInputLayout,
                                             String msg) {
         textInputLayout.setError(msg);
@@ -182,6 +190,7 @@ public class LoginActivity extends AppCompatActivity {
             textInputLayout.setErrorEnabled(true);
         }
     }
+*/
 
 
     @Override
