@@ -61,23 +61,25 @@
             android:src="@drawable/transmi2" />
 
         <LinearLayout
+            android:id="@+id/layoutSaldo"
             android:layout_width="175dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:gravity="center"
-            android:layout_marginTop="280dp">
+            android:layout_marginTop="280dp"
+            android:gravity="center">
 
 
             <TextView
                 android:id="@+id/saldoview"
+                android:maxEms="12"
+                android:maxLength="12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="30sp"
                 android:textColor="@color/md_white_1000"
-                android:textStyle="bold"
-                 />
+                android:textSize="30sp"
+                android:textStyle="bold" />
         </LinearLayout>
-       <!-- android:text="$12.000"-->
+        <!-- android:text="$12.000"-->
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -109,29 +111,28 @@
 
 
         <LinearLayout
-            android:layout_width="359dp"
-            android:layout_height="44dp"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            android:layout_marginStart="15dp"
-            android:layout_marginBottom="218dp"
+            android:id="@+id/layoutRecarga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layoutSaldo"
+            android:layout_marginTop="35dp"
+            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/recargaPerview"
-                android:layout_width="136dp"
-                android:layout_height="29dp"
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="182dp"
-                android:text="@string/recargaPerfil" />
+                android:id="@+id/titulorecaPerview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/tituloRecarga"
+                android:textColor="@color/md_falcon_A400"
+                android:textSize="15sp"/>
 
             <TextView
-                android:id="@+id/fechaPerview"
-                android:layout_width="130dp"
-                android:layout_height="30dp"
-                android:layout_marginEnd="19dp"
-                android:layout_marginBottom="-2dp"
-                android:text="@string/fechaPerfil" />
+                android:id="@+id/recargaPerview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/recargaPerfil" />
 
         </LinearLayout>
         <!--

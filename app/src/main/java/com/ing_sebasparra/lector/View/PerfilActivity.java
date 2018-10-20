@@ -35,7 +35,7 @@ public class PerfilActivity extends AppCompatActivity {
     FrameLayout statusBar;
 
     //VARIABLES
-    public TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar, saldoTV,recargaTV,fechaTV;
+    public TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar, saldoTV,recargaTV,tituloRecargaTV;
     private String email1, nombre1, apellido1, cargo1, foto1, cedula1, idconsulta, saldo1;
     private static final int INTERVALO = 2000; //2 segundos para salir
     private long tiempoPrimerClick;
@@ -81,7 +81,7 @@ public class PerfilActivity extends AppCompatActivity {
         cedulaTV = (TextView) findViewById(R.id.cedulaview);
         saldoTV = (TextView) findViewById(R.id.saldoview);
         recargaTV = (TextView) findViewById(R.id.recargaPerview);
-        fechaTV = (TextView) findViewById(R.id.fechaPerview);
+        tituloRecargaTV = (TextView) findViewById(R.id.titulorecaPerview);
 
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);

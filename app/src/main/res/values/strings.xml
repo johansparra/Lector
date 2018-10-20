@@ -81,6 +81,8 @@
     <string name="acavalafoto1">Aca" "va " "la" "foto</string>
     <string name="nombre_fb">Nombre Facebook:</string>
     <string name="acavaelnombre2">Aca va el nombre FB</string>
+    <string name="tituloRecarga">titulorecarga</string>
+    <string name="recargaPerfil">recarga</string>
 
     <!--MAIN MAPS-->
     <string name="estoy_aqui">Estoy aqui</string>
@@ -103,8 +105,7 @@
     <string name="gps">GPS</string>
     <string name="googlemaps">Google Maps</string>
 
-    <string name="recargaPerfil">recarga</string>
-    <string name="fechaPerfil">recarga</string>
+
     <!--    &lt;!&ndash;FACEBOOK&ndash;&gt;
         <string name="facebook_app_id">324584154732775</string>
         <string name="fb_login_protocol_scheme">fb324584154732775</string>-->
