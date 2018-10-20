@@ -16,4 +16,6 @@ public class IraActividades  {
         Intent CuentaIntent = new Intent(context, PerfilActivity.class);
         context.startActivity(CuentaIntent);
     }
+
+
 }
