@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/tituloRecarga"
                 android:textColor="@color/md_falcon_A400"
-                android:textSize="15sp"/>
+                android:textSize="16sp"/>
 
             <TextView
                 android:id="@+id/recargaPerview"
