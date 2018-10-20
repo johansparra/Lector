@@ -103,6 +103,8 @@
     <string name="gps">GPS</string>
     <string name="googlemaps">Google Maps</string>
 
+    <string name="recargaPerfil">recarga</string>
+    <string name="fechaPerfil">recarga</string>
     <!--    &lt;!&ndash;FACEBOOK&ndash;&gt;
         <string name="facebook_app_id">324584154732775</string>
         <string name="fb_login_protocol_scheme">fb324584154732775</string>-->

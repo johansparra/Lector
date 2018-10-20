@@ -25,6 +25,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.ConsultaDTO;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
 import com.ing_sebasparra.lector.Recursos.UsuarioDTO;
 import com.ing_sebasparra.lector.View.PerfilActivity;
@@ -155,18 +156,11 @@ public class ApiRest {
 
     }
 
-    public void consultarSaldo(final String n_identificacion, final Context context) {
-
-        RequestQueue respuesta;
-        final Cache cache = new DiskBasedCache(context.getCacheDir(), 1024 * 1024); // 1MB cap
-        Network network = new BasicNetwork(new HurlStack());
-        respuesta = new RequestQueue(cache, network);
-
-        respuesta.start();
+    public void consultarSaldo(final String n_identificacion, final Context context, final PerfilActivity perfil) {
 
         String urlConsulta = n_identificacion;
         try {
-          //  RequestQueue respuesta = Volley.newRequestQueue(context);
+            RequestQueue respuesta = Volley.newRequestQueue(context);
             JsonObjectRequest obejto = new JsonObjectRequest(
                     Request.Method.GET, url.CONSULTA_SALDO_URL + urlConsulta, null,
                     new Response.Listener<JSONObject>() {
@@ -183,17 +177,9 @@ public class ApiRest {
                                 recarga = request.getString("ultimaRecarga");
                                 saldo = request.getString("saldo");
                                 fecha = request.getString("fechaRecarga");
-                               /* ConsultaDTO consultaDTO=new ConsultaDTO();
-                                consultaDTO.setSaldo(saldo);
-                                consultaDTO.setRecarga(recarga);
-                                consultaDTO.setFecha(fecha);*/
-
-                                SharedPreferences sharedPreferences = context.getSharedPreferences(config.SHARED_PREF_CONSULTA, Context.MODE_PRIVATE);
-                                SharedPreferences.Editor editor = sharedPreferences.edit();
-                                editor.putString(config.SALDO_SHARED_PREF, saldo);
-                                editor.apply();
-                                //actividades.iraCuenta(context);
-
+                                perfil.saldoTV.setText("$"+saldo);
+                                perfil.recargaTV.setText("$"+recarga);
+                                perfil.fechaTV.setText("$"+fecha);
 
                             } catch (JSONException e) {
                                 Toast.makeText(context, "Error Consulta Json: " + e.getMessage(), Toast.LENGTH_SHORT).show();
@@ -215,7 +201,6 @@ public class ApiRest {
         } catch (Exception error) {
             Toast.makeText(context, "Error Consulta: " + error.getMessage(), Toast.LENGTH_SHORT).show();
         }
-
 
     }
 

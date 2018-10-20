@@ -14,18 +14,6 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.Cache;
-import com.android.volley.Network;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.BasicNetwork;
-import com.android.volley.toolbox.DiskBasedCache;
-import com.android.volley.toolbox.HurlStack;
-import com.android.volley.toolbox.JsonObjectRequest;
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.CerrarSesion;
 import com.ing_sebasparra.lector.Recursos.Config;
@@ -35,10 +23,7 @@ import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
 import com.ing_sebasparra.lector.WebServices.UrlServices;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
+import com.ing_sebasparra.lector.Recursos.ConsultaDTO;
 import java.util.Objects;
 
 public class PerfilActivity extends AppCompatActivity {
@@ -50,14 +35,13 @@ public class PerfilActivity extends AppCompatActivity {
     FrameLayout statusBar;
 
     //VARIABLES
-    private TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar, saldoTV;
+    public TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar, saldoTV,recargaTV,fechaTV;
     private String email1, nombre1, apellido1, cargo1, foto1, cedula1, idconsulta, saldo1;
-
     private static final int INTERVALO = 2000; //2 segundos para salir
     private long tiempoPrimerClick;
     Config config = new Config();
     ApiRest apires = new ApiRest();
-
+    ConsultaDTO consultaDTO=new ConsultaDTO();
     private final UrlServices url = new UrlServices();
 
     @Override
@@ -69,17 +53,11 @@ public class PerfilActivity extends AppCompatActivity {
         setContentView(R.layout.activity_perfil);
 
         toolbarStatusBar();
-       // SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         cargarVariables();
 
 
        consultaSaldo(idconsulta,this);
 
-
-        //consulta();
-      /*  ConsultaDTO consultaDTO = new ConsultaDTO();
-        saldo1 = consultaDTO.getSaldo();
-        saldoTV.setText("$"+saldo1);*/
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
@@ -93,81 +71,17 @@ public class PerfilActivity extends AppCompatActivity {
     }
 
 
-
-    private void consulta() {
-        RequestQueue mRequestQueue;
-
-        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
-        Network network = new BasicNetwork(new HurlStack());
-        mRequestQueue = new RequestQueue(cache, network);
-        mRequestQueue.start();
-
-
-        // RequestQueue respuesta = Volley.newRequestQueue(this);
-        String urlConsulta = idconsulta;
-        try {
-            JsonObjectRequest obejto = new JsonObjectRequest(
-                    Request.Method.GET, url.CONSULTA_SALDO_URL + urlConsulta, null,
-                    new Response.Listener<JSONObject>() {
-
-                        @Override
-                        public void onResponse(JSONObject respuesta) {
-
-                            String cuenta = "";
-                            String saldo = "";
-                            String fecha = "";
-                            try {
-
-                                JSONObject request = respuesta.getJSONObject("cuenta");
-                                cuenta = request.getString("ultimaRecarga");
-                                saldo = request.getString("saldo");
-                                fecha = request.getString("fechaRecarga");
-                                saldoTV.setText("$" + saldo);
-                            } catch (JSONException e) {
-                                Toast.makeText(PerfilActivity.this, "Error Consulta Json: " + e.getMessage(), Toast.LENGTH_SHORT).show();
-                            }
-                        }
-
-                    }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-
-                }
-            }
-            );
-            mRequestQueue.add(obejto);
-
-
-        } catch (Exception error) {
-            Toast.makeText(PerfilActivity.this, "Error Consulta: " + error.getMessage(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
-  /*  @Override
-    protected void onResume() {
-        super.onResume();
-        consulta();
-
-    }*/
-
     private void consultaSaldo(String n_identificacion, Context context) {
-        apires.consultarSaldo(n_identificacion, context);
-        SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_CONSULTA, Context.MODE_PRIVATE);
-        saldo1 = sharedPreferences.getString(config.SALDO_SHARED_PREF, "No Disponible");
-        saldoTV.setText("$"+saldo1);
 
-      /*  SharedPreferences preferences = context.getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putBoolean(config.SHARED_PREF_CONSULTA, false);
-        editor.putString(config.SALDO_SHARED_PREF, "");
-        editor.commit();*/
-
+        apires.consultarSaldo(n_identificacion, context, this);
     }
 
     private void cargarVariables() {
         nombreTV = (TextView) findViewById(R.id.nombreview);
         cedulaTV = (TextView) findViewById(R.id.cedulaview);
         saldoTV = (TextView) findViewById(R.id.saldoview);
+        recargaTV = (TextView) findViewById(R.id.recargaPerview);
+        fechaTV = (TextView) findViewById(R.id.fechaPerview);
 
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
