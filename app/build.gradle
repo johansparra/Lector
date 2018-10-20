@@ -5,8 +5,8 @@ android {
         config {
             keyAlias 'parra'
             keyPassword 'j0h4ns92ap'
-        //    storeFile file('P:/Android/projects/parra.keystore.jks') //HUGO
-            storeFile file('C:/Users/defaultuser0/parra.keystore.jks')//SEBAS
+            storeFile file('P:/Android/projects/parra.keystore.jks') //HUGO
+         //   storeFile file('C:/Users/defaultuser0/parra.keystore.jks')//SEBAS
             storePassword 'j0h4ns92ap'
         }
 

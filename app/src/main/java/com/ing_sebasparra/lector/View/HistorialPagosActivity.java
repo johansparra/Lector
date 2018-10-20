@@ -10,7 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.Toast;
+
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.CuentaBancaDTO;
@@ -52,7 +52,7 @@ public class HistorialPagosActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String email = "";
                 String password = "";
-                Toast.makeText(HistorialPagosActivity.this, "Usuario registrado Correctamenten", Toast.LENGTH_SHORT).show();
+            //    Toast.makeText(HistorialPagosActivity.this, "Usuario registrado Correctamenten", Toast.LENGTH_SHORT).show();
                 getCuentaBancaria();
             }
         });
@@ -73,13 +73,16 @@ public class HistorialPagosActivity extends AppCompatActivity {
             Config config = new Config();
             SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
             String idUser = sharedPreferences.getString(config.ID_USUARIO_SHARED_PREF, "No Disponible");
-            Integer.parseInt(idUser);
+            String tipoUser = sharedPreferences.getString(config.CEDULA_SHARED_PREF, "No Disponible");
+            String cedulaUser = sharedPreferences.getString(config.N_IDENTIFICACION_SHARED_PREF, "No Disponible");
+
+            Integer.parseInt(tipoUser);
             int myNum = 0;
-            myNum = Integer.parseInt(idUser);
+            myNum = Integer.parseInt(tipoUser);
 
             Long valRecarga=Long.parseLong(editValorRecarga.getText().toString().trim());
-            cuentabancaDTO.setNumIdentifiacion("1069738505");
-            cuentabancaDTO.setTipo(myNum);
+            cuentabancaDTO.setNumIdentifiacion(cedulaUser);
+            cuentabancaDTO.setTipo(2);
             cuentabancaDTO.setNumTarjeta("4594186388989000");
             cuentabancaDTO.setCvv(123);
             cuentabancaDTO.setFechaVenci(1224);

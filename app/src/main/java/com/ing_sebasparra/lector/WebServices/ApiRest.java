@@ -23,14 +23,11 @@ import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.CuentaBancaDTO;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
 import com.ing_sebasparra.lector.Recursos.UsuarioDTO;
-import com.ing_sebasparra.lector.View.HistorialPagosActivity;
 import com.ing_sebasparra.lector.View.PerfilActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -291,7 +288,7 @@ public class ApiRest {
                                     if(Long.parseLong(saldo)<=valRecarga){
                                         Toast.makeText(context, "Saldo insuficiente para realizar la recarga ", Toast.LENGTH_SHORT).show();
                                     }else{
-                                        Toast.makeText(context, "llama al metodo put ", Toast.LENGTH_SHORT).show();
+                                      //  Toast.makeText(context, "Cargado correctamente ", Toast.LENGTH_SHORT).show();
                                         updateCuentabanca(cuentaBancaDTO,valRecarga,saldo,urlcuentabanca,idUser,context);
                                     }
                                 }
