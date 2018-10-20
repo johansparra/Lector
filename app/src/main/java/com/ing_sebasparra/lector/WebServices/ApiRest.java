@@ -178,8 +178,12 @@ public class ApiRest {
                                 saldo = request.getString("saldo");
                                 fecha = request.getString("fechaRecarga");
                                 perfil.saldoTV.setText("$"+saldo);
+                                perfil.tituloRecargaTV.setText("Valor Ultima Recarga: ");
                                 perfil.recargaTV.setText("$"+recarga);
-                                perfil.tituloRecargaTV.setText("Recarga");
+                                perfil.tituloFechaTV.setText("Fecha Recarga: ");
+                                perfil.fecharecTV.setText(fecha);
+
+
 
                             } catch (JSONException e) {
                                 Toast.makeText(context, "Error Consulta Json: " + e.getMessage(), Toast.LENGTH_SHORT).show();

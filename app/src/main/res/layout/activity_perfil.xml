@@ -71,10 +71,10 @@
 
             <TextView
                 android:id="@+id/saldoview"
-                android:maxEms="12"
-                android:maxLength="12"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:maxEms="10"
+                android:maxLength="10"
                 android:textColor="@color/md_white_1000"
                 android:textSize="30sp"
                 android:textStyle="bold" />
@@ -116,112 +116,55 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/layoutSaldo"
             android:layout_marginTop="35dp"
-            android:gravity="center"
             android:orientation="horizontal">
 
             <TextView
                 android:id="@+id/titulorecaPerview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
                 android:text="@string/tituloRecarga"
-                android:textColor="@color/md_falcon_A400"
-                android:textSize="15sp"/>
+                android:textColor="@color/md_falcon_500"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/recargaPerview"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@string/recargaPerfil" />
+                android:text="@string/recargaPerfil"
+                android:textColor="@color/md_deep_orange_600"
+                android:textSize="18sp" />
 
         </LinearLayout>
-        <!--
 
+        <LinearLayout
+            android:id="@+id/layoutFecha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layoutRecarga"
+            android:layout_marginTop="5dp"
+            android:orientation="horizontal">
 
+            <TextView
+                android:id="@+id/titulofechaPerview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:text="@string/tituloRecarga"
+                android:textColor="@color/md_falcon_500"
+                android:textSize="18sp" />
 
+            <TextView
+                android:id="@+id/fechaPerview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/recargaPerfil"
+                android:textColor="@color/md_deep_orange_600"
+                android:textSize="18sp" />
 
--->
-
-        <!-- <Button
-             android:id="@+id/tarjeta"
-             android:layout_width="wrap_content"
-             android:layout_height="wrap_content"
-             android:layout_alignParentStart="true"
-             android:layout_alignParentBottom="true"
-             android:layout_marginStart="21dp"
-             android:layout_marginBottom="222dp"
-             android:background="?attr/colorPrimary"
-             android:drawableStart="@mipmap/ic_credit_card"
-             android:paddingRight="6dp"
-             android:text="Tarjeta"
-             android:textAllCaps="false"
-             android:textColor="?attr/colorControlNormal"
-             tools:layout_editor_absoluteX="145dp"
-             tools:layout_editor_absoluteY="358dp" />-->
-
-
-        <!--     <TextView
-                 android:id="@+id/txt_nombre"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_alignParentStart="true"
-                 android:layout_alignParentTop="true"
-                 android:layout_marginStart="12dp"
-                 android:layout_below="@+id/fondo"
-                 android:text="@string/Nombrel1"
-                 android:textSize="17sp" />-->
-
-
-        <!--   <TextView
-               android:id="@+id/nombreview"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-
-               android:text="@string/acavaelnombre1"
-               android:textColor="@color/md_black_1000"
-               android:textSize="18sp" />
-
-             &lt;!&ndash;<TextView
-                 android:id="@+id/txt_apellidos"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@+id/nombreview"
-                 android:layout_alignStart="@+id/nombreview"
-                 android:text="Apellidos"
-                 android:textSize="17sp" />&ndash;&gt;
-
-           <TextView
-               android:id="@+id/apellidosview"
-               android:layout_width="match_parent"
-               android:layout_height="wrap_content"
-
-
-               android:text="@string/acavaelnombre1"
-               android:textColor="@color/md_black_1000"
-               android:textSize="18sp" />
-
-      &lt;!&ndash;       <TextView
-                 android:id="@+id/txt_email"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@+id/apellidosview"
-                 android:layout_alignStart="@+id/nombreview"
-                 android:text="@string/Emaill1"
-                 android:textSize="17sp" />&ndash;&gt;
-
-
-
-     &lt;!&ndash;        <TextView
-                 android:id="@+id/txt_cedula"
-                 android:layout_width="wrap_content"
-                 android:layout_height="wrap_content"
-                 android:layout_below="@+id/emailview"
-                 android:layout_alignStart="@+id/nombreview"
-                 android:text="Cedula"
-                 android:textSize="17sp" />&ndash;&gt;
-
-
-   -->
+        </LinearLayout>
 
     </RelativeLayout>
 
