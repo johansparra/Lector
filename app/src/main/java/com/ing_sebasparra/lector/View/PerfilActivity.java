@@ -23,7 +23,7 @@ import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
 import com.ing_sebasparra.lector.WebServices.UrlServices;
-import com.ing_sebasparra.lector.Recursos.ConsultaDTO;
+
 import java.util.Objects;
 
 public class PerfilActivity extends AppCompatActivity {
@@ -41,7 +41,6 @@ public class PerfilActivity extends AppCompatActivity {
     private long tiempoPrimerClick;
     Config config = new Config();
     ApiRest apires = new ApiRest();
-    ConsultaDTO consultaDTO=new ConsultaDTO();
     private final UrlServices url = new UrlServices();
 
     @Override

@@ -105,6 +105,10 @@
     <string name="gps">GPS</string>
     <string name="googlemaps">Google Maps</string>
 
+    <!--ACTIVITY  HISTORIAL RECARGAS-->
+    <string name="recargarTarjeta">Recargar"    "</string>
+    <string name="valorRecarga">valor recarga"    "</string>
+
 
     <!--    &lt;!&ndash;FACEBOOK&ndash;&gt;
         <string name="facebook_app_id">324584154732775</string>

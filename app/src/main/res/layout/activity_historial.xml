@@ -41,17 +41,36 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="60dp"
+            android:layout_marginStart="90dp"
+            android:gravity="center"
+            android:layout_marginTop="400dp"
+            android:layout_marginEnd="100dp"
             android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/parametro1"
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/valorRecarga"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:background="@drawable/boton_registro"
+                android:hint="@string/valorRecarga"
+                android:inputType="number"
+                android:maxEms="11"
+                android:maxLength="13"
+                android:minEms="10"
+                android:paddingStart="13sp"
+                android:paddingEnd="5sp"/>
+            <Button
+                android:id="@+id/buttonPagar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-
-                android:text="aca va el 1" />
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="45dp"
+                android:background="?attr/colorPrimary"
+                android:text="@string/recargarTarjeta"
+                android:textColor="@color/md_brown_50" />
 
 
         </LinearLayout>
