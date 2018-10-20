@@ -28,7 +28,7 @@ public class HistorialPagosActivity extends AppCompatActivity {
     private EditText editValorRecarga;
 
     IraActividades iraActividades=new IraActividades();
-    private Button btPagar;
+    private Button btPagar,tarjetaCredito;
 
 
     @Override
@@ -46,6 +46,7 @@ public class HistorialPagosActivity extends AppCompatActivity {
     private void inicializeValues() {
         editValorRecarga = (EditText) findViewById(R.id.valorRecarga);
         btPagar = findViewById(R.id.buttonPagar);
+        tarjetaCredito = findViewById(R.id.tarjeta);
         btPagar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,6 +54,13 @@ public class HistorialPagosActivity extends AppCompatActivity {
                 String password = "";
                 Toast.makeText(HistorialPagosActivity.this, "Usuario registrado Correctamenten", Toast.LENGTH_SHORT).show();
                 getCuentaBancaria();
+            }
+        });
+
+        tarjetaCredito.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                iraActividades.iraTarjetaCredito(HistorialPagosActivity.this);
             }
         });
 
@@ -65,11 +73,13 @@ public class HistorialPagosActivity extends AppCompatActivity {
             Config config = new Config();
             SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
             String idUser = sharedPreferences.getString(config.ID_USUARIO_SHARED_PREF, "No Disponible");
-
+            Integer.parseInt(idUser);
+            int myNum = 0;
+            myNum = Integer.parseInt(idUser);
 
             Long valRecarga=Long.parseLong(editValorRecarga.getText().toString().trim());
             cuentabancaDTO.setNumIdentifiacion("1069738505");
-            cuentabancaDTO.setTipo(1);
+            cuentabancaDTO.setTipo(myNum);
             cuentabancaDTO.setNumTarjeta("4594186388989000");
             cuentabancaDTO.setCvv(123);
             cuentabancaDTO.setFechaVenci(1224);

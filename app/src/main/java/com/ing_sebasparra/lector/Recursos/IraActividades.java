@@ -3,6 +3,7 @@ package com.ing_sebasparra.lector.Recursos;
 import android.content.Context;
 import android.content.Intent;
 
+import com.ing_sebasparra.lector.TarjetaCredito.CardEditActivity;
 import com.ing_sebasparra.lector.View.LoginActivity;
 import com.ing_sebasparra.lector.View.PerfilActivity;
 
@@ -16,6 +17,11 @@ public class IraActividades  {
         Intent CuentaIntent = new Intent(context, PerfilActivity.class);
         context.startActivity(CuentaIntent);
     }
+    public void iraTarjetaCredito(Context context) {
+        Intent TarjetaIntent = new Intent(context, CardEditActivity.class);
+        context.startActivity(TarjetaIntent);
+    }
+
 
 
 }
