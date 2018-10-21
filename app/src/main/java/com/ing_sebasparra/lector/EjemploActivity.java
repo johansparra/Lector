@@ -21,7 +21,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.View.OpcionesActivity;
-import com.ing_sebasparra.lector.View.PerfilActivity;
+import com.ing_sebasparra.lector.View.CuentaActivity;
 
 import java.io.File;
 
@@ -105,7 +105,7 @@ public class EjemploActivity extends AppCompatActivity {
                                 Intent intent = new Intent(EjemploActivity.this, MainActivity.class);
                                 startActivity(intent);
                                 return true;*/
-                            case R.id.item_navigation_drawer_perfil:
+                            case R.id.item_navigation_drawer_cuenta:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 return true;
@@ -140,7 +140,7 @@ public class EjemploActivity extends AppCompatActivity {
     // BOTON ATRAS CELULAR
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(EjemploActivity.this, PerfilActivity.class);
+        Intent intent = new Intent(EjemploActivity.this, CuentaActivity.class);
         startActivity(intent);
     }
     // TEMA NO CAMBIAR

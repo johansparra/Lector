@@ -49,9 +49,7 @@ public class CardEditActivity extends AppCompatActivity {
             public void onClick(View v) {
 
                 ViewPager pager = (ViewPager) findViewById(R.id.card_field_container_pager);
-
                 int max = pager.getAdapter().getCount();
-
                 if (pager.getCurrentItem() == max - 1) {
                     // if last card.
                     onDoneTapped();

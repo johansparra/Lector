@@ -68,7 +68,8 @@
         <item>Cedula extranjera</item>
     </string-array>
 
-    <!--ACTIVITY PERFIL-->
+    <!--ACTIVITY CUENTA-->
+    <string name="cuenta">Cuenta</string>
     <string name="Nombrel1">Nombre:</string>
     <string name="Emaill1">Email:</string>
     <string name="Cedulal1">Cédula:</string>

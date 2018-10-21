@@ -69,17 +69,17 @@
             android:name=".View.OpcionesActivity"
             android:parentActivityName=".View.LoginActivity" />
         <activity
-            android:name=".View.PerfilActivity"
-            android:parentActivityName=".View.PerfilActivity" />
+            android:name=".View.CuentaActivity"
+            android:parentActivityName=".View.CuentaActivity" />
         <activity
             android:name=".GpsActivity"
-            android:parentActivityName=".View.PerfilActivity" />
+            android:parentActivityName=".View.CuentaActivity" />
         <activity
             android:name=".View.HistorialPagosActivity"
-            android:parentActivityName=".View.PerfilActivity" />
+            android:parentActivityName=".View.CuentaActivity" />
         <activity
             android:name=".View.MapsActivity"
-            android:parentActivityName=".View.PerfilActivity" />
+            android:parentActivityName=".View.CuentaActivity" />
         <activity
             android:name=".View.MapsCalleActivity"
             android:parentActivityName=".View.MapsActivity" />
@@ -88,11 +88,11 @@
             android:parentActivityName=".View.LoginActivity" />
         <activity
             android:name=".TarjetaCredito.CardEditActivity"
-            android:parentActivityName=".View.PerfilActivity" />
+            android:parentActivityName=".View.CuentaActivity" />
         <activity
             android:name=".View.PagoTransmilenioActivity"
             android:label="NFC"
-            android:parentActivityName=".View.PerfilActivity">
+            android:parentActivityName=".View.CuentaActivity">
 
             <!-- NFC ENVIAR -->
             <intent-filter>

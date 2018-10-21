@@ -28,7 +28,7 @@ import android.widget.TextView;
 import com.ing_sebasparra.lector.Recursos.LimpiarMemoria;
 import com.ing_sebasparra.lector.Recursos.NavegationLateral;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
-import com.ing_sebasparra.lector.View.PerfilActivity;
+import com.ing_sebasparra.lector.View.CuentaActivity;
 
 import java.util.Objects;
 
@@ -193,7 +193,7 @@ public class GpsActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Intent intent = new Intent(GpsActivity.this, PerfilActivity.class);
+        Intent intent = new Intent(GpsActivity.this, CuentaActivity.class);
         startActivity(intent);
     }
 

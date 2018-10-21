@@ -3,9 +3,9 @@
 
     <group android:checkableBehavior="single">
         <item
-            android:id="@+id/item_navigation_drawer_perfil"
+            android:id="@+id/item_navigation_drawer_cuenta"
             android:icon="@drawable/ic_login"
-            android:title="@string/perfil" />
+            android:title="@string/cuenta" />
         <item
             android:id="@+id/item_navigation_drawer_nfc"
             android:icon="@drawable/ic_pago"

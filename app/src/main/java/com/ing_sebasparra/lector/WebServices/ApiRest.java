@@ -23,7 +23,7 @@ import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.CuentaBancaDTO;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
 import com.ing_sebasparra.lector.Recursos.UsuarioDTO;
-import com.ing_sebasparra.lector.View.PerfilActivity;
+import com.ing_sebasparra.lector.View.CuentaActivity;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -74,7 +74,7 @@ public class ApiRest {
                             if(idusuario.equals("0")){
                                 Toast.makeText(context, "Correo o password incorrectos", Toast.LENGTH_SHORT).show();
                             }else {
-                                Intent intent = new Intent(context, PerfilActivity.class);
+                                Intent intent = new Intent(context, CuentaActivity.class);
                                 context.startActivity(intent);
                             }
 
@@ -151,7 +151,7 @@ public class ApiRest {
 
     }
 
-    public void consultarSaldo(final String n_identificacion, final Context context, final PerfilActivity perfil) {
+    public void consultarSaldo(final String n_identificacion, final Context context, final CuentaActivity perfil) {
 
         String urlConsulta = n_identificacion;
         try {

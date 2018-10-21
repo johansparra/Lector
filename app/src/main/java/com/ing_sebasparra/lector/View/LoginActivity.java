@@ -132,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         loggedIn = sharedPreferences.getBoolean(config.LOGGEDIN_SHARED_PREF, false);
         if (loggedIn) {
-            Intent intent = new Intent(LoginActivity.this, PerfilActivity.class);
+            Intent intent = new Intent(LoginActivity.this, CuentaActivity.class);
             startActivity(intent);
         }
     }

@@ -40,7 +40,7 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
             switch (msg.what) {
                 case MESSAGE_SENT:
                     Toast.makeText(getApplicationContext(), "Mensaje enviado!", Toast.LENGTH_LONG).show();
-                    Intent intent3 = new Intent(PagoTransmilenioActivity.this, PerfilActivity.class);
+                    Intent intent3 = new Intent(PagoTransmilenioActivity.this, CuentaActivity.class);
                     startActivity(intent3);
                     break;
             }
@@ -100,7 +100,7 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
             //  mInfoText.setText("NFC no es compatible con este dispositivo");
 
             Toast.makeText(this, "NFC no es compatible con este dispositivo", Toast.LENGTH_SHORT).show();
-            Intent intent = new Intent(PagoTransmilenioActivity.this, PerfilActivity.class);
+            Intent intent = new Intent(PagoTransmilenioActivity.this, CuentaActivity.class);
             startActivity(intent);
         } else {
             mNfcAdapter.setNdefPushMessageCallback(this, this);

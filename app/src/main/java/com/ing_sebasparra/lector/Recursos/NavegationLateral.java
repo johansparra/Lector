@@ -2,26 +2,19 @@ package com.ing_sebasparra.lector.Recursos;
 
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Gravity;
 import android.view.MenuItem;
 import android.view.Window;
 
-import com.ing_sebasparra.lector.GpsActivity;
 import com.ing_sebasparra.lector.R;
-import com.ing_sebasparra.lector.View.HistorialPagosActivity;
-import com.ing_sebasparra.lector.View.MapsActivity;
-import com.ing_sebasparra.lector.View.OpcionesActivity;
-import com.ing_sebasparra.lector.View.PagoTransmilenioActivity;
-import com.ing_sebasparra.lector.View.PerfilActivity;
 
 public class NavegationLateral {
+    IraActividades iraActividades = new IraActividades();
 
 
-    public void navegationContent(NavigationView navigationView, final Context context,final DrawerLayout drawerLayout) {
+    public void navegationContent(NavigationView navigationView, final Context context, final DrawerLayout drawerLayout) {
         navigationView.setNavigationItemSelectedListener(
 
                 new NavigationView.OnNavigationItemSelectedListener() {
@@ -31,41 +24,35 @@ public class NavegationLateral {
 
                         switch (menuItem.getItemId()) {
 
-                            case R.id.item_navigation_drawer_perfil:
+                            case R.id.item_navigation_drawer_cuenta:
                                 menuItem.setChecked(true);
-                                Intent perfil = new Intent(context, PerfilActivity.class);
-                                context.startActivity(perfil);
                                 drawerLayout.closeDrawer(GravityCompat.START);
+                                iraActividades.iraCuenta(context);
                                 return true;
                             case R.id.item_navigation_drawer_nfc:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent pago = new Intent(context, PagoTransmilenioActivity.class);
-                                context.startActivity(pago);
+                                iraActividades.iraPagoTransmilenio(context);
                                 return true;
                             case R.id.item_navigation_drawer_recargar:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent recargar = new Intent(context, GpsActivity.class);
-                                context.startActivity(recargar);
+                                iraActividades.iraTarjetaCredito(context);
                                 return true;
                             case R.id.item_navigation_drawer_historial:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent historial = new Intent(context, HistorialPagosActivity.class);
-                                context.startActivity(historial);
+                                iraActividades.iraHistorial(context);
                                 return true;
                             case R.id.item_navigation_drawer_configuracion:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent intent1 = new Intent(context, OpcionesActivity.class);
-                                context.startActivity(intent1);
+                                iraActividades.iraOpciones(context);
                                 return true;
                             case R.id.item_navigation_drawer_maps:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                Intent maps = new Intent(context, MapsActivity.class);
-                                context.startActivity(maps);
+                                iraActividades.iraMaps(context);
                                 return true;
                             case R.id.item_navigation_drawer_acercade:
                                 menuItem.setChecked(true);

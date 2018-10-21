@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.TextView;
+
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.CerrarSesion;
 import com.ing_sebasparra.lector.Recursos.Config;
@@ -22,11 +23,10 @@ import com.ing_sebasparra.lector.Recursos.NavegationLateral;
 import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
-import com.ing_sebasparra.lector.WebServices.UrlServices;
 
 import java.util.Objects;
 
-public class PerfilActivity extends AppCompatActivity {
+public class CuentaActivity extends AppCompatActivity {
 
     //CARGAR EL TEMA
     DrawerLayout drawerLayout;
@@ -35,13 +35,11 @@ public class PerfilActivity extends AppCompatActivity {
     FrameLayout statusBar;
 
     //VARIABLES
-    public TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar, saldoTV,recargaTV,tituloRecargaTV, fecharecTV,tituloFechaTV;
-    private String email1, nombre1, apellido1, cargo1, foto1, cedula1, idconsulta, saldo1;
-    private static final int INTERVALO = 2000; //2 segundos para salir
-    private long tiempoPrimerClick;
+    public TextView nombreTV, cedulaTV, saldoTV,recargaTV,tituloRecargaTV, fecharecTV,tituloFechaTV;
+    private String nombre1, cedula1, idconsulta;
     Config config = new Config();
     ApiRest apires = new ApiRest();
-    private final UrlServices url = new UrlServices();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -92,7 +90,6 @@ public class PerfilActivity extends AppCompatActivity {
         cedulaTV.setText(cedula1);
         idconsulta = sharedPreferences.getString(config.ID_USUARIO_SHARED_PREF, "No Disponible");
 
-        // saldotiemporeal();
     }
 
     // MENUS LATERALES
@@ -106,7 +103,7 @@ public class PerfilActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_acerca) {
-            Dialog dialog = new Dialog(PerfilActivity.this);
+            Dialog dialog = new Dialog(CuentaActivity.this);
             dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
             dialog.setContentView(R.layout.dialogo_acerca);
             dialog.show();
@@ -132,7 +129,7 @@ public class PerfilActivity extends AppCompatActivity {
     public void onBackPressed() {
 
         SalirAplicacion salirdeaplicacion = new SalirAplicacion();
-        salirdeaplicacion.now(this, PerfilActivity.this, "Pulse otra vez para cerrar", 2500);
+        salirdeaplicacion.now(this, CuentaActivity.this, "Pulse otra vez para cerrar", 2500);
 
     }
 
@@ -141,7 +138,7 @@ public class PerfilActivity extends AppCompatActivity {
         statusBar = (FrameLayout) findViewById(R.id.statusBar);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.perfil));
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.cuenta));
         getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
