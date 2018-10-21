@@ -1,18 +1,7 @@
 package com.ing_sebasparra.lector.Recursos;
 
 public class Config {
-    // URL de nuestro archivo login.php
-    // A TODOS LES QUITE EL public
  //   static final String LOGIN_URL = "https://johansparra1.000webhostapp.com/Registro/logmenu/login.php";
-    static final String LOGIN_URL= "http://api-transmilenio.us-west-1.elasticbeanstalk.com/API_TRANSMI/V0/User/Cuenta/ValorPasaje/";
-
-
-    // Claves para el correo electrónico y la contraseña como se define  $_POST['key'] en login.php
-    static final String KEY_EMAIL = "email";
-    static final String KEY_PASSWORD = "password";
-
-    // Si la respuesta del servidor es igual a esto, significa que el inicio de sesión es correcto
-    static final String LOGIN_SUCCESS = "success";
 
     // Claves para las preferencias compartidas
     // Este sería el nombre de nuestras preferencias compartidas
@@ -25,15 +14,6 @@ public class Config {
     // para rastrear que el usuario ha iniciado sesión o no
     public final String LOGGEDIN_SHARED_PREF = "loggedin";
 
-    /// guardar los otros datos id nombre nivel matricula
-  //  static final String NOMBRE_SHARED_PREF = "name";
-    static final String APELLIDOS_SHARED_PREF = "apellido";
-    static final String NIVEL_SHARED_PREF = "nivel";
-    static final String MATRICULA_SHARED_PREF = "matricula";
-    static final String CREDITOS_SHARED_PREF = "creditos";
-    static final String ERR_SHARED_PREF = "err";
-    static final String SHARED_BEAM = "";
-
 
     public final String SHARED_PREF_CONSULTA = "valor";
     public final String CONSULTA_SHARED_PREF = "consulta";
@@ -43,5 +23,14 @@ public class Config {
     public final String NOMBRE_SHARED_PREF="nombre";
     public final String SALDO_SHARED_PREF="saldo";
 
+    //TARJETA DE CREDITO
+    public final String SHARED_PREF_TARJETA="tarjeta";
+    public final String TARJETA_SHARED_PREF="guardada";
+    public final String TARJETA_CVV="cvv";
+    public final String TARJETA_NOMBRE="nombre";
+    public final String TARJETA_EXPIRA="fecha";
+    public final String TARJETA_NUMERO="numero";
+
+
+
 }
-//otra prueba

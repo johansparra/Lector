@@ -2,6 +2,7 @@ package com.ing_sebasparra.lector.TarjetaCredito;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
@@ -15,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.R;
+import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
 import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapter;
 import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapter.ICardEntryCompleteListener;
@@ -38,11 +40,15 @@ public class CardEditActivity extends AppCompatActivity {
     private String mExpiry;
     private int mStartPage = 0;
     private CardFragmentAdapter mCardAdapter;
+    //
+    Config config = new Config();
+    private boolean tarjeta_guardada = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.t_activity_card_edit);
+        cardGuardada();
 
         findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
             @Override
@@ -71,6 +77,15 @@ public class CardEditActivity extends AppCompatActivity {
 
         loadPager(args);
         checkParams(args);
+    }
+
+    private void cardGuardada() {
+        SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_TARJETA, Context.MODE_PRIVATE);
+        tarjeta_guardada = sharedPreferences.getBoolean(config.TARJETA_SHARED_PREF, false);
+        if (tarjeta_guardada) {
+            Intent intent = new Intent(CardEditActivity.this, CardGuardadaActivity.class);
+            startActivity(intent);
+        }
     }
 
     private void checkParams(Bundle bundle) {
@@ -294,11 +309,29 @@ public class CardEditActivity extends AppCompatActivity {
             intent.putExtra(EXTRA_CARD_EXPIRY, mExpiry);
             intent.putExtra(EXTRA_CARD_NUMBER, mCardNumber);
 
+            SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_TARJETA, Context.MODE_PRIVATE);
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean(config.TARJETA_SHARED_PREF, true);
+
+            editor.putString(config.TARJETA_CVV, mCVV);
+            editor.putString(config.TARJETA_NOMBRE, mCardHolderName);
+            editor.putString(config.TARJETA_EXPIRA, mExpiry);
+            editor.putString(config.TARJETA_NUMERO, mCardNumber);
+            editor.apply();
+
             Toast.makeText(this, "Finalizo y guarda todo", Toast.LENGTH_SHORT).show();
         }
 
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        cardGuardada();
+
+    }
+
+
 
     // from the link above
     @Override

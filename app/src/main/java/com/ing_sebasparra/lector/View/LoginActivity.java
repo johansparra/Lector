@@ -111,9 +111,7 @@ public class LoginActivity extends AppCompatActivity {
                 if(comprobarCampos.validar_campo(LoginActivity.this, email,password,editTextEmail,editTextPassword)){
                     servicesLogin(email, password);
                 }
-               /* if (validar_campo(email, password)) {
-                    servicesLogin(email, password);
-                }*/
+
             }
         });
         registrarse.setOnClickListener(new View.OnClickListener() {
