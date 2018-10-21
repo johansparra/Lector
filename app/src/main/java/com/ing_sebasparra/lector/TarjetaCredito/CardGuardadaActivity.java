@@ -6,14 +6,15 @@ import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.CerrarSesionTarjeta;
 import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
-import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapter;
 import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapter.ICardEntryCompleteListener;
+import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapterRecarga;
 
 import static com.ing_sebasparra.lector.TarjetaCredito.CreditCardUtils.CARD_NAME_PAGE;
 
@@ -27,49 +28,54 @@ public class CardGuardadaActivity extends AppCompatActivity {
     private String mCVV;
     private String mCardHolderName;
     private String mExpiry;
+    private String mCardRecarga;
     private int mStartPage = 0;
-    private CardFragmentAdapter mCardAdapter;
+    private CardFragmentAdapterRecarga mCardAdapter;
     //
     Config config = new Config();
+    private EditText valor_recarga;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.t_activity_card_recargar);
 
-        Toast.makeText(this, "Esta en la otra", Toast.LENGTH_SHORT).show();
-
         findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(CardGuardadaActivity.this, "Recargar", Toast.LENGTH_SHORT).show();
+                String valor="";
+               valor= valor_recarga.getText().toString().trim();
+                Toast.makeText(CardGuardadaActivity.this, "recarga: "+valor, Toast.LENGTH_SHORT).show();
+
             }
         });
         findViewById(R.id.previous).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              //  showPrevious();
                 CerrarSesionTarjeta  cerrarSesionTarjeta =new CerrarSesionTarjeta();
                 cerrarSesionTarjeta.logout(CardGuardadaActivity.this);
 
             }
         });
 
-       // setKeyboardVisibility(true);
         mCreditCardView = (CreditCardView) findViewById(R.id.credit_card_view);
         Bundle args = savedInstanceState != null ? savedInstanceState : getIntent().getExtras();
 
         loadPager(args);
         checkParams(args);
         carga();
+        iniciarValores();
+    }
+
+    private void iniciarValores() {
+        valor_recarga=(EditText)findViewById(R.id.edit_recarga);
     }
 
     private void carga() {
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_TARJETA, Context.MODE_PRIVATE);
         mCVV = sharedPreferences.getString(config.TARJETA_CVV, "No Disponible");
-        Toast.makeText(this, "cvv: "+mCVV, Toast.LENGTH_SHORT).show();
         mCardHolderName = sharedPreferences.getString(config.TARJETA_NOMBRE, "No Disponible");
-        Toast.makeText(this, "nombre: "+mCardHolderName, Toast.LENGTH_SHORT).show();
         mExpiry = sharedPreferences.getString(config.TARJETA_EXPIRA, "No Disponible");
         mCardNumber = sharedPreferences.getString(config.TARJETA_NUMERO, "No Disponible");
         mStartPage=1;
@@ -86,20 +92,10 @@ public class CardGuardadaActivity extends AppCompatActivity {
         }
         carga();
 
-    /*    mCardHolderName = bundle.getString(EXTRA_CARD_HOLDER_NAME);
-        mCVV = bundle.getString(EXTRA_CARD_CVV);
-        mExpiry = bundle.getString(EXTRA_CARD_EXPIRY);
-        mCardNumber = bundle.getString(EXTRA_CARD_NUMBER);*/
-     /*   mStartPage = bundle.getInt(EXTRA_ENTRY_START_PAGE);
-
-        final int maxCvvLength = CardSelector.selectCard(mCardNumber).getCvvLength();
-        if (mCVV != null && mCVV.length() > maxCvvLength) {
-            mCVV = mCVV.substring(0, maxCvvLength);
-        }*/
-
         mCreditCardView.setCVV(mCVV);
         mCreditCardView.setCardHolderName(mCardHolderName);
         mCreditCardView.setCardExpiry(mExpiry);
+        mCreditCardView.setCardNumber(mCardNumber);
         mCreditCardView.setCardNumber(mCardNumber);
 
         int cardSide = bundle.getInt(CreditCardUtils.EXTRA_CARD_SHOW_CARD_SIDE, CreditCardUtils.CARD_SIDE_FRONT);
@@ -129,23 +125,20 @@ public class CardGuardadaActivity extends AppCompatActivity {
 
                 if ((mCreditCardView.getCardType() != CreditCardUtils.CardType.AMEX_CARD) && (position == 2)) {
                     mCreditCardView.showBack();
-                } else if (((position == 1) || (position == 3)) && (mLastPageSelected == 2) && (mCreditCardView.getCardType() != CreditCardUtils.CardType.AMEX_CARD)) {
+                } else if (((position == 1)) && (mCreditCardView.getCardType() != CreditCardUtils.CardType.AMEX_CARD)) {
                     mCreditCardView.showFront();
                 }
 
                 mLastPageSelected = position;
-
-             //   refreshNextButton();
-
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
-        pager.setOffscreenPageLimit(4);
+        pager.setOffscreenPageLimit(1);
 
-        mCardAdapter = new CardFragmentAdapter(getSupportFragmentManager(), bundle);
+        mCardAdapter = new CardFragmentAdapterRecarga(getSupportFragmentManager(), bundle);
         mCardAdapter.setOnCardEntryCompleteListener(new ICardEntryCompleteListener() {
             @Override
             public void onCardEntryComplete(int currentIndex) {
@@ -156,23 +149,8 @@ public class CardGuardadaActivity extends AppCompatActivity {
             public void onCardEntryEdit(int currentIndex, String entryValue) {
                 switch (currentIndex) {
                     case 0:
-                        mCardNumber = entryValue.replace(CreditCardUtils.SPACE_SEPERATOR, "");
-                        mCreditCardView.setCardNumber(mCardNumber);
-                        if (mCardAdapter != null) {
-                            mCardAdapter.setMaxCVV(CardSelector.selectCard(mCardNumber).getCvvLength());
-                        }
-                        break;
-                    case 1:
-                        mExpiry = entryValue;
-                        mCreditCardView.setCardExpiry(entryValue);
-                        break;
-                    case 2:
-                        mCVV = entryValue;
-                        mCreditCardView.setCVV(entryValue);
-                        break;
-                    case 3:
-                        mCardHolderName = entryValue;
-                        mCreditCardView.setCardHolderName(entryValue);
+                        mCardRecarga = entryValue;
+                        mCreditCardView.setCardNumber(mCardRecarga);
                         break;
                 }
             }
@@ -181,37 +159,9 @@ public class CardGuardadaActivity extends AppCompatActivity {
         pager.setAdapter(mCardAdapter);
     }
 
-/*    public void onSaveInstanceState(Bundle outState) {
-        outState.putString(EXTRA_CARD_CVV, mCVV);
-        outState.putString(EXTRA_CARD_HOLDER_NAME, mCardHolderName);
-        outState.putString(EXTRA_CARD_EXPIRY, mExpiry);
-        outState.putString(EXTRA_CARD_NUMBER, mCardNumber);
-
-        super.onSaveInstanceState(outState);
-    }*/
-
-   /* public void onRestoreInstanceState(Bundle inState) {
-        super.onRestoreInstanceState(inState);
-        checkParams(inState);
-    }*/
-
-
-   /* public void showPrevious() {
-        final ViewPager pager = (ViewPager) findViewById(R.id.card_field_container_pager);
-        int currentIndex = pager.getCurrentItem();
-
-        if (currentIndex == 0) {
-            Toast.makeText(this, "si esta guardada", Toast.LENGTH_SHORT).show();
-            IraActividades iraActividades=new IraActividades();
-            iraActividades.iraCuenta(this);
-        }
-
-    }*/
-
 
     @Override
     public void onBackPressed() {
-       // this.finish();
         IraActividades iraActividades=new IraActividades();
         iraActividades.iraCuenta(this);
     }
