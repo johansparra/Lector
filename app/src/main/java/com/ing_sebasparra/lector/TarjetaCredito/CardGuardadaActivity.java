@@ -5,9 +5,12 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.R;
@@ -17,7 +20,10 @@ import com.ing_sebasparra.lector.Recursos.CuentaBancaDTO;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
 import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapter.ICardEntryCompleteListener;
 import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapterRecarga;
+import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
+
+import java.util.Objects;
 
 import static com.ing_sebasparra.lector.TarjetaCredito.CreditCardUtils.CARD_NAME_PAGE;
 
@@ -39,10 +45,18 @@ public class CardGuardadaActivity extends AppCompatActivity {
     private EditText valor_recarga;
     private ProgressDialog loadingBar;
 
+    //CARGAR EL TEMA
+    DrawerLayout drawerLayout;
+    Toolbar toolbar;
+
+    FrameLayout statusBar;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        SeleccionTema selecTema = new SeleccionTema();
+        selecTema.theme(this);
         setContentView(R.layout.t_activity_card_recargar);
 
         findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
@@ -76,6 +90,16 @@ public class CardGuardadaActivity extends AppCompatActivity {
         checkParams(args);
         carga();
         iniciarValores();
+
+        toolbarStatusBar();
+    }
+    public void toolbarStatusBar() {
+        statusBar = (FrameLayout) findViewById(R.id.statusBar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.cuenta));
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_menu_white_24dp);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 
     private void getCuentaBancaria(Long valRecarga) {
