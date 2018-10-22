@@ -18,15 +18,13 @@ import android.os.Message;
 import android.os.Parcelable;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
+import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.Config;
-import com.squareup.picasso.Picasso;
-
-import de.hdodenhof.circleimageview.CircleImageView;
 
 
 public class PagoTransmilenioActivity extends Activity implements CreateNdefMessageCallback,
@@ -111,6 +109,7 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
             dialogomostrar();
             Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
             finish();
+
             return;
         }
         // Register callback
@@ -120,16 +119,18 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
     }
 
     private void dialogomostrar() {
+        Dialog dialog = new Dialog(this);
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setContentView(R.layout.dialogo_acerca);
+        dialog.show();
 
-        myDialog = new Dialog(this);
+      /*  myDialog = new Dialog(this);
         myDialog.setContentView(R.layout.dialogo_error_nfc);
         TextView dialog_name = (TextView) myDialog.findViewById(R.id.titulo_dialogo_texto);
         CircleImageView imagen_name = (CircleImageView) myDialog.findViewById(R.id.imagen_dialogo);
         dialog_name.setText("error");
         Picasso.get().load(R.drawable.profile_image).placeholder(R.drawable.profile_image).into(imagen_name);
-
-
-        myDialog.show();
+        myDialog.show();*/
     }
 
     public void toolbarStatusBar() {
