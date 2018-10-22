@@ -1,5 +1,6 @@
 package com.ing_sebasparra.lector.TarjetaCredito;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -36,6 +37,7 @@ public class CardGuardadaActivity extends AppCompatActivity {
     //
     Config config = new Config();
     private EditText valor_recarga;
+    private ProgressDialog loadingBar;
 
 
     @Override
@@ -101,11 +103,19 @@ public class CardGuardadaActivity extends AppCompatActivity {
         cuentabancaDTO.setCvv(myCvv);
         cuentabancaDTO.setFechaVenci(fecha);
 
+
+        loadingBar.setTitle("Recarga...");
+        loadingBar.setMessage("Procesando Recarga");
+        loadingBar.setCanceledOnTouchOutside(true);
+        loadingBar.show();
         apirest.consultarCuentaBanca(cuentabancaDTO, valRecarga, idUser, this);
+        loadingBar.dismiss();
+
     }
 
     private void iniciarValores() {
         valor_recarga = (EditText) findViewById(R.id.edit_recarga);
+        loadingBar = new ProgressDialog(this);
     }
 
     private void carga() {
