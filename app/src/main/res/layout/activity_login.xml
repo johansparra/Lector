@@ -12,7 +12,7 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/md_white_1000"
+        android:background="@drawable/fondo_login"
         android:orientation="vertical">
 
         <android.support.v7.widget.Toolbar
@@ -44,7 +44,15 @@
         android:layout_width="match_parent"
         android:focusableInTouchMode="true"
         android:layout_height="match_parent">
-
+        <ImageView
+            android:id="@+id/layoutimage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_marginStart="30dp"
+            android:layout_marginTop="1dp"
+            android:layout_marginEnd="30dp"
+            android:src="@drawable/present_login" />
 
         <ProgressBar
             android:id="@+id/login_progress"
@@ -79,8 +87,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@+id/layout_email"
-            android:layout_alignStart="@+id/layout_email"
-            android:layout_alignEnd="@+id/layout_email"
+            android:layout_alignStart="@+id/layoutimage"
+            android:layout_alignEnd="@+id/layoutimage"
             android:importantForAutofill="noExcludeDescendants"
             android:textColor="@color/textColor"
             android:textColorHint="@color/colorHint"
@@ -97,6 +105,8 @@
                 android:maxEms="20"
                 android:maxLength="20"
                 android:minEms="4"
+                android:textColor="@color/md_secondary_text_icons_white"
+                android:textStyle="bold"
                 android:inputType="textPassword" />
 
         </android.support.design.widget.TextInputLayout>
@@ -105,10 +115,12 @@
             android:id="@+id/layout_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/referencia"
-            android:layout_alignEnd="@+id/referencia"
-            android:layout_centerVertical="true"
+            android:layout_alignStart="@+id/layoutimage"
+            android:layout_alignEnd="@+id/layoutimage"
+            android:layout_marginTop="370dp"
+
             android:importantForAutofill="noExcludeDescendants"
+
             android:textColorHint="@color/colorHint"
             tools:ignore="UnusedAttribute">
 
@@ -117,12 +129,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/layout_email"
-                android:layout_alignStart="@+id/editTextPassword"
                 android:layout_marginTop="40dp"
                 android:layout_weight="1"
                 android:hint="@string/Digitesuemail"
+                android:textStyle="bold"
                 android:inputType="textEmailAddress"
-                android:textColor="@color/textColor" />
+                android:textColor="@color/md_secondary_text_icons_white" />
 
         </android.support.design.widget.TextInputLayout>
 
@@ -138,19 +150,20 @@
             android:text="@string/Entrar"
             android:textColor="@color/md_brown_50" />
 
-        <TextView
-            android:id="@+id/txtBienvenido"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignBaseline="@+id/referencia"
-            android:layout_alignBottom="@+id/referencia"
-            android:layout_centerHorizontal="true"
-            android:text="@string/bienvenido"
-            android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
-            android:textColor="?attr/colorAccent"
-            android:textSize="18sp" />
 
-        <!-- textAppearance Y textColor PARA CAMBIAR EL COLOR SEGUN EL TEMA -->
+        <!--     <TextView
+               android:id="@+id/txtBienvenido"
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:layout_alignBaseline="@+id/referencia"
+               android:layout_alignBottom="@+id/referencia"
+               android:layout_centerHorizontal="true"
+               android:text="@string/bienvenido"
+               android:textAppearance="@style/TextAppearance.AppCompat.Subhead.Inverse"
+               android:textColor="?attr/colorAccent"
+               android:textSize="18sp" />-->
+
+           <!-- textAppearance Y textColor PARA CAMBIAR EL COLOR SEGUN EL TEMA -->
 
         <Button
             android:id="@+id/ir_registro"
@@ -162,6 +175,7 @@
             android:background="@color/transparent"
             android:gravity="center"
             android:textAllCaps="false"
+            android:textColor="@color/md_deep_orange_400"
             android:text="Registrese" />
 
     </RelativeLayout>
