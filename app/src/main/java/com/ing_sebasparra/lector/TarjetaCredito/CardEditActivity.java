@@ -231,9 +231,6 @@ public class CardEditActivity extends AppCompatActivity {
         int currentIndex = pager.getCurrentItem();
 
         if (currentIndex == 0) {
-           /* setResult(RESULT_CANCELED);
-            finish();*/
-           // Toast.makeText(this, "No puede ir mas atras", Toast.LENGTH_SHORT).show();
             IraActividades iraActividades=new IraActividades();
             iraActividades.iraCuenta(this);
         }
@@ -265,32 +262,6 @@ public class CardEditActivity extends AppCompatActivity {
 
     //CUANDOA ACABA
     private void onDoneTapped() {
-   /*     Intent intent = new Intent();
-
-        intent.putExtra(EXTRA_CARD_CVV, mCVV);
-        intent.putExtra(EXTRA_CARD_HOLDER_NAME, mCardHolderName);
-        intent.putExtra(EXTRA_CARD_EXPIRY, mExpiry);
-        intent.putExtra(EXTRA_CARD_NUMBER, mCardNumber);
-
-        setResult(RESULT_OK, intent);
-        finish();*/
-
-       /*boolean isUpdate;
-        Bundle bundle= getIntent().getExtras();
-        if (bundle!= null) {// to avoid the NullPointerException
-            isUpdate=bundle.getBoolean("update");
-            if(isUpdate)
-            {
-                Toast.makeText(this, "si pasa: "+mExpiry, Toast.LENGTH_SHORT).show();
-
-            }else{
-
-                Toast.makeText(this, "NOOO pasa: "+mExpiry, Toast.LENGTH_SHORT).show();
-            }
-        }*/
-
-
-
         if (mCardNumber.length() <= 15) {
 
             Toast.makeText(this, "Por favor verifique el Número de tarjeta", Toast.LENGTH_SHORT).show();
@@ -338,7 +309,6 @@ public class CardEditActivity extends AppCompatActivity {
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
 
-        // Checks whether a hardware keyboard is available
         if (newConfig.hardKeyboardHidden == Configuration.HARDKEYBOARDHIDDEN_NO) {
 
             RelativeLayout parent = (RelativeLayout) findViewById(R.id.parent);
@@ -363,7 +333,6 @@ public class CardEditActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-       // this.finish();
         IraActividades iraActividades=new IraActividades();
         iraActividades.iraCuenta(this);
     }
