@@ -21,7 +21,8 @@ public class Config {
     public final String ID_USUARIO_SHARED_PREF="idusuario";
     public final String N_IDENTIFICACION_SHARED_PREF="n_identificacion";
     public final String NOMBRE_SHARED_PREF="nombre";
-    public final String SALDO_SHARED_PREF="saldo";
+    public final String TIPO_SHARED_PREF="tipo";
+
 
     //TARJETA DE CREDITO
     public final String SHARED_PREF_TARJETA="tarjeta";

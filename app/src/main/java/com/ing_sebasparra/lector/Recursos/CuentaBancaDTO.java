@@ -1,15 +1,12 @@
 package com.ing_sebasparra.lector.Recursos;
 
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
 public class CuentaBancaDTO {
 
     private String numIdentifiacion ="";
     private int tipo=0;
     private String numTarjeta="";
     private int cvv=0;
-    private int fechaVenci=0;
+    private String fechaVenci="";
 
     public String getNumIdentifiacion() {
         return numIdentifiacion;
@@ -43,13 +40,12 @@ public class CuentaBancaDTO {
         this.cvv = cvv;
     }
 
-    public int getFechaVenci() {
+    public String getFechaVenci() {
         return fechaVenci;
     }
 
-    public void setFechaVenci(int fechaVenci) {
+    public void setFechaVenci(String fechaVenci) {
         this.fechaVenci = fechaVenci;
     }
-
 }
 

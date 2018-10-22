@@ -52,11 +52,13 @@ public class ApiRest {
                             String idusuario = "";
                             String n_identificacion = "";
                             String nombre = "";
+                            String tipo = "";
                             try {
 
                                 JSONObject request = respuesta.getJSONObject("login");
                                 idusuario = request.getString("idUsuario");
                                 n_identificacion = request.getString("numIdentificacion");
+                                tipo = request.getString("tipoIden");
                                 nombre = request.getString("nombre");
                             } catch (JSONException e) {
                                 Log.e("Error getLogin: ", e.getMessage());
@@ -68,6 +70,7 @@ public class ApiRest {
                             editor.putBoolean(config.LOGGEDIN_SHARED_PREF, true);
                             editor.putString(config.ID_USUARIO_SHARED_PREF, idusuario);
                             editor.putString(config.N_IDENTIFICACION_SHARED_PREF, n_identificacion);
+                            editor.putString(config.TIPO_SHARED_PREF, tipo);
                             editor.putString(config.NOMBRE_SHARED_PREF, nombre);
                             editor.apply();
 

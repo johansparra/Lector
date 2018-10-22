@@ -85,7 +85,7 @@ public class HistorialPagosActivity extends AppCompatActivity {
             cuentabancaDTO.setTipo(2);
             cuentabancaDTO.setNumTarjeta("4594186388989000");
             cuentabancaDTO.setCvv(123);
-            cuentabancaDTO.setFechaVenci(1224);
+            cuentabancaDTO.setFechaVenci("1224");
 
             apirest.consultarCuentaBanca(cuentabancaDTO,valRecarga,idUser,this);
 
