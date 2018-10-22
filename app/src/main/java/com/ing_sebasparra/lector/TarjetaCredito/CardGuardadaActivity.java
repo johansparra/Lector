@@ -12,9 +12,11 @@ import android.widget.Toast;
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.CerrarSesionTarjeta;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.CuentaBancaDTO;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
 import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapter.ICardEntryCompleteListener;
 import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapterRecarga;
+import com.ing_sebasparra.lector.WebServices.ApiRest;
 
 import static com.ing_sebasparra.lector.TarjetaCredito.CreditCardUtils.CARD_NAME_PAGE;
 
@@ -44,16 +46,22 @@ public class CardGuardadaActivity extends AppCompatActivity {
         findViewById(R.id.next).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String valor="";
-               valor= valor_recarga.getText().toString().trim();
-                Toast.makeText(CardGuardadaActivity.this, "recarga: "+valor, Toast.LENGTH_SHORT).show();
+                String valor = "";
+                valor = valor_recarga.getText().toString().trim();
+                if (valor.equals("")) {
+                    Toast.makeText(CardGuardadaActivity.this, "Por favor digite el numero", Toast.LENGTH_SHORT).show();
+                } else {
+                    Long valor_long = Long.parseLong(valor);
+                    getCuentaBancaria(valor_long);
+                }
+
 
             }
         });
         findViewById(R.id.previous).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CerrarSesionTarjeta  cerrarSesionTarjeta =new CerrarSesionTarjeta();
+                CerrarSesionTarjeta cerrarSesionTarjeta = new CerrarSesionTarjeta();
                 cerrarSesionTarjeta.logout(CardGuardadaActivity.this);
 
             }
@@ -68,8 +76,36 @@ public class CardGuardadaActivity extends AppCompatActivity {
         iniciarValores();
     }
 
+    private void getCuentaBancaria(Long valRecarga) {
+        CuentaBancaDTO cuentabancaDTO = new CuentaBancaDTO();
+        ApiRest apirest = new ApiRest();
+        SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
+        String idUser = sharedPreferences.getString(config.ID_USUARIO_SHARED_PREF, "No Disponible");
+        String cedulaUser = sharedPreferences.getString(config.N_IDENTIFICACION_SHARED_PREF, "No Disponible");
+        String TipoUser = sharedPreferences.getString(config.TIPO_SHARED_PREF, "No Disponible");
+        Integer.parseInt(TipoUser);
+        int myTipo = 0;
+        myTipo = Integer.parseInt(TipoUser);
+
+        Integer.parseInt(mCVV);
+        int myCvv = 0;
+        myCvv = Integer.parseInt(mCVV);
+
+        String fecha = mExpiry.replace("/", "");
+     //   Toast.makeText(this, "fecha1: " + fecha, Toast.LENGTH_SHORT).show();
+      //  Toast.makeText(this, mCVV, Toast.LENGTH_SHORT).show();
+
+        cuentabancaDTO.setNumIdentifiacion(cedulaUser);
+        cuentabancaDTO.setTipo(myTipo);
+        cuentabancaDTO.setNumTarjeta(mCardNumber);
+        cuentabancaDTO.setCvv(myCvv);
+        cuentabancaDTO.setFechaVenci(fecha);
+
+        apirest.consultarCuentaBanca(cuentabancaDTO, valRecarga, idUser, this);
+    }
+
     private void iniciarValores() {
-        valor_recarga=(EditText)findViewById(R.id.edit_recarga);
+        valor_recarga = (EditText) findViewById(R.id.edit_recarga);
     }
 
     private void carga() {
@@ -78,7 +114,7 @@ public class CardGuardadaActivity extends AppCompatActivity {
         mCardHolderName = sharedPreferences.getString(config.TARJETA_NOMBRE, "No Disponible");
         mExpiry = sharedPreferences.getString(config.TARJETA_EXPIRA, "No Disponible");
         mCardNumber = sharedPreferences.getString(config.TARJETA_NUMERO, "No Disponible");
-        mStartPage=1;
+        mStartPage = 1;
 
         mCreditCardView.setCVV(mCVV);
         mCreditCardView.setCardHolderName(mCardHolderName);
@@ -162,7 +198,7 @@ public class CardGuardadaActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        IraActividades iraActividades=new IraActividades();
+        IraActividades iraActividades = new IraActividades();
         iraActividades.iraCuenta(this);
     }
 }

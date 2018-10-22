@@ -43,6 +43,7 @@ public class CardEditActivity extends AppCompatActivity {
     //
     Config config = new Config();
     private boolean tarjeta_guardada = false;
+    IraActividades iraActividades =new IraActividades();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,8 +84,9 @@ public class CardEditActivity extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_TARJETA, Context.MODE_PRIVATE);
         tarjeta_guardada = sharedPreferences.getBoolean(config.TARJETA_SHARED_PREF, false);
         if (tarjeta_guardada) {
-            Intent intent = new Intent(CardEditActivity.this, CardGuardadaActivity.class);
-            startActivity(intent);
+           /* Intent intent = new Intent(CardEditActivity.this, CardGuardadaActivity.class);
+            startActivity(intent);*/
+            iraActividades.iraCardGuardada(this);
         }
     }
 
@@ -290,7 +292,9 @@ public class CardEditActivity extends AppCompatActivity {
             editor.putString(config.TARJETA_NUMERO, mCardNumber);
             editor.apply();
 
-            Toast.makeText(this, "Finalizo y guarda todo", Toast.LENGTH_SHORT).show();
+        //    Toast.makeText(this, "Finalizo y guarda todo", Toast.LENGTH_SHORT).show();
+
+            iraActividades.iraCardGuardada(this);
         }
 
 

@@ -5,6 +5,7 @@ import android.content.Intent;
 
 import com.ing_sebasparra.lector.GpsActivity;
 import com.ing_sebasparra.lector.TarjetaCredito.CardEditActivity;
+import com.ing_sebasparra.lector.TarjetaCredito.CardGuardadaActivity;
 import com.ing_sebasparra.lector.View.CuentaActivity;
 import com.ing_sebasparra.lector.View.HistorialPagosActivity;
 import com.ing_sebasparra.lector.View.LoginActivity;
@@ -46,6 +47,11 @@ public class IraActividades  {
         Intent MapsIntent = new Intent(context, MapsActivity.class);
         context.startActivity(MapsIntent);
     }
+    public void iraCardGuardada(Context context) {
+        Intent CardGuardadaIntent = new Intent(context, CardGuardadaActivity.class);
+        context.startActivity(CardGuardadaIntent);
+    }
+
 
 
 
