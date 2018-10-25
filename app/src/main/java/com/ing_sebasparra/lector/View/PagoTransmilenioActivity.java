@@ -16,7 +16,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Parcelable;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
@@ -48,12 +47,10 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
     NfcAdapter mNfcAdapter;
     TextView mInfoText;
 
-    private boolean loggedIn = false;
     //VARIABLES
-    private TextView emailTV, nombreTV, apellidoTV, cargoTV, fotoTV, cedulaTV, nmostrar;
-    private String email1, nombre1, apellido1, cargo1, foto1, cedula1;
+    private TextView  nombreTV, apellidoTV, cedulaTV;
+    private String  nombre1,cedula1,idUsuario;
 
-    Toolbar toolbar;
     FrameLayout statusBar;
 
     //
@@ -67,8 +64,6 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
         dispositivoCompatible();
         setContentView(R.layout.activity_beam);//main
 
-
-
         mInfoText = findViewById(R.id.textView);
 
         nombreTV = (TextView) findViewById(R.id.nombre);
@@ -78,16 +73,12 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);
         nombre1 = sharedPreferences.getString(config.NOMBRE_SHARED_PREF, "No Disponible");
         nombreTV.setText(nombre1);
-      /*  apellido1 = sharedPreferences.getString(Config.APELLIDOS_SHARED_PREF, "No Disponible");
-        apellidoTV.setText(apellido1);*/
         apellidoTV.setVisibility(View.GONE);
         cedula1 = sharedPreferences.getString(config.N_IDENTIFICACION_SHARED_PREF, "No Disponible");
         cedulaTV.setText(cedula1);
-
+        idUsuario = sharedPreferences.getString(config.ID_USUARIO_SHARED_PREF, "No Disponible");
 
         toolbarStatusBar();
-        //toolbar = (Toolbar) findViewById(R.id.toolbar);
-
 
     }
 
@@ -140,11 +131,10 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
 
     @Override
     public NdefMessage createNdefMessage(NfcEvent event) {
-        //String texto = ("Val"+"1069738505");
-        // String texto = ("1069738505");
-        String texto = (cedula1);
+      //  String texto = (cedula1);
+        String texto = (idUsuario);
         NdefMessage msg = new NdefMessage(NdefRecord.createMime(
-                "Aplicacion Transmilenio", texto.getBytes())
+                "Aplicación Transmilenio", texto.getBytes())
                 //"application/com.example.android.beam", texto.getBytes())
                 /**
                  * The Android Application Record (AAR) is commented out. When a device

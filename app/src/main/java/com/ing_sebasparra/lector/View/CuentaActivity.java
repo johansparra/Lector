@@ -52,9 +52,7 @@ public class CuentaActivity extends AppCompatActivity {
         toolbarStatusBar();
         cargarVariables();
 
-
        consultaSaldo(idconsulta,this);
-
 
         drawerLayout = (DrawerLayout) findViewById(R.id.navigation_drawer_layout);
         NavigationView navigationView = (NavigationView) findViewById(R.id.navigation_view);
