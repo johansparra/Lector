@@ -89,7 +89,7 @@
     <string name="fecha_recarga">00/00/0000 0:00:00</string>
 
     <!--MAIN MAPS-->
-    <string name="estoy_aqui">Estoy aqui</string>
+    <string name="estoy_aqui">Ubicación Actual</string>
     <string name="panoramica">Panoramica</string>
 
     <!--DRAWER-->

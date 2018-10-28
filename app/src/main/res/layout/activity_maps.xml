@@ -52,21 +52,12 @@
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="31dp"
             android:text="@string/estoy_aqui"
+            android:textAllCaps="false"
             android:paddingEnd="5dp"
             android:paddingStart="5dp"
             android:background="?attr/colorPrimary"
             android:textColor="?attr/colorControlNormal" />
 
-        <!--<Button
-            android:id="@+id/btnotro2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/btnotro"
-            android:layout_marginStart="15dp"
-            android:layout_toEndOf="@+id/btnotro"
-            android:text="@string/casa"
-            android:background="?attr/colorPrimary"
-            android:textColor="?attr/colorControlNormal" />-->
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -97,7 +88,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
                 android:text="@string/mapa" />
 
             <Button
@@ -124,6 +114,7 @@
             android:layout_alignBottom="@+id/btnestoyqui"
             android:layout_marginEnd="20dp"
             android:layout_toStartOf="@+id/btnestoyqui"
+            android:textAllCaps="false"
             android:text="@string/panoramica"
             android:paddingEnd="5dp"
             android:paddingStart="5dp"

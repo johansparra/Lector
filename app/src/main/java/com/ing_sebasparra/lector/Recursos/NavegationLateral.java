@@ -59,9 +59,9 @@ public class NavegationLateral {
                                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 dialog.setContentView(R.layout.dialogo_acerca);
                                 dialog.show();
-                            /*    menuItem.setChecked(true);
+                              /*
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                iraActividades.iraPrueba(context);*/
+                               iraActividades.iraPrueba(context);*/
                                 return true;
                         }
                         return true;
