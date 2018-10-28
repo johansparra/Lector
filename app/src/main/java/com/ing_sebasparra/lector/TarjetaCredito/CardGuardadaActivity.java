@@ -15,7 +15,9 @@ import android.widget.Toast;
 
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.CerrarSesionTarjeta;
+import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.CuadroDialogo;
 import com.ing_sebasparra.lector.Recursos.CuentaBancaDTO;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
 import com.ing_sebasparra.lector.TarjetaCredito.pager.CardFragmentAdapter.ICardEntryCompleteListener;
@@ -126,7 +128,13 @@ public class CardGuardadaActivity extends AppCompatActivity {
         cuentabancaDTO.setNumTarjeta(mCardNumber);
         cuentabancaDTO.setCvv(myCvv);
         cuentabancaDTO.setFechaVenci(fecha);
-
+        ConexionApp conect = new ConexionApp();
+        if (!conect.conexionWifi(CardGuardadaActivity.this)) {
+            Config config = new Config();
+            CuadroDialogo cuadroDialogo=new CuadroDialogo();
+            cuadroDialogo.mostrar(CardGuardadaActivity.this,config.TITILO_AVISO_2,config.ALERT_NOT_WIFI_MOVILE ,R.drawable.ic_msg_wifi,null);
+            return;
+        }
 
         loadingBar.setTitle("Recarga...");
         loadingBar.setMessage("Procesando Recarga");

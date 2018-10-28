@@ -1,10 +1,12 @@
 package com.ing_sebasparra.lector.Recursos;
 
+import android.app.Dialog;
 import android.content.Context;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.MenuItem;
+import android.view.Window;
 
 import com.ing_sebasparra.lector.R;
 
@@ -51,14 +53,15 @@ public class NavegationLateral {
                                 iraActividades.iraMaps(context);
                                 return true;
                             case R.id.item_navigation_drawer_acercade:
-                              /*  menuItem.setChecked(true);
+                                menuItem.setChecked(true);
+                                drawerLayout.closeDrawer(GravityCompat.START);
                                 Dialog dialog = new Dialog(context);
                                 dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                                 dialog.setContentView(R.layout.dialogo_acerca);
-                                dialog.show();*/
-                                menuItem.setChecked(true);
+                                dialog.show();
+                            /*    menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);
-                                iraActividades.iraPrueba(context);
+                                iraActividades.iraPrueba(context);*/
                                 return true;
                         }
                         return true;

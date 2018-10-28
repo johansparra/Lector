@@ -4,9 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -23,7 +21,6 @@ import com.ing_sebasparra.lector.Recursos.ComprobarCamposLogin;
 import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.Config;
 import com.ing_sebasparra.lector.Recursos.CuadroDialogo;
-import com.ing_sebasparra.lector.Recursos.PermisosPreguntar;
 import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
 import com.ing_sebasparra.lector.WebServices.ApiRest;
@@ -42,18 +39,13 @@ public class LoginActivity extends AppCompatActivity {
     private Button buttonLogin1;
 
     private boolean loggedIn = false;
-    // mirar si carga los datos
-    String PASSWORDT1 = null, EMAILT1 = null, NOMBRET1 = null, APELLIDOT1 = null, NIVELT1 = null, CEDULAT1 = null, CREDITOST1 = null;
-    //hasta aca
 
     public TextInputLayout inputLayoutCorreo, inputLayoutPassword;
     private View mProgressView;
     private Button registrarse;
     // private Activity activitypreguntar;
 
-
-    public static final int PERMISO = 100;
-    PermisosPreguntar permisosPreguntar = new PermisosPreguntar();
+   // PermisosPreguntar permisosPreguntar = new PermisosPreguntar();
 
 
     @Override
@@ -67,11 +59,11 @@ public class LoginActivity extends AppCompatActivity {
         toolbarStatusBar();
         inicializeValues();
 
-        permisosPreguntar.validapermisos(this);
+     //   permisosPreguntar.validapermisos(this);
 
     }
 
-    @Override
+  /*  @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode == 100) {
@@ -83,7 +75,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         }
 
-    }
+    }*/
 
     private void inicializeValues() {
         editTextEmail = findViewById(R.id.editTextEmailf);
@@ -103,7 +95,8 @@ public class LoginActivity extends AppCompatActivity {
                 if (!conect.conexionWifi(LoginActivity.this)) {
                     Config config = new Config();
                     CuadroDialogo cuadroDialogo=new CuadroDialogo();
-                    cuadroDialogo.mostrar(LoginActivity.this,config.TITILO_AVISO_2,config.ALERT_NOT_WIFI_MOVILE ,R.drawable.ic_msg_wifi,null);                    return;
+                    cuadroDialogo.mostrar(LoginActivity.this,config.TITILO_AVISO_2,config.ALERT_NOT_WIFI_MOVILE ,R.drawable.ic_msg_wifi,null);
+                    return;
                 }
                 email = editTextEmail.getText().toString().trim();
                 password = editTextPassword.getText().toString().trim();
@@ -140,57 +133,6 @@ public class LoginActivity extends AppCompatActivity {
         ApiRest apires = new ApiRest();
         apires.getLogin(email, password, this);
     }
-
-
-    //MIRAR SI ESTA VACIO LOS EDIT TEXT
-   /* public boolean validar_campo(String email, String password) {
-        String mailError = null;
-        Boolean mensaje;
-        Boolean validaCampos = true;
-        String passError = null;
-        String ErrorEmail = null;
-
-        if (TextUtils.isEmpty(email)) {
-            mailError = getResources().getString(R.string.error_campo);
-            validaCampos = false;
-        }
-        toggleTextInputLayoutError(inputLayoutCorreo, mailError);
-
-        if (TextUtils.isEmpty(password)) {
-            passError = getString(R.string.error_campo);
-            validaCampos = false;
-        }
-
-        if (TextUtils.isEmpty(password)) {
-            passError = getString(R.string.error_campo);
-            validaCampos = false;
-        }
-        toggleTextInputLayoutError(inputLayoutPassword, passError);
-
-        if (validaCampos) {
-            ValidacionDatos validar = new ValidacionDatos();
-            mensaje = validar.validaremail(email);
-            if (mensaje) {
-                ErrorEmail = getString(R.string.error_invalid_email_di);
-                validaCampos = false;
-            }
-            toggleTextInputLayoutError(inputLayoutCorreo, ErrorEmail);
-        }
-        return validaCampos;
-
-    }
-
-    private void toggleTextInputLayoutError(@NonNull TextInputLayout textInputLayout,
-                                            String msg) {
-        textInputLayout.setError(msg);
-        if (msg == null) {
-            textInputLayout.setErrorEnabled(false);
-        } else {
-            textInputLayout.setErrorEnabled(true);
-        }
-    }
-*/
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

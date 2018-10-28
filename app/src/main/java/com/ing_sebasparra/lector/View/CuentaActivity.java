@@ -18,7 +18,9 @@ import android.widget.TextView;
 
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.CerrarSesion;
+import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.CuadroDialogo;
 import com.ing_sebasparra.lector.Recursos.LimpiarMemoria;
 import com.ing_sebasparra.lector.Recursos.NavegationLateral;
 import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
@@ -68,7 +70,13 @@ public class CuentaActivity extends AppCompatActivity {
 
 
     private void consultaSaldo(String n_identificacion, Context context) {
-
+        ConexionApp conect = new ConexionApp();
+        if (!conect.conexionWifi(CuentaActivity.this)) {
+            Config config = new Config();
+            CuadroDialogo cuadroDialogo=new CuadroDialogo();
+            cuadroDialogo.mostrar(CuentaActivity.this,config.TITILO_AVISO_2,config.ALERT_NOT_WIFI_MOVILE ,R.drawable.ic_msg_wifi,null);
+            return;
+        }
         apires.consultarSaldo(n_identificacion, context, this);
     }
 
