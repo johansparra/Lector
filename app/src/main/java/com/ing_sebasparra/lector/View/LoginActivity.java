@@ -220,6 +220,7 @@ public class LoginActivity extends AppCompatActivity {
     public void toolbarStatusBar() {
         statusBar = findViewById(R.id.statusBar);
         toolbar = findViewById(R.id.toolbar);
+        toolbar.setVisibility(View.GONE);
         setSupportActionBar(toolbar);
         Objects.requireNonNull(getSupportActionBar()).setTitle(getResources().getString(R.string.inicio_sesion));
     }

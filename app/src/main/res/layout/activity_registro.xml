@@ -12,7 +12,7 @@
         android:id="@+id/layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/md_white_1000"
+        android:background="@drawable/fondo_registro"
         android:orientation="vertical">
 
 
@@ -22,6 +22,7 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?colorPrimary"
             android:translationZ="4dp"
+            android:visibility="gone"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
@@ -34,11 +35,18 @@
 
     </FrameLayout>
 
+    <!--    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="20dp"android:text="asdadsd"/>-->
+
+
     <RelativeLayout
         android:id="@+id/contenedor"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/toolbar"
+        android:layout_marginTop="20dp"
         android:focusableInTouchMode="true">
 
 
@@ -46,7 +54,7 @@
             android:id="@+id/todo"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="20dp"
             tools:ignore="UselessParent">
 
             <LinearLayout
@@ -55,12 +63,39 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <!--  <android.support.design.widget.TextInputLayout
+                      android:id="@+id/layout_email2"
+                      android:layout_width="match_parent"
+                      android:layout_height="wrap_content"
+                      android:layout_gravity="center"
+                      android:layout_marginStart="50dp"
+                      android:layout_marginTop="10dp"
+                      android:layout_marginEnd="50dp"
+                      android:importantForAutofill="noExcludeDescendants"
+                      android:textColorHint="@color/colorHint"
+                      tools:ignore="UnusedAttribute">
+
+                      <android.support.design.widget.TextInputEditText
+                          android:id="@+id/editTextEmailf"
+                          android:layout_width="match_parent"
+                          android:layout_height="wrap_content"
+                          android:layout_below="@+id/layout_email"
+                          android:background="@drawable/edit_forma"
+                          android:hint="@string/Digitesuemail"
+                          android:inputType="textEmailAddress"
+                          android:textColor="@color/md_secondary_text_icons_white"
+                          android:textSize="18dp"
+                          android:textStyle="bold" />
+
+                  </android.support.design.widget.TextInputLayout>-->
+
                 <android.support.design.widget.TextInputLayout
                     android:id="@+id/layout_nombres"
                     android:layout_width="290dp"
                     android:layout_height="62dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:textColorHint="@color/md_orange_900"
                     android:theme="?attr/colorPrimary"
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
@@ -70,14 +105,14 @@
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
                         android:hint="@string/nombres"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="textAutoCorrect|textCapWords|textAutoComplete|textPersonName"
                         android:maxEms="20"
                         android:maxLength="20"
                         android:minEms="3"
-                        android:nextFocusForward="@id/reg_apellidos"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
+                        android:textColor="@color/md_white_1000" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -86,7 +121,9 @@
                     android:layout_width="290dp"
                     android:layout_height="62dp"
                     android:layout_gravity="center"
+                    android:layout_marginTop="5dp"
                     android:gravity="center"
+                    android:textColorHint="@color/md_orange_900"
                     android:theme="?attr/colorPrimary"
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
@@ -96,6 +133,7 @@
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
                         android:hint="@string/apellidos"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="textAutoCorrect|textCapWords|textAutoComplete"
                         android:maxEms="30"
                         android:maxLength="30"
@@ -103,7 +141,7 @@
                         android:nextFocusForward="@id/reg_telefono"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
+                        android:textColor="@color/md_white_1000" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -113,6 +151,7 @@
                     android:layout_height="62dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:textColorHint="@color/md_orange_900"
                     android:theme="?attr/colorPrimary"
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
@@ -122,13 +161,14 @@
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
                         android:hint="@string/telefono"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="number"
                         android:maxEms="11"
                         android:maxLength="11"
                         android:minEms="10"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
+                        android:textColor="@color/md_white_1000" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -138,6 +178,7 @@
                     android:layout_height="62dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:textColorHint="@color/md_orange_900"
                     android:theme="?attr/colorPrimary"
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
@@ -149,11 +190,12 @@
                         android:clickable="true"
                         android:focusable="false"
                         android:hint="@string/fecha_naci"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="date"
                         android:maxLength="10"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
+                        android:textColor="@color/md_white_1000" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -164,6 +206,7 @@
                     android:layout_height="62dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:textColorHint="@color/md_orange_900"
                     android:theme="?attr/colorPrimary"
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
@@ -173,6 +216,7 @@
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
                         android:hint="@string/email"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="textEmailAddress"
                         android:maxEms="30"
                         android:maxLength="30"
@@ -180,7 +224,7 @@
                         android:nextFocusForward="@id/reg_password"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
+                        android:textColor="@color/md_white_1000" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -190,6 +234,7 @@
                     android:layout_height="62dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:textColorHint="@color/md_orange_900"
                     android:theme="?attr/colorPrimary"
                     app:hintTextAppearance="@style/TextoRegistroEditLayout"
                     app:passwordToggleEnabled="true"
@@ -202,13 +247,14 @@
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
                         android:hint="@string/password"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="textPassword"
                         android:maxEms="20"
                         android:maxLength="20"
                         android:minEms="3"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
+                        android:textColor="@color/md_white_1000" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -231,6 +277,7 @@
                     android:layout_height="62dp"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:textColorHint="@color/md_orange_900"
                     android:theme="?attr/colorPrimary"
                     app:hintTextAppearance="@style/TextoRegistroEditLayout">
 
@@ -239,13 +286,15 @@
                         android:layout_width="match_parent"
                         android:layout_height="45dp"
                         android:background="@drawable/boton_registro"
+                        android:importantForAutofill="noExcludeDescendants"
                         android:inputType="number"
                         android:maxEms="10"
+                        android:textColorHint="@color/md_orange_900"
                         android:maxLength="10"
                         android:minEms="6"
                         android:paddingStart="13sp"
                         android:paddingEnd="5sp"
-                        android:theme="?attr/colorPrimary" />
+                        android:textColor="@color/md_white_1000" />
 
                 </android.support.design.widget.TextInputLayout>
 
@@ -263,10 +312,12 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:buttonTint="?attr/colorPrimary"
+
                         android:hint="@string/hombre"
                         android:onClick="onRadioButtonClicked"
                         android:paddingLeft="25sp"
-                        android:paddingRight="25sp" />
+                        android:paddingRight="25sp"
+                        android:textColorHint="@color/md_orange_900" />
 
                     <RadioButton
                         android:id="@+id/RDmujer"
@@ -276,21 +327,23 @@
                         android:hint="@string/mujer"
                         android:onClick="onRadioButtonClicked"
                         android:paddingLeft="25sp"
-                        android:paddingRight="25sp" />
+                        android:paddingRight="25sp"
+                        android:textColorHint="@color/md_orange_900" />
                 </RadioGroup>
 
 
                 <Button
                     android:id="@+id/btn_registro"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
+                    android:layout_marginStart="20dp"
                     android:layout_marginTop="20dp"
+                    android:layout_marginEnd="20dp"
                     android:layout_marginBottom="20dp"
                     android:background="?attr/colorPrimary"
-                    android:drawableStart="@mipmap/ic_codigo"
-                    android:paddingEnd="10dp"
                     android:text="Registrar"
+                    android:textAllCaps="false"
                     android:textColor="@color/md_brown_50" />
 
 

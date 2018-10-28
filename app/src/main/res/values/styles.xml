@@ -192,6 +192,7 @@
 
     <style name="TextoRegistroEditLayout" parent="TextAppearance.Design.Hint">
         <item name="android:textSize">15sp</item>
+
     </style>
 
 <!--CREDIT CARD-->

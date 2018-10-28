@@ -99,9 +99,9 @@ public class ComprobarCampos {
         if (TextUtils.isEmpty(usuarioDTO.getPassword())) {
             // password_edit.setError(context.getString(R.string.error_campo), context.getDrawable(R.drawable.ic_acerca));
             Drawable icon =
-                    context.getResources().getDrawable(R.drawable.ic_action_action_settings);
+                    context.getResources().getDrawable(R.drawable.ic_vision);
             if (icon != null) {
-                icon.setBounds(-50, 0,
+                icon.setBounds(0, 0,
                         icon.getIntrinsicWidth(),
                         icon.getIntrinsicHeight());
             }

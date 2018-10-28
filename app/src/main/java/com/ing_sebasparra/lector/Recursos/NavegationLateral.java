@@ -39,11 +39,6 @@ public class NavegationLateral {
                                 drawerLayout.closeDrawer(GravityCompat.START);
                                 iraActividades.iraTarjetaCredito(context);
                                 return true;
-                            case R.id.item_navigation_drawer_historial:
-                                menuItem.setChecked(true);
-                                drawerLayout.closeDrawer(GravityCompat.START);
-                                iraActividades.iraHistorial(context);
-                                return true;
                             case R.id.item_navigation_drawer_configuracion:
                                 menuItem.setChecked(true);
                                 drawerLayout.closeDrawer(GravityCompat.START);

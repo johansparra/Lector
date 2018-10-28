@@ -42,7 +42,7 @@
     <string name="bienvenido">Bienvenido</string>
     <string name="Digitesucontraseña">Password</string>
     <string name="Digitesuemail">Email</string>
-    <string name="Entrar">Iniciar Sesion"    "</string>
+    <string name="Entrar">Iniciar Sesión</string>
     <item name="visible" type="id" />
     <item name="masked" type="id" />
     <string name="inicio_sesion">Inicio Sesión</string>

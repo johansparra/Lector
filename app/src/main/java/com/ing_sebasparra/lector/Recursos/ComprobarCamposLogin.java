@@ -1,6 +1,7 @@
 package com.ing_sebasparra.lector.Recursos;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.text.TextUtils;
 import android.widget.EditText;
 
@@ -20,11 +21,17 @@ public class ComprobarCamposLogin {
             validaCampos = false;
         }
         if (TextUtils.isEmpty(password)) {
-            password_edit.setError(context.getString(R.string.error_campo));
+            Drawable icon =
+                    context.getResources().getDrawable(R.drawable.ic_vision);
+            if (icon != null) {
+                icon.setBounds(-10, 0,
+                        icon.getIntrinsicWidth(),
+                        icon.getIntrinsicHeight());
+            }
+            password_edit.setError(context.getString(R.string.error_campo),icon);
             password_edit.requestFocus();
             validaCampos = false;
         }
-
         if (validaCampos) {
             ValidacionDatos validar = new ValidacionDatos();
             mensaje = validar.validaremail(email);

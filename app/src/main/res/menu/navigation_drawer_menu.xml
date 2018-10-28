@@ -16,11 +16,6 @@
             android:icon="@drawable/ic_recarga"
             android:visible="true"
             android:title="@string/recargar" />
-        <item
-            android:id="@+id/item_navigation_drawer_historial"
-            android:icon="@drawable/ic_historial"
-            android:visible="true"
-            android:title="@string/historial" />
     </group>
 
     <item android:title="@string/opciones">
