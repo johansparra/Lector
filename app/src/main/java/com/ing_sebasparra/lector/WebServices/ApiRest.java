@@ -20,6 +20,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.CuadroDialogo;
 import com.ing_sebasparra.lector.Recursos.CuentaBancaDTO;
 import com.ing_sebasparra.lector.Recursos.IraActividades;
 import com.ing_sebasparra.lector.Recursos.UsuarioDTO;
@@ -36,6 +37,7 @@ public class ApiRest {
     private UrlServices url = new UrlServices();
     IraActividades actividades = new IraActividades();
     Config config = new Config();
+    CuadroDialogo cuadroDialogo=new CuadroDialogo();
 
 
     public void getLogin(String email, String password, final Context context) {
@@ -74,13 +76,18 @@ public class ApiRest {
                             editor.putString(config.NOMBRE_SHARED_PREF, nombre);
                             editor.apply();
 
-                            if(idusuario.equals("0")){
-                                Toast.makeText(context, "Correo o password incorrectos", Toast.LENGTH_SHORT).show();
-                            }else {
+                            if (idusuario.equals("0")) {
+
+                                cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_LOGIN_INCORR ,R.drawable.logo,null);
+                                //Toast.makeText(context, "Correo o password incorrectos", Toast.LENGTH_SHORT).show();
+                                editor.putBoolean(config.LOGGEDIN_SHARED_PREF, false);
+                                editor.apply();
+                                return;
+
+                            } else {
                                 Intent intent = new Intent(context, CuentaActivity.class);
                                 context.startActivity(intent);
                             }
-
 
 
                         }
@@ -88,7 +95,7 @@ public class ApiRest {
                     }, new Response.ErrorListener() {
                 @Override
                 public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(context, "Error getLogin:"+error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context, "Error getLogin:" + error.getMessage(), Toast.LENGTH_SHORT).show();
                 }
             }
             );
@@ -100,7 +107,7 @@ public class ApiRest {
 
         }
         //para terminarlo
-       cancelarRespuestas(respuesta,context);
+        cancelarRespuestas(respuesta, context);
 
     }
 
@@ -151,7 +158,6 @@ public class ApiRest {
         }
 
 
-
     }
 
     public void consultarSaldo(final String n_identificacion, final Context context, final CuentaActivity perfil) {
@@ -175,12 +181,11 @@ public class ApiRest {
                                 recarga = request.getString("ultimaRecarga");
                                 saldo = request.getString("saldo");
                                 fecha = request.getString("fechaRecarga");
-                                perfil.saldoTV.setText("$"+saldo);
+                                perfil.saldoTV.setText("$" + saldo);
                                 perfil.tituloRecargaTV.setText("Valor Ultima Recarga: ");
-                                perfil.recargaTV.setText("$"+recarga);
+                                perfil.recargaTV.setText("$" + recarga);
                                 perfil.tituloFechaTV.setText("Fecha Recarga: ");
                                 perfil.fecharecTV.setText(fecha);
-
 
 
                             } catch (JSONException e) {
@@ -229,6 +234,7 @@ public class ApiRest {
                     public void onResponse(JSONObject response) {
                         Log.d("ok", response.toString());
                         Toast.makeText(context, "Usuario registrado Correctamenten", Toast.LENGTH_SHORT).show();
+                        cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_REGISTER ,R.drawable.logo,null);
                         actividades.iraLogin(context);
 
                     }
@@ -267,10 +273,10 @@ public class ApiRest {
         queue.add(jsonObjReq);
     }
 
-    public void consultarCuentaBanca(final CuentaBancaDTO cuentaBancaDTO, final Long valRecarga,final String idUser ,final Context context) {
+    public void consultarCuentaBanca(final CuentaBancaDTO cuentaBancaDTO, final Long valRecarga, final String idUser, final Context context) {
 
-        final String urlcuentabanca = "CuentaBancaria/User/numiden/"+cuentaBancaDTO.getNumIdentifiacion()+"/tipoiden/"+cuentaBancaDTO.getTipo()+
-                          "/numtarjeta/"+cuentaBancaDTO.getNumTarjeta()+"/cvv/"+cuentaBancaDTO.getCvv()+"/fechaVenci/"+ cuentaBancaDTO.getFechaVenci();
+        final String urlcuentabanca = "CuentaBancaria/User/numiden/" + cuentaBancaDTO.getNumIdentifiacion() + "/tipoiden/" + cuentaBancaDTO.getTipo() +
+                "/numtarjeta/" + cuentaBancaDTO.getNumTarjeta() + "/cvv/" + cuentaBancaDTO.getCvv() + "/fechaVenci/" + cuentaBancaDTO.getFechaVenci();
         final String[] saldoresq = {""};
         try {
             RequestQueue respuesta = Volley.newRequestQueue(context);
@@ -285,24 +291,19 @@ public class ApiRest {
 
                                 JSONObject request = respuesta.getJSONObject("cuentabanca");
                                 saldo = request.getString("saldo");
-                                if(saldo.equals("NO"))
-                                    Toast.makeText(context, "Datos incorrectos o cuenta no existe ", Toast.LENGTH_SHORT).show();
-                                else{
-                                    if(Long.parseLong(saldo)<=valRecarga){
-                                        Toast.makeText(context, "Saldo insuficiente para realizar la recarga ", Toast.LENGTH_SHORT).show();
-                                    }else{
-                                      //  Toast.makeText(context, "Cargado correctamente ", Toast.LENGTH_SHORT).show();
-                                        updateCuentabanca(cuentaBancaDTO,valRecarga,saldo,urlcuentabanca,idUser,context);
+                                if (saldo.equals("NO"))
+                                    cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_TARJETA_INCORRECT ,R.drawable.logo,null);
+                                else {
+                                    if (Long.parseLong(saldo) <= valRecarga) {
+                                        cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_SALDO_INSU ,R.drawable.logo,null);
+                                    } else {
+                                        updateCuentabanca(cuentaBancaDTO, valRecarga, saldo, urlcuentabanca, idUser, context);
                                     }
                                 }
-
-
-                         //       Toast.makeText(context, "Resultado Cuenta: "+saldo, Toast.LENGTH_SHORT).show();
 
                             } catch (JSONException e) {
                                 Toast.makeText(context, "Error consultarCuentaBanca Json: " + e.getMessage(), Toast.LENGTH_SHORT).show();
                             }
-
 
                         }
 
@@ -321,7 +322,7 @@ public class ApiRest {
         }
     }
 
-    public void updateCuentabanca(CuentaBancaDTO cuentaBancaDTO,final Long valRecarga,final String saldo,String urlcuentabanca,final String idUser,final Context context) {
+    public void updateCuentabanca(CuentaBancaDTO cuentaBancaDTO, final Long valRecarga, final String saldo, String urlcuentabanca, final String idUser, final Context context) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         Map<String, String> params = new HashMap<String, String>();
@@ -330,18 +331,19 @@ public class ApiRest {
 
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                url.LOGIN_URL_1+urlcuentabanca, new JSONObject(params),
+                url.LOGIN_URL_1 + urlcuentabanca, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("ok", response.toString());
-                        String estadoRecarga="";
+                        String estadoRecarga = "";
                         try {
                             JSONObject request = response.getJSONObject("recarga");
-                            estadoRecarga = request.getString("recarga");
-                            Toast.makeText(context, "Recarga exitosa " +estadoRecarga, Toast.LENGTH_SHORT).show();
-                            updatetarjetaTransmi(idUser,valRecarga,context);
+                            CuentaActivity activity =new CuentaActivity();
+                               cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.RECARGA_TARJETA,R.drawable.logo,activity);
+
+                            updatetarjetaTransmi(idUser, valRecarga, context);
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -381,25 +383,23 @@ public class ApiRest {
         queue.add(jsonObjReq);
     }
 
-    public void updatetarjetaTransmi(String idUser,final Long valRecarga,final Context context) {
+    public void updatetarjetaTransmi(String idUser, final Long valRecarga, final Context context) {
 
         RequestQueue queue = Volley.newRequestQueue(context);
         Map<String, String> params = new HashMap<String, String>();
         params.put("recarga", String.valueOf(valRecarga));
-        String ulrTarjetaTransmi= "/TarjetaTransmi/"+idUser;
+        String ulrTarjetaTransmi = "/TarjetaTransmi/" + idUser;
 
         JsonObjectRequest jsonObjReq = new JsonObjectRequest(Request.Method.PUT,
-                url.LOGIN_URL_1+ulrTarjetaTransmi, new JSONObject(params),
+                url.LOGIN_URL_1 + ulrTarjetaTransmi, new JSONObject(params),
                 new Response.Listener<JSONObject>() {
 
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.d("ok", response.toString());
-                        String estadoRecarga="";
+                        String estadoRecarga = "";
                         try {
                             JSONObject request = response.getJSONObject("recarga");
-                            estadoRecarga = request.getString("recarga");
-                            Toast.makeText(context, "Recarga tarjeta transmilenio exitosa" +estadoRecarga, Toast.LENGTH_SHORT).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -439,13 +439,11 @@ public class ApiRest {
         queue.add(jsonObjReq);
     }
 
-    public void cancelarRespuestas(RequestQueue respuesta,Context context){
-       // respuesta.cancelAll("PETICIONES");
+    public void cancelarRespuestas(RequestQueue respuesta, Context context) {
+        // respuesta.cancelAll("PETICIONES");
         respuesta.cancelAll(context);
 
     }
-
-
 
 
 }

@@ -2,7 +2,7 @@
 
     <dimen name="activity_horizontal_margen">16dp</dimen>
     <dimen name="activity_vertical_margen">16dp</dimen>
-<!--    <bool name="fitsSystemWindows">true</bool>-->
+    <!--    <bool name="fitsSystemWindows">true</bool>-->
     <dimen name="navigation_drawer_header_margen">16dp</dimen>
     <dimen name="status_bar_margin_top">0dp</dimen>
     <dimen name="statusBarHeight">0dp</dimen>

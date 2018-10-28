@@ -32,6 +32,11 @@
         android:glEsVersion="0x00020000"
         android:required="true" />
 
+    <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.READ_PROFILE" />
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_logo_b"
@@ -64,7 +69,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".View.LoginActivity" />
-
         <activity
             android:name=".View.OpcionesActivity"
             android:parentActivityName=".View.LoginActivity" />
@@ -105,10 +109,11 @@
                 <action android:name="android.nfc.action.TECH_DISCOVERED" />
 
                 <category android:name="android.intent.category.BROWSABLE" />
-
             </intent-filter>
         </activity>
-
+        <activity
+            android:name=".Prueba"
+            android:label="@string/title_activity_prueba"></activity>
     </application>
 
 </manifest>

@@ -24,6 +24,7 @@ import android.widget.Toast;
 
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.CuadroDialogo;
 
 
 public class PagoTransmilenioActivity extends Activity implements CreateNdefMessageCallback,
@@ -61,7 +62,7 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        dispositivoCompatible();
+       // dispositivoCompatible();
         setContentView(R.layout.activity_beam);//main
 
         mInfoText = findViewById(R.id.textView);
@@ -97,10 +98,9 @@ public class PagoTransmilenioActivity extends Activity implements CreateNdefMess
         }*/
         mNfcAdapter = NfcAdapter.getDefaultAdapter(this);
         if (mNfcAdapter == null) {
-            dialogomostrar();
-            Toast.makeText(this, "NFC is not available", Toast.LENGTH_LONG).show();
-            finish();
-
+            CuadroDialogo cuadroDialogo=new CuadroDialogo();
+            CuentaActivity cuentaActivity =new CuentaActivity();
+            cuadroDialogo.mostrar(this,config.TITILO_AVISO_1,config.ALERT_NFC_NOT ,R.drawable.logo,cuentaActivity);
             return;
         }
         // Register callback
