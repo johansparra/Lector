@@ -46,7 +46,7 @@
     <item name="visible" type="id" />
     <item name="masked" type="id" />
     <string name="inicio_sesion">Inicio Sesión</string>
-    <string name="error_mensaje_conexion">Error de conexión No Hay internet! </string>
+ <!--   <string name="error_mensaje_conexion">Error de conexión No Hay internet! </string>-->
     <!--ACTIVITY  REGISTRO-->
     <string name="registro">Registro</string>
     <string name="identificacion">Seleccione el tipo de identificación</string>
@@ -82,8 +82,11 @@
     <string name="acavalafoto1">Aca" "va " "la" "foto</string>
     <string name="nombre_fb">Nombre Facebook:</string>
     <string name="acavaelnombre2">Aca va el nombre FB</string>
-    <string name="tituloRecarga">titulorecarg</string>
     <string name="recargaPerfil">recarga</string>
+    <string name="titulo_valor_ultima_recarga">Valor Ultima Recarga:</string>
+    <string name="valor_ultima_recarga">$</string>
+    <string name="titulo_fecha_recarga">Fecha Recarga:</string>
+    <string name="fecha_recarga">00/00/0000 0:00:00</string>
 
     <!--MAIN MAPS-->
     <string name="estoy_aqui">Estoy aqui</string>
@@ -189,5 +192,7 @@ AIzaSyBzIyAhKl-Vk1OdwknsPZUeu5wAcZp9J80
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
     </string>
+
+
 
 </resources>

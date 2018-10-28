@@ -124,7 +124,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:text="@string/tituloRecarga"
+                android:text="@string/titulo_valor_ultima_recarga"
                 android:textColor="@color/md_falcon_500"
                 android:textSize="18sp" />
 
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@string/recargaPerfil"
+                android:text="@string/valor_ultima_recarga"
                 android:textColor="@color/md_deep_orange_600"
                 android:textSize="18sp" />
 
@@ -152,7 +152,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="30dp"
-                android:text="@string/tituloRecarga"
+                android:text="@string/titulo_fecha_recarga"
                 android:textColor="@color/md_falcon_500"
                 android:textSize="18sp" />
 
@@ -161,7 +161,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:text="@string/recargaPerfil"
+                android:text="@string/fecha_recarga"
                 android:textColor="@color/md_deep_orange_600"
                 android:textSize="18sp" />
 

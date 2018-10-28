@@ -7,14 +7,17 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.View.CuentaActivity;
 
 public class CerrarSesionTarjeta extends AppCompatActivity {
     public void logout(final Context context) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
-        alertDialogBuilder.setMessage(" ¿Seguro que quieres quitar la tarjeta? ");
-        alertDialogBuilder.setPositiveButton("Si",
+        alertDialogBuilder.setTitle("Aviso");
+        alertDialogBuilder.setIcon(R.drawable.ic_msg_war);
+        alertDialogBuilder.setMessage(" ¿Seguro que quieres modificar la tarjeta? ");
+        alertDialogBuilder.setPositiveButton("Aceptar",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -33,7 +36,7 @@ public class CerrarSesionTarjeta extends AppCompatActivity {
                         context.startActivity(intent);
                     }
                 });
-        alertDialogBuilder.setNegativeButton("No ",
+        alertDialogBuilder.setNegativeButton("Cancelar",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {

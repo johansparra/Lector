@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.util.Log;
+import android.view.View;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -78,7 +79,7 @@ public class ApiRest {
 
                             if (idusuario.equals("0")) {
 
-                                cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_LOGIN_INCORR ,R.drawable.logo,null);
+                                cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_LOGIN_INCORR ,R.drawable.ic_msg_error,null);
                                 //Toast.makeText(context, "Correo o password incorrectos", Toast.LENGTH_SHORT).show();
                                 editor.putBoolean(config.LOGGEDIN_SHARED_PREF, false);
                                 editor.apply();
@@ -181,10 +182,13 @@ public class ApiRest {
                                 recarga = request.getString("ultimaRecarga");
                                 saldo = request.getString("saldo");
                                 fecha = request.getString("fechaRecarga");
+                                perfil.saldoTV.setVisibility(View.VISIBLE);
                                 perfil.saldoTV.setText("$" + saldo);
-                                perfil.tituloRecargaTV.setText("Valor Ultima Recarga: ");
+                                perfil.tituloRecargaTV.setVisibility(View.VISIBLE);
+                                perfil.recargaTV.setVisibility(View.VISIBLE);
                                 perfil.recargaTV.setText("$" + recarga);
-                                perfil.tituloFechaTV.setText("Fecha Recarga: ");
+                                perfil.tituloFechaTV.setVisibility(View.VISIBLE);
+                                perfil.fecharecTV.setVisibility(View.VISIBLE);
                                 perfil.fecharecTV.setText(fecha);
 
 
@@ -234,7 +238,7 @@ public class ApiRest {
                     public void onResponse(JSONObject response) {
                         Log.d("ok", response.toString());
                         Toast.makeText(context, "Usuario registrado Correctamenten", Toast.LENGTH_SHORT).show();
-                        cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_REGISTER ,R.drawable.logo,null);
+                        cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_REGISTER ,R.drawable.ic_msg_ok,null);
                         actividades.iraLogin(context);
 
                     }
@@ -292,10 +296,10 @@ public class ApiRest {
                                 JSONObject request = respuesta.getJSONObject("cuentabanca");
                                 saldo = request.getString("saldo");
                                 if (saldo.equals("NO"))
-                                    cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_TARJETA_INCORRECT ,R.drawable.logo,null);
+                                    cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_TARJETA_INCORRECT ,R.drawable.ic_msg_error,null);
                                 else {
                                     if (Long.parseLong(saldo) <= valRecarga) {
-                                        cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_SALDO_INSU ,R.drawable.logo,null);
+                                        cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_SALDO_INSU ,R.drawable.ic_msg_error,null);
                                     } else {
                                         updateCuentabanca(cuentaBancaDTO, valRecarga, saldo, urlcuentabanca, idUser, context);
                                     }
@@ -341,7 +345,7 @@ public class ApiRest {
                         try {
                             JSONObject request = response.getJSONObject("recarga");
                             CuentaActivity activity =new CuentaActivity();
-                               cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.RECARGA_TARJETA,R.drawable.logo,activity);
+                               cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.RECARGA_TARJETA,R.drawable.ic_msg_ok,activity);
 
                             updatetarjetaTransmi(idUser, valRecarga, context);
                         } catch (JSONException e) {

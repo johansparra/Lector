@@ -35,11 +35,13 @@ public class Config {
     //MENSAJES CUADRO DE DIALOGO
     public final String RECARGA_TARJETA = "Recarga Exitosa";
     public final String TITILO_AVISO_1 = "Aviso";
+    public final String TITILO_AVISO_2 = "Conexión";
     public final String ALERT_LOGIN_INCORR = "Correo o password incorrectos";
     public final String ALERT_REGISTER= "Usuario registrado correctamente";
     public final String ALERT_TARJETA_INCORRECT= "Datos del cliente no existe";
     public final String ALERT_SALDO_INSU= "Saldo insuficiente para realizar la recarga";
     public final String ALERT_NFC_NOT= "El dispositivo movil NO dispone de hardware NFC";
+    public final String ALERT_NOT_WIFI_MOVILE= "Error de conexión No Hay internet!";
 
 
 

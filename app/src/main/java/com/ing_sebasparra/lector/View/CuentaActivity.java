@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.Window;
 import android.widget.FrameLayout;
 import android.widget.TextView;
@@ -47,7 +48,7 @@ public class CuentaActivity extends AppCompatActivity {
 
         SeleccionTema selecTema = new SeleccionTema();
         selecTema.theme(this);
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.activity_cuenta);
 
         toolbarStatusBar();
         cargarVariables();
@@ -75,10 +76,15 @@ public class CuentaActivity extends AppCompatActivity {
         nombreTV = (TextView) findViewById(R.id.nombreview);
         cedulaTV = (TextView) findViewById(R.id.cedulaview);
         saldoTV = (TextView) findViewById(R.id.saldoview);
+        saldoTV.setVisibility(View.GONE);
         recargaTV = (TextView) findViewById(R.id.recargaPerview);
+        recargaTV.setVisibility(View.GONE);
         tituloRecargaTV = (TextView) findViewById(R.id.titulorecaPerview);
+        tituloRecargaTV.setVisibility(View.GONE);
         fecharecTV = (TextView) findViewById(R.id.fechaPerview);
+        fecharecTV.setVisibility(View.GONE);
         tituloFechaTV = (TextView) findViewById(R.id.titulofechaPerview);
+        tituloFechaTV.setVisibility(View.GONE);
 
         // SharedPreferences
         SharedPreferences sharedPreferences = getSharedPreferences(config.SHARED_PREF_NAME, Context.MODE_PRIVATE);

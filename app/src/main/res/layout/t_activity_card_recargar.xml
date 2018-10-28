@@ -119,7 +119,7 @@
                 android:background="@color/green_continue"
                 android:gravity="center"
                 android:padding="@dimen/padding_normal"
-                android:text="CANCELAR"
+                android:text="MODIFICAR"
                 android:textColor="@android:color/white"
                 android:textSize="@dimen/text_size_small" />
 

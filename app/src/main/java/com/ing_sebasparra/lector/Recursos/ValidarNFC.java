@@ -19,7 +19,7 @@ public class ValidarNFC {
         if (mNfcAdapter == null) {
             CuadroDialogo cuadroDialogo=new CuadroDialogo();
             CuentaActivity cuentaActivity =new CuentaActivity();
-            cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_NFC_NOT ,R.drawable.logo,null);
+            cuadroDialogo.mostrar(context,config.TITILO_AVISO_1,config.ALERT_NFC_NOT ,R.drawable.ic_msg_nfc_error,null);
             return;
         }
         Intent PagoIntent = new Intent(context, PagoTransmilenioActivity.class);

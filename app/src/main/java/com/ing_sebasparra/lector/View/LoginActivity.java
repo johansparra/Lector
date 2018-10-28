@@ -17,12 +17,12 @@ import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.Recursos.ComprobarCamposLogin;
 import com.ing_sebasparra.lector.Recursos.ConexionApp;
 import com.ing_sebasparra.lector.Recursos.Config;
+import com.ing_sebasparra.lector.Recursos.CuadroDialogo;
 import com.ing_sebasparra.lector.Recursos.PermisosPreguntar;
 import com.ing_sebasparra.lector.Recursos.SalirAplicacion;
 import com.ing_sebasparra.lector.Temas.SeleccionTema;
@@ -101,8 +101,9 @@ public class LoginActivity extends AppCompatActivity {
                 String password = "";
                 ConexionApp conect = new ConexionApp();
                 if (!conect.conexionWifi(LoginActivity.this)) {
-                    Toast.makeText(LoginActivity.this, getResources().getString(R.string.error_mensaje_conexion), Toast.LENGTH_SHORT).show();
-                    return;
+                    Config config = new Config();
+                    CuadroDialogo cuadroDialogo=new CuadroDialogo();
+                    cuadroDialogo.mostrar(LoginActivity.this,config.TITILO_AVISO_2,config.ALERT_NOT_WIFI_MOVILE ,R.drawable.ic_msg_wifi,null);                    return;
                 }
                 email = editTextEmail.getText().toString().trim();
                 password = editTextPassword.getText().toString().trim();

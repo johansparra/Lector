@@ -27,6 +27,7 @@ public class CuadroDialogo {
                 });
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+
     }
 
 

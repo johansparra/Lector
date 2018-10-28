@@ -7,14 +7,18 @@ import android.content.SharedPreferences;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 
+import com.ing_sebasparra.lector.R;
 import com.ing_sebasparra.lector.View.LoginActivity;
 
 public class CerrarSesion extends AppCompatActivity {
     public void logout(final Context context) {
 
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        alertDialogBuilder.setTitle("Aviso");
+
         alertDialogBuilder.setMessage(" ¿Seguro que quieres cerrar la sesión? ");
-        alertDialogBuilder.setPositiveButton("Si",
+        alertDialogBuilder.setIcon(R.drawable.ic_msg_war);
+        alertDialogBuilder.setPositiveButton("Aceptar",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {
@@ -30,7 +34,7 @@ public class CerrarSesion extends AppCompatActivity {
                         context.startActivity(intent);
                     }
                 });
-        alertDialogBuilder.setNegativeButton("No ",
+        alertDialogBuilder.setNegativeButton("Cancelar ",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface arg0, int arg1) {

@@ -39,7 +39,7 @@ public class EjemploActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         // Seleccionar el tema guardado por el usuario (siempre antes de setContentView)
         theme();
-        setContentView(R.layout.activity_perfil);
+        setContentView(R.layout.activity_cuenta);
 
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
